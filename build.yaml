@@ -1,0 +1,6 @@
+targets:
+  $default:
+    builders:
+      icon_builder|icon_builder:
+        generate_for:
+          - lib/generated/icons_placeholder.dart
