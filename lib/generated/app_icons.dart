@@ -1,5 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 class AppIcons {
+  static const String kSunrise = 'assets/icons/sunrise.svg';
   static const String kRupeeIcon = 'assets/icons/rupee_icon.svg';
   static const String kVisa = 'assets/icons/Visa.svg';
   static const String kRfid = 'assets/icons/rfid.svg';
