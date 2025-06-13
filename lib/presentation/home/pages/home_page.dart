@@ -4,6 +4,7 @@ import 'package:expenso_expense_tracker/generated/app_icons.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -140,62 +141,70 @@ class CreditCardWidget extends StatelessWidget {
                     children: [
                       Text(
                         "Available Credit",
-                        style: TextStyle(
+                        style: GoogleFonts.publicSans(
                           color: Colors.white70,
                           fontSize: 12.sp,
                         ),
                       ),
-                      SizedBox(height: 36.h,width: 36.h,child: CustomSvgIcon(AppIcons.kRfid),)
+                      SizedBox(height: 30.h,width: 30.h,child: CustomSvgIcon(AppIcons.kRfid),)
                     ],
                   ),
                   Text(
                     "\$12000",
-                    style: TextStyle(
+                    style: GoogleFonts.publicSans(
                       color: Colors.white,
-                      fontSize: 28.sp,
+                      fontSize: 32.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  SizedBox(height: 12.h,),
                   Text(
                     "****  ****  ****  0023",
-                    style: TextStyle(
+                    style: GoogleFonts.publicSans(
                       color: Colors.white,
-                      fontSize: 18.sp,
+                      fontSize: 14.sp,
                       letterSpacing: 2,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Card Holder",
-                            style:
-                                TextStyle(color: Colors.white70, fontSize: 12),
-                          ),
-                          Text(
-                            "Shinas Koya",
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                        ],
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Valid Thru",
-                            style:
-                                TextStyle(color: Colors.white70, fontSize: 12),
-                          ),
-                          Text(
-                            "08/25",
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ],
+                  SizedBox(height: 12.h,),
+
+                  Padding(
+                    padding: rightPadding12,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Card Holder",
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white54, fontSize: 10),
+                            ),
+                            Text(
+                              "Shinas Koya",
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                          ],
+                        ),
+                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Valid Thru",
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white54, fontSize: 10),
+                            ),
+                            Text(
+                              "08/25",
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -237,7 +246,7 @@ class CreditCardWidget extends StatelessWidget {
                   // Tap Icon Placeholder
                   Align(
                     alignment: Alignment.topRight,
-                    child: Container(
+                    child: SizedBox(
                       height: 48.r,
                       width: 48.r,
                       // Replace this with your tap SVG later
