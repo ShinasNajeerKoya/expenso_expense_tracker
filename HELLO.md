@@ -1,1 +1,1 @@
-Hello shinas!
+Hello add_card!

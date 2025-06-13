@@ -6,6 +6,7 @@ class AppIcons {
   static const String kRfid = 'assets/icons/rfid.svg';
   static const String kDollarIcon = 'assets/icons/dollar_icon.svg';
   static const String kEuroIcon = 'assets/icons/euro_icon.svg';
+  static const String kScanCard = 'assets/icons/scan_card.svg';
   static const String kFileAdd = 'assets/icons/file_add.svg';
   static const String kRuPay = 'assets/icons/RuPay.svg';
   static const String kDoubleArrowMark = 'assets/icons/double_arrow_mark.svg';

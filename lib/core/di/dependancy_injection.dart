@@ -1,5 +1,11 @@
 // core/di/injector.dart
 
+import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository.dart';
+import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository_impl.dart';
+import 'package:expenso_expense_tracker/domain/repositories/home/home_repository.dart';
+import 'package:expenso_expense_tracker/domain/repositories/home/home_repository_impl.dart';
+import 'package:expenso_expense_tracker/presentation/add_card/bloc/add_card_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/home/bloc/home_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/onboarding/bloc/onboarding_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,9 +18,13 @@ class GetItHelper {
 
     /// Repositories
     getIt.registerSingleton<OnboardingRepository>(OnboardingRepositoryImpl());
+    getIt.registerSingleton<HomeRepository>(HomeRepositoryImpl());
+    getIt.registerSingleton<AddCardRepository>(AddCardRepositoryImpl());
 
     /// BloCs
     getIt.registerSingleton<OnboardingBloc>(OnboardingBloc(getIt<OnboardingRepository>()));
+    getIt.registerSingleton<HomeBloc>(HomeBloc(getIt<HomeRepository>()));
+    getIt.registerSingleton<AddCardBloc>(AddCardBloc(getIt<AddCardRepository>()));
     // getIt.registerSingleton<InboxBloc>(InboxBloc());
   }
 

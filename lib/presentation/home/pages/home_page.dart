@@ -6,8 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../add_card/pages/add_card_page.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  final cardData = null;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +25,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
             decoration: BoxDecoration(
                 color: AppColors.kHomeBlackColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30.r),
-                    bottomRight: Radius.circular(30.r))),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -40,9 +42,7 @@ class HomePage extends StatelessWidget {
                     Container(
                       height: 40.h,
                       width: 40.h,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14.r)),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14.r)),
                       // child: CustomSvgIcon(AppIconsOld.kDoubleArrow),
                     ),
                   ],
@@ -73,15 +73,19 @@ class HomePage extends StatelessWidget {
                 ),
                 Text(
                   'Welcome Shinas',
-                  style: TextStyle(
-                      fontSize: 22.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 12.h,
                 ),
-                CreditCardWidget()
+                cardData == null
+                    ? AddCardButton(onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => AddCardPage()),
+                        );
+                      })
+                    : CreditCardWidget(),
               ],
             ),
           ),
@@ -89,12 +93,111 @@ class HomePage extends StatelessWidget {
           Container(
             height: 285.h,
             width: 360.w,
-            decoration: BoxDecoration(
-                color: AppColors.kHomeGraphBgColor,
-                borderRadius: BorderRadius.circular(20.r)),
+            decoration: BoxDecoration(color: AppColors.kHomeGraphBgColor, borderRadius: BorderRadius.circular(20.r)),
           ),
         ],
       ),
+    );
+  }
+}
+
+class AddCardButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const AddCardButton({super.key, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+          height: 200.h,
+          width: (286 + 76).w,
+          decoration: BoxDecoration(
+            color: const Color(0xFFF9F7F2),
+            borderRadius: BorderRadius.circular(32.r),
+          ),
+          child: Center(
+              child: GestureDetector(
+            onTap: onTap,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+              decoration: BoxDecoration(
+                color: const Color(0xFFD67D4F),
+                borderRadius: BorderRadius.circular(100.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x33D67D4F),
+                    blurRadius: 24,
+                    spreadRadius: 2,
+                  )
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Icon Placeholder
+                  CustomSvgIcon(AppIcons.kSlantedCard, // your icon path
+                      color: Colors.white),
+                  SizedBox(width: 8.w),
+                  Text(
+                    "Add Card",
+                    style: GoogleFonts.publicSans(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ))),
+    );
+  }
+}
+
+class InnerShadowContainer extends StatelessWidget {
+  final Widget child;
+  final double borderRadius;
+
+  const InnerShadowContainer({
+    super.key,
+    required this.child,
+    this.borderRadius = 32,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        /// Outer Container
+        Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF9F7F2),
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          child: child,
+        ),
+
+        /// Fake Inner Shadow Overlay
+        Positioned.fill(
+          child: IgnorePointer(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(borderRadius),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.red.withOpacity(0.4),
+                    blurRadius: 20,
+                    spreadRadius: 1,
+                    offset: const Offset(0, -8),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -146,7 +249,11 @@ class CreditCardWidget extends StatelessWidget {
                           fontSize: 12.sp,
                         ),
                       ),
-                      SizedBox(height: 30.h,width: 30.h,child: CustomSvgIcon(AppIcons.kRfid),)
+                      SizedBox(
+                        height: 30.h,
+                        width: 30.h,
+                        child: CustomSvgIcon(AppIcons.kRfid),
+                      )
                     ],
                   ),
                   Text(
@@ -157,7 +264,9 @@ class CreditCardWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 12.h,),
+                  SizedBox(
+                    height: 12.h,
+                  ),
                   Text(
                     "****  ****  ****  0023",
                     style: GoogleFonts.publicSans(
@@ -166,40 +275,37 @@ class CreditCardWidget extends StatelessWidget {
                       letterSpacing: 2,
                     ),
                   ),
-                  SizedBox(height: 12.h,),
-
+                  SizedBox(
+                    height: 12.h,
+                  ),
                   Padding(
                     padding: rightPadding12,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Card Holder",
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white54, fontSize: 10),
+                              style: GoogleFonts.publicSans(color: Colors.white54, fontSize: 10),
                             ),
                             Text(
                               "Shinas Koya",
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white, fontSize: 12),
+                              style: GoogleFonts.publicSans(color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),
-                         Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Valid Thru",
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white54, fontSize: 10),
+                              style: GoogleFonts.publicSans(color: Colors.white54, fontSize: 10),
                             ),
                             Text(
                               "08/25",
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white, fontSize: 12),
+                              style: GoogleFonts.publicSans(color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),
