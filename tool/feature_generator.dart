@@ -1,3 +1,11 @@
+// ** DO NOT EDIT WITHOUT PERMISSION **
+
+// feature generation file
+
+// this file is to generate feature using mason package. this will also include
+// running build runner to create freezed package as per the state we are defining.
+
+
 import 'dart:io';
 
 void main(List<String> args) async {
