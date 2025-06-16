@@ -1,24 +1,197 @@
+import 'dart:developer';
+
+import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/presentation/add_card/widgets/card_selector.dart';
+import 'package:expenso_expense_tracker/presentation/add_card/widgets/text_field_label_and_body.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../generated/app_icons.dart';
 import '../bloc/add_card_bloc.dart';
 import '../bloc/add_card_state.dart';
 import '../utils/card_type_extensions.dart';
+import '../widgets/custom_add_card_text_field.dart';
 
-class AddCardPage extends StatelessWidget {
-  AddCardPage({super.key});
+// class AddCardPage extends StatelessWidget {
+//   AddCardPage({super.key});
+//
+//   final addCardBloc = GetIt.I<AddCardBloc>();
+//
+//   final cardNumberController = TextEditingController();
+//   final cardHolderController = TextEditingController();
+//   final expiryDateController = TextEditingController();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       appBar: AppBar(
+//         title: const Text('Add Card', style: TextStyle(color: Colors.black)),
+//         backgroundColor: Colors.white,
+//         elevation: 0,
+//         iconTheme: const IconThemeData(color: Colors.black),
+//       ),
+//       body: SingleChildScrollView(
+//         child: Padding(
+//           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               _CardSelector(addCardBloc: addCardBloc),
+//               SizedBox(height: 26.h),
+//               Divider(height: 1, color: Colors.grey.shade400),
+//               const SizedBox(height: 26),
+//               BlocBuilder<AddCardBloc, AddCardState>(
+//                 bloc: addCardBloc,
+//                 builder: (context, state) {
+//                   return _LabeledField(
+//                       label: 'Card Number',
+//                       child: CustomAddCardTextField(
+//                         controller: cardNumberController,
+//                         hintText: "0000",
+//                         height: 55.h,
+//                         prefixText: "****  ****  ****  ",
+//                         trailing: InkWell(
+//                           onTap: () {},
+//                           child: SizedBox(
+//                             height: 24,
+//                             width: 24,
+//                             child: CustomSvgIcon(AppIcons.kScanCard),
+//                           ),
+//                         ),
+//                         keyboardType: TextInputType.number,
+//                         errorMessage: state.cardNumberError,
+//                         isEditable: true,
+//                         maxCharacterLength: 4,
+//                         onChanged: addCardBloc.onCardNumberChanged,
+//                       ));
+//                 },
+//               ),
+//               BlocBuilder<AddCardBloc, AddCardState>(
+//                 bloc: addCardBloc,
+//                 builder: (context, state) {
+//                   return _LabeledField(
+//                       label: 'Cardholder Name',
+//                       child: CustomAddCardTextField(
+//                         controller: cardHolderController,
+//                         hintText: "Name on the card",
+//                         height: 55.h,
+//                         keyboardType: TextInputType.text,
+//                         errorMessage: state.cardHolderError,
+//                         isEditable: true,
+//                         onChanged: addCardBloc.onCardHolderChanged,
+//                       ));
+//                 },
+//               ),
+//               BlocBuilder<AddCardBloc, AddCardState>(
+//                 bloc: addCardBloc,
+//                 builder: (context, state) {
+//                   return _LabeledField(
+//                       label: 'Expiry Date',
+//                       child: CustomAddCardTextField(
+//                         controller: expiryDateController,
+//                         hintText: "MM/YY",
+//                         height: 44.h,
+//                         width: 180.w,
+//                         keyboardType: TextInputType.number,
+//                         errorMessage: state.expiryDateError,
+//                         maxCharacterLength: 5,
+//                         onChanged: (value) {
+//                           final numbers = value.replaceAll('/', '');
+//                           if (numbers.length > 2) {
+//                             final formatted =
+//                                 '${numbers.substring(0, 2)}/${numbers.substring(2)}';
+//                             expiryDateController.value = TextEditingValue(
+//                               text: formatted,
+//                               selection: TextSelection.collapsed(
+//                                   offset: formatted.length),
+//                             );
+//                             addCardBloc.onExpiryDateChanged(formatted);
+//                           } else {
+//                             addCardBloc.onExpiryDateChanged(numbers);
+//                           }
+//                         },
+//                       ));
+//                 },
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//       bottomNavigationBar: Padding(
+//         padding: allPadding20,
+//         child: BlocBuilder<AddCardBloc, AddCardState>(
+//           bloc: addCardBloc,
+//           builder: (context, state) {
+//             return SizedBox(
+//               width: double.infinity,
+//               child: ElevatedButton(
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.black,
+//                   padding: const EdgeInsets.symmetric(vertical: 14),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(8),
+//                   ),
+//                 ),
+//                 onPressed: () {
+//                   final cardType = state.selectedCardType;
+//                   final cardNumber = cardNumberController.text;
+//                   final cardHolderName = cardHolderController.text;
+//                   final expiryDate = expiryDateController.text;
+//
+//                   addCardBloc.validateAndSubmitCardDetails(
+//                       cardType: cardType,
+//                       cardNumber: cardNumber,
+//                       cardHolderName: cardHolderName,
+//                       expiryDate: expiryDate);
+//                 },
+//                 child: const Text("Save Card",
+//                     style: TextStyle(color: Colors.white)),
+//               ),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  final addCardBloc = GetIt.I<AddCardBloc>();
+class AddCardPage extends StatefulWidget {
+  const AddCardPage({super.key});
+
+  @override
+  State<AddCardPage> createState() => _AddCardPageState();
+}
+
+class _AddCardPageState extends State<AddCardPage> {
+  late final AddCardBloc addCardBloc;
 
   final cardNumberController = TextEditingController();
   final cardHolderController = TextEditingController();
   final expiryDateController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    addCardBloc = GetIt.I<AddCardBloc>();
+  }
+
+  @override
+  void dispose() {
+    cardNumberController.dispose();
+    cardHolderController.dispose();
+    expiryDateController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('AddCardPage rebuilt');
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -27,245 +200,126 @@ class AddCardPage extends StatelessWidget {
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: BlocBuilder<AddCardBloc, AddCardState>(
-        bloc: addCardBloc,
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const _CardSelector(),
-                SizedBox(height: 26.h),
-                Divider(height: 1, color: Colors.grey.shade400),
-                const SizedBox(height: 26),
-                _LabeledField(
-                    label: 'Card Number',
-                    child: CustomAddCardTextField(
-                      controller: cardNumberController,
-                      hintText: "0000",
-                      height: 55.h,
-                      prefixText: "****  ****  ****  ",
-                      trailing: Container(height: 20, width: 20, color: Colors.yellow),
-                      keyboardType: TextInputType.number,
-                      errorMessage: state.cardNumberError,
-                      isEditable: true,
-                      onChanged: addCardBloc.onCardNumberChanged,
-                    )),
-                _LabeledField(
-                    label: 'Cardholder Name',
-                    child: CustomAddCardTextField(
-                      controller: cardHolderController,
-                      hintText: "Name on the card",
-                      height: 55.h,
-                      keyboardType: TextInputType.text,
-                      errorMessage: state.cardHolderError,
-                      isEditable: true,
-                      onChanged: addCardBloc.onCardHolderChanged,
-                    )),
-                _LabeledField(
-                    label: 'Expiry Date',
-                    child: CustomAddCardTextField(
-                      controller: expiryDateController,
-                      hintText: "MM/YY",
-                      height: 44.h,
-                      width: 180.w,
-                      keyboardType: TextInputType.number,
-                      errorMessage: state.expiryDateError,
-                      onChanged: (value) {
-                        final numbers = value.replaceAll('/', '');
-                        if (numbers.length > 2) {
-                          final formatted = '${numbers.substring(0, 2)}/${numbers.substring(2)}';
-                          expiryDateController.value = TextEditingValue(
-                            text: formatted,
-                            selection: TextSelection.collapsed(offset: formatted.length),
-                          );
-                          addCardBloc.onExpiryDateChanged(formatted);
-                        } else {
-                          addCardBloc.onExpiryDateChanged(numbers);
-                        }
-                      },
-                    )),
-                const Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// 🔹 Wrap only the card selector with BlocBuilder
+            CardSelector(addCardBloc: addCardBloc),
+            SizedBox(height: 26.h),
+            Divider(height: 1, color: Colors.grey.shade400),
+            const SizedBox(height: 26),
+
+            /// 🔹 Use separate BlocBuilders for error-sensitive fields
+            BlocSelector<AddCardBloc, AddCardState, String?>(
+              bloc: addCardBloc,
+              selector: (state) => state.cardNumberError,
+              builder: (context, cardNumberError) {
+                print('Card Number textfield rebuilt');
+
+                return TextFieldLabelAndBody(
+                  label: 'Card Number',
+                  child: CustomAddCardTextField(
+                    controller: cardNumberController,
+                    hintText: "0000",
+                    height: 55.h,
+                    prefixText: "****  ****  ****  ",
+                    trailing: InkWell(
+                      onTap: () {},
+                      child: SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CustomSvgIcon(AppIcons.kScanCard),
                       ),
                     ),
-                    onPressed: () {
-                      addCardBloc
-                        ..onCardNumberChanged(cardNumberController.text)
-                        ..onCardHolderChanged(cardHolderController.text)
-                        ..onExpiryDateChanged(expiryDateController.text)
-                        ..validateAndSubmit();
+                    keyboardType: TextInputType.number,
+                    errorMessage: cardNumberError,
+                    isEditable: true,
+                    maxCharacterLength: 4,
+                    onChanged: addCardBloc.onCardNumberChanged,
+                  ),
+                );
+              },
+            ),
+            BlocSelector<AddCardBloc, AddCardState, String?>(
+              bloc: addCardBloc,
+              selector: (state) => state.cardHolderError,
+              builder: (context, cardHolderError) {
+                print('Cardholder Name textfield rebuilt');
+
+                return TextFieldLabelAndBody(
+                  label: 'Cardholder Name',
+                  child: CustomAddCardTextField(
+                    controller: cardHolderController,
+                    hintText: "Name on the card",
+                    height: 55.h,
+                    keyboardType: TextInputType.text,
+                    errorMessage: cardHolderError,
+                    isEditable: true,
+                    onChanged: addCardBloc.onCardHolderChanged,
+                  ),
+                );
+              },
+            ),
+            BlocSelector<AddCardBloc, AddCardState, String?>(
+              bloc: addCardBloc,
+              selector: (state) => state.expiryDateError,
+              builder: (context, expiryDateError) {
+                print('Expiry Date textfield rebuilt');
+
+                return TextFieldLabelAndBody(
+                  label: 'Expiry Date',
+                  child: CustomAddCardTextField(
+                    controller: expiryDateController,
+                    hintText: "MM/YY",
+                    height: 44.h,
+                    width: 180.w,
+                    keyboardType: TextInputType.number,
+                    errorMessage: expiryDateError,
+                    maxCharacterLength: 5,
+                    onChanged: (value) {
+                      final numbers = value.replaceAll('/', '');
+                      if (numbers.length > 2) {
+                        final formatted =
+                            '${numbers.substring(0, 2)}/${numbers.substring(2)}';
+                        expiryDateController.value = TextEditingValue(
+                          text: formatted,
+                          selection:
+                              TextSelection.collapsed(offset: formatted.length),
+                        );
+                        addCardBloc.onExpiryDateChanged(formatted);
+                      } else {
+                        addCardBloc.onExpiryDateChanged(numbers);
+                      }
                     },
-                    child: const Text("Save Card", style: TextStyle(color: Colors.white)),
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          );
-        },
+          ],
+        ),
       ),
-    );
-  }
-}
-
-class _CardSelector extends StatefulWidget {
-  const _CardSelector();
-
-  @override
-  State<_CardSelector> createState() => _CardSelectorState();
-}
-
-class _CardSelectorState extends State<_CardSelector> {
-  CardType selectedType = CardType.masterCard;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: CardType.values.map((type) {
-        final isSelected = selectedType == type;
-        return Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4.w),
-            child: GestureDetector(
-              onTap: () => setState(() => selectedType = type),
-              child: Container(
-                height: 50.h,
-                decoration: BoxDecoration(
-                  color: isSelected ? Colors.grey[300] : const Color(0xFFFFF9F9),
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      offset: const Offset(-2, 4),
-                      blurRadius: 2,
-                    ),
-                  ],
-                ),
-                alignment: Alignment.center,
-                child: CustomSvgIcon(
-                  type.icon,
-                  width: 40.w,
-                ),
+      bottomNavigationBar: Padding(
+        padding: allPadding20,
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-}
-
-class _LabeledField extends StatelessWidget {
-  final String label;
-  final Widget child;
-  const _LabeledField({required this.label, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-        SizedBox(height: 8.h),
-        child,
-        SizedBox(height: 26.h),
-      ],
-    );
-  }
-}
-
-class CustomAddCardTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String hintText;
-  final double height;
-  final double? width;
-  final Widget? trailing;
-  final String? errorMessage;
-  final TextInputType keyboardType;
-  final bool isEditable;
-  final String? prefixText;
-  final void Function(String)? onChanged;
-
-  const CustomAddCardTextField({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    required this.height,
-    this.width,
-    this.trailing,
-    this.errorMessage,
-    this.keyboardType = TextInputType.text,
-    this.isEditable = true,
-    this.prefixText,
-    this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final readOnly = !isEditable;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: height,
-          width: width ?? double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(color: Colors.grey.shade400),
-          ),
-          child: Row(
-            children: [
-              if (prefixText != null)
-                Text(
-                  prefixText!,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14.sp,
-                    letterSpacing: 3,
-                  ),
-                ),
-              Expanded(
-                child: TextField(
-                  controller: controller,
-                  readOnly: readOnly,
-                  keyboardType: keyboardType,
-                  onChanged: onChanged,
-                  style: TextStyle(fontSize: 14.sp, letterSpacing: 3),
-                  decoration: InputDecoration(
-                    hintText: hintText,
-                    hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey, letterSpacing: 3),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-              if (trailing != null)
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: trailing!,
-                ),
-            ],
+            onPressed: () {
+              addCardBloc.validateAndSubmitCardDetails();
+            },
+            child:
+                const Text("Save Card", style: TextStyle(color: Colors.white)),
           ),
         ),
-        if (errorMessage != null && errorMessage!.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: 4, left: 4),
-            child: Text(
-              errorMessage!,
-              style: TextStyle(color: Colors.red, fontSize: 10.sp),
-            ),
-          ),
-      ],
+      ),
     );
   }
 }

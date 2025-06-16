@@ -16,6 +16,9 @@ _AddCardState _$AddCardStateFromJson(Map<String, dynamic> json) =>
       cardNumberError: json['cardNumberError'] as String?,
       cardHolderError: json['cardHolderError'] as String?,
       expiryDateError: json['expiryDateError'] as String?,
+      selectedCardType:
+          $enumDecodeNullable(_$CardTypeEnumMap, json['selectedCardType']) ??
+              CardType.masterCard,
     );
 
 Map<String, dynamic> _$AddCardStateToJson(_AddCardState instance) =>
@@ -28,4 +31,11 @@ Map<String, dynamic> _$AddCardStateToJson(_AddCardState instance) =>
       'cardNumberError': instance.cardNumberError,
       'cardHolderError': instance.cardHolderError,
       'expiryDateError': instance.expiryDateError,
+      'selectedCardType': _$CardTypeEnumMap[instance.selectedCardType]!,
     };
+
+const _$CardTypeEnumMap = {
+  CardType.masterCard: 'masterCard',
+  CardType.visa: 'visa',
+  CardType.ruPay: 'ruPay',
+};

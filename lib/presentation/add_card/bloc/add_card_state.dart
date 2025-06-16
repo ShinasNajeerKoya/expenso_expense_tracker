@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../utils/card_type_extensions.dart';
+
 part 'add_card_state.freezed.dart';
 part 'add_card_state.g.dart';
 
@@ -18,6 +20,8 @@ abstract class AddCardState with _$AddCardState {
     String? cardNumberError,
     String? cardHolderError,
     String? expiryDateError,
+
+    @Default(CardType.masterCard) CardType selectedCardType,
   }) = _AddCardState;
 
   factory AddCardState.fromJson(Map<String, dynamic> json) => _$AddCardStateFromJson(json);
