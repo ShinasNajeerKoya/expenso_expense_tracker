@@ -4,8 +4,8 @@ class PostgrestException implements Exception {
   PostgrestException({required this.errorMessage, this.errorDescription});
 }
 
-class IsarErrorException implements Exception {
+class DriftErrorException implements Exception {
   String errorMessage;
   String? errorDescription;
-  IsarErrorException({required this.errorMessage, this.errorDescription});
+  DriftErrorException({required this.errorMessage, this.errorDescription});
 }

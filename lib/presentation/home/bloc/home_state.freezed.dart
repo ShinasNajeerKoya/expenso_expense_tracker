@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$HomeState {
   bool get error;
   bool get isLoading;
+  List<AddCardModel> get cardList;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -35,16 +36,18 @@ mixin _$HomeState {
             other is HomeState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other.cardList, cardList));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      const DeepCollectionEquality().hash(cardList));
 
   @override
   String toString() {
-    return 'HomeState(error: $error, isLoading: $isLoading)';
+    return 'HomeState(error: $error, isLoading: $isLoading, cardList: $cardList)';
   }
 }
 
@@ -53,7 +56,7 @@ abstract mixin class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) =
       _$HomeStateCopyWithImpl;
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call({bool error, bool isLoading, List<AddCardModel> cardList});
 }
 
 /// @nodoc
@@ -70,6 +73,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? cardList = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -80,6 +84,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      cardList: null == cardList
+          ? _self.cardList
+          : cardList // ignore: cast_nullable_to_non_nullable
+              as List<AddCardModel>,
     ));
   }
 }
@@ -87,7 +95,11 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 /// @nodoc
 @JsonSerializable()
 class _HomeState implements HomeState {
-  const _HomeState({this.error = false, this.isLoading = false});
+  const _HomeState(
+      {this.error = false,
+      this.isLoading = false,
+      final List<AddCardModel> cardList = const []})
+      : _cardList = cardList;
   factory _HomeState.fromJson(Map<String, dynamic> json) =>
       _$HomeStateFromJson(json);
 
@@ -97,6 +109,14 @@ class _HomeState implements HomeState {
   @override
   @JsonKey()
   final bool isLoading;
+  final List<AddCardModel> _cardList;
+  @override
+  @JsonKey()
+  List<AddCardModel> get cardList {
+    if (_cardList is EqualUnmodifiableListView) return _cardList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cardList);
+  }
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -120,16 +140,18 @@ class _HomeState implements HomeState {
             other is _HomeState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other._cardList, _cardList));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      const DeepCollectionEquality().hash(_cardList));
 
   @override
   String toString() {
-    return 'HomeState(error: $error, isLoading: $isLoading)';
+    return 'HomeState(error: $error, isLoading: $isLoading, cardList: $cardList)';
   }
 }
 
@@ -141,7 +163,7 @@ abstract mixin class _$HomeStateCopyWith<$Res>
       __$HomeStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call({bool error, bool isLoading, List<AddCardModel> cardList});
 }
 
 /// @nodoc
@@ -158,6 +180,7 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? cardList = null,
   }) {
     return _then(_HomeState(
       error: null == error
@@ -168,6 +191,10 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      cardList: null == cardList
+          ? _self._cardList
+          : cardList // ignore: cast_nullable_to_non_nullable
+              as List<AddCardModel>,
     ));
   }
 }

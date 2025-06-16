@@ -1,17 +1,40 @@
+import 'dart:developer';
+
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expenso_expense_tracker/config/themes/colors.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../domain/models/add_card/add_card_model.dart';
 import '../../add_card/pages/add_card_page.dart';
+import '../../add_card/utils/card_type_extensions.dart';
+import '../bloc/home_bloc.dart';
+import '../bloc/home_state.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
 
-  final cardData = null;
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final homeBloc = GetIt.I<HomeBloc>();
+
+  final CarouselSliderController controller = CarouselSliderController();
+
+  @override
+  void initState() {
+    super.initState();
+    homeBloc.loadAllCards();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +48,9 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
             decoration: BoxDecoration(
                 color: AppColors.kHomeBlackColor,
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r))),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30.r),
+                    bottomRight: Radius.circular(30.r))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -33,16 +58,26 @@ class HomePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      height: 40.h,
-                      width: 40.h,
-                      // child: CustomSvgIcon(AppIconsOld.kDoubleArrow),
-                      child: CustomSvgIcon(AppIcons.kFileAdd),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => AddCardPage()),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 40.h,
+                        width: 40.h,
+                        // child: CustomSvgIcon(AppIconsOld.kDoubleArrow),
+                        child: CustomSvgIcon(AppIcons.kFileAdd),
+                      ),
                     ),
                     Container(
                       height: 40.h,
                       width: 40.h,
-                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14.r)),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(14.r)),
                       // child: CustomSvgIcon(AppIconsOld.kDoubleArrow),
                     ),
                   ],
@@ -73,19 +108,150 @@ class HomePage extends StatelessWidget {
                 ),
                 Text(
                   'Welcome Shinas',
-                  style: TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 22.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 12.h,
                 ),
-                cardData == null
-                    ? AddCardButton(onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => AddCardPage()),
-                        );
-                      })
-                    : CreditCardWidget(),
+                // BlocSelector<HomeBloc, HomeState, List<AddCardModel>>(
+                //   bloc: homeBloc,
+                //   selector: (state) => state.cardList,
+                //   builder: (context, cardList) {
+                //     log('cardList : ${cardList.length}');
+                //
+                //     if (cardList.isEmpty) {
+                //       return AddCardButton(
+                //         onTap: () {
+                //           Navigator.push(
+                //             context,
+                //             MaterialPageRoute(builder: (_) => AddCardPage()),
+                //           );
+                //         },
+                //       );
+                //     } else {
+                //       final extendedList = [
+                //         ...cardList,
+                //         null
+                //       ]; // `null` for AddCard slot
+                //
+                //       return SizedBox(
+                //         height: 220.h,
+                //         child: CarouselSlider.builder(
+                //           itemCount: extendedList.length,
+                //           carouselController: controller,
+                //           itemBuilder: (context, index, realIdx) {
+                //             final card = extendedList[index];
+                //             return Padding(
+                //               padding: EdgeInsets.symmetric(horizontal: 8.w),
+                //               child: Transform.scale(
+                //                 scale:
+                //                     1, // Optional: Add scale effect if needed
+                //                 child: card != null
+                //                     ? CreditCardWidget(
+                //                         cardHoldersName: card.cardHolderName,
+                //                         cardNumber: card.cardNumber,
+                //                         expiryDate: card.expiryDate,
+                //                         cardType: card.cardType,
+                //                       )
+                //                     : AddCardButton(
+                //                         onTap: () {
+                //                           Navigator.push(
+                //                             context,
+                //                             MaterialPageRoute(
+                //                                 builder: (_) => AddCardPage()),
+                //                           );
+                //                         },
+                //                       ),
+                //               ),
+                //             );
+                //           },
+                //           options: CarouselOptions(
+                //             height: 220.h,
+                //             viewportFraction: 0.85,
+                //             enlargeCenterPage: true,
+                //             enableInfiniteScroll: false,
+                //             scrollPhysics: const ClampingScrollPhysics(),
+                //             pageSnapping: true,
+                //             onPageChanged: (index, reason) {
+                //               if (index == extendedList.length - 1) {
+                //                 log('Reached Add Card Slot');
+                //               }
+                //             },
+                //           ),
+                //         ),
+                //       );
+                //     }
+                //   },
+                // )
+
+                BlocSelector<HomeBloc, HomeState, List<AddCardModel>>(
+                  bloc: homeBloc,
+                  selector: (state) => state.cardList,
+                  builder: (context, cardList) {
+                    log('cardList : ${cardList.length}');
+
+                    if (cardList.isEmpty) {
+                      return AddCardButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => AddCardPage()),
+                          );
+                        },
+                      );
+                    } else {
+                      final extendedList = [
+                        ...cardList,
+                        null
+                      ]; // null = Add Card
+
+                      return SizedBox(
+                        height: 220.h,
+                        child: PageView.builder(
+                          controller: PageController(
+                            viewportFraction:
+                                0.85, // Same as carousel's card width
+                          ),
+                          physics: const ClampingScrollPhysics(), // No bounce
+                          itemCount: extendedList.length,
+                          itemBuilder: (context, index) {
+                            final card = extendedList[index];
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.w),
+                              child: Transform.scale(
+                                scale: 1,
+                                child: card != null
+                                    ? CreditCardWidget(
+                                        cardHoldersName: card.cardHolderName,
+                                        cardNumber: card.cardNumber,
+                                        expiryDate: card.expiryDate,
+                                        cardType: card.cardType,
+                                      )
+                                    : AddCardButton(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => AddCardPage()),
+                                          );
+                                        },
+                                      ),
+                              ),
+                            );
+                          },
+                          onPageChanged: (index) {
+                            if (index == extendedList.length - 1) {
+                              log('Reached Add Card Slot');
+                            }
+                          },
+                        ),
+                      );
+                    }
+                  },
+                )
               ],
             ),
           ),
@@ -93,7 +259,9 @@ class HomePage extends StatelessWidget {
           Container(
             height: 285.h,
             width: 360.w,
-            decoration: BoxDecoration(color: AppColors.kHomeGraphBgColor, borderRadius: BorderRadius.circular(20.r)),
+            decoration: BoxDecoration(
+                color: AppColors.kHomeGraphBgColor,
+                borderRadius: BorderRadius.circular(20.r)),
           ),
         ],
       ),
@@ -203,7 +371,18 @@ class InnerShadowContainer extends StatelessWidget {
 }
 
 class CreditCardWidget extends StatelessWidget {
-  const CreditCardWidget({super.key});
+  const CreditCardWidget(
+      {super.key,
+      required this.cardHoldersName,
+      required this.cardNumber,
+      required this.expiryDate,
+      required this.cardType});
+
+  final String cardHoldersName;
+  final String cardNumber;
+  final String expiryDate;
+
+  final CardType cardType;
 
   @override
   Widget build(BuildContext context) {
@@ -268,7 +447,7 @@ class CreditCardWidget extends StatelessWidget {
                     height: 12.h,
                   ),
                   Text(
-                    "****  ****  ****  0023",
+                    "****  ****  ****  $cardNumber",
                     style: GoogleFonts.publicSans(
                       color: Colors.white,
                       fontSize: 14.sp,
@@ -288,11 +467,13 @@ class CreditCardWidget extends StatelessWidget {
                           children: [
                             Text(
                               "Card Holder",
-                              style: GoogleFonts.publicSans(color: Colors.white54, fontSize: 10),
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white54, fontSize: 10),
                             ),
                             Text(
-                              "Shinas Koya",
-                              style: GoogleFonts.publicSans(color: Colors.white, fontSize: 12),
+                              cardHoldersName,
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),
@@ -301,11 +482,13 @@ class CreditCardWidget extends StatelessWidget {
                           children: [
                             Text(
                               "Valid Thru",
-                              style: GoogleFonts.publicSans(color: Colors.white54, fontSize: 10),
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white54, fontSize: 10),
                             ),
                             Text(
-                              "08/25",
-                              style: GoogleFonts.publicSans(color: Colors.white, fontSize: 12),
+                              expiryDate,
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),
@@ -356,7 +539,8 @@ class CreditCardWidget extends StatelessWidget {
                       height: 48.r,
                       width: 48.r,
                       // Replace this with your tap SVG later
-                      child: CustomSvgIcon(AppIcons.kMasterCard),
+                      // child: CustomSvgIcon(AppIcons.kMasterCard),
+                      child: CustomSvgIcon(cardType.icon),
                     ),
                   ),
                   // Card Logo Placeholder

@@ -36,7 +36,7 @@ Future<void> futureTryCatch(
       logging: logging,
       onError: onError,
     );
-  } on IsarErrorException catch (error, stack) {
+  } on DriftErrorException catch (error, stack) {
     _handleError(
       error: error,
       message: error.errorMessage,

@@ -183,7 +183,7 @@ class _SwipeToGetStartedState extends State<SwipeToGetStarted> with SingleTicker
         if (state.sliderCompleted) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) => const HomePage()),
+              MaterialPageRoute(builder: (_) =>  HomePage()),
             );
           });
         }

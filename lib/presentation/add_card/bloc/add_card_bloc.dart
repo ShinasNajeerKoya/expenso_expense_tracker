@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/models/add_card/add_card_model.dart';
 import '../../../domain/repositories/add_card/add_card_repository.dart';
 import '../utils/card_type_extensions.dart';
 import 'add_card_state.dart';
@@ -28,54 +29,6 @@ class AddCardBloc extends Cubit<AddCardState> {
   void onCardTypeChanged(CardType type) {
     emit(state.copyWith(selectedCardType: type));
   }
-
-  // void validateAndSubmitCardDetails() {
-  //   final cardType = state.selectedCardType;
-  //   final cardNumber = state.cardNumber;
-  //   final cardHolderName = state.cardHolderName;
-  //   final expiryDate = state.expiryDate;
-  //   bool hasError = false;
-  //
-  //   String? cardNumberError;
-  //   String? nameError;
-  //   String? expiryError;
-  //
-  //   if (!RegExp(r'^\d+$').hasMatch(state.cardNumber)) {
-  //     cardNumberError = 'Only digits allowed';
-  //     hasError = true;
-  //   }
-  //
-  //   if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(state.cardHolderName)) {
-  //     nameError = 'Only alphabets allowed';
-  //     hasError = true;
-  //   }
-  //
-  //   if (!RegExp(r'^\d{2}/\d{2}$').hasMatch(state.expiryDate)) {
-  //     expiryError = 'Format must be MM/YY';
-  //     hasError = true;
-  //   }
-  //
-  //   emit(state.copyWith(
-  //     cardNumberError: cardNumberError,
-  //     cardHolderError: nameError,
-  //     expiryDateError: expiryError,
-  //   ));
-  //
-  //   if (!hasError) {
-  //     log('card details : $cardType, $cardNumber, $cardHolderName, $expiryDate');
-  //
-  //     emit(state.copyWith(
-  //       cardNumber: cardNumber,
-  //       cardNumberError: null,
-  //       cardHolderName: cardHolderName,
-  //       cardHolderError: null,
-  //       expiryDate: expiryDate,
-  //       expiryDateError: null,
-  //     ));
-  //
-  //     _repo.startAddCard();
-  //   }
-  // }
 
   void validateAndSubmitCardDetails() {
     final cardType = state.selectedCardType;
@@ -121,7 +74,14 @@ class AddCardBloc extends Cubit<AddCardState> {
     if (!hasError) {
       log('card details : $cardType, $cardNumber, $cardHolderName, $expiryDate');
 
-      _repo.startAddCard();
+      _repo.insertCard(
+        AddCardModel(
+          cardHolderName: cardHolderName.trim(),
+          cardNumber: cardNumber.trim(),
+          expiryDate: expiryDate.trim(),
+          cardType: cardType,
+        ),
+      );
     }
   }
 }
