@@ -46,7 +46,9 @@ class AddCardBloc extends Cubit<AddCardState> {
     ));
   }
 
-
+  void clearEditingCard() {
+    emit(state.copyWith(editingCardModel: null));
+  }
 
   // void validateAndSubmitCardDetails() {
   //   final cardType = state.selectedCardType;
@@ -158,9 +160,7 @@ class AddCardBloc extends Cubit<AddCardState> {
         cardDesignType: cardDesignType,
       );
 
-      final Future<void> dbCall = state.editingCardModel != null
-          ? _repo.updateCard(card)
-          : _repo.insertCard(card);
+      final Future<void> dbCall = state.editingCardModel != null ? _repo.updateCard(card) : _repo.insertCard(card);
 
       dbCall.then((_) {
         emit(state.copyWith(isFormSaved: true));
@@ -170,8 +170,6 @@ class AddCardBloc extends Cubit<AddCardState> {
           emit(state.copyWith(isFormSaved: false));
         });
       });
-
     }
   }
-
 }

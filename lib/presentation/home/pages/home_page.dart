@@ -420,9 +420,13 @@ class CreditCardWidget extends StatelessWidget {
                           "Card Holder",
                           style: GoogleFonts.anta(color: Colors.white54, fontSize: 10.sp),
                         ),
-                        Text(
-                          cardHoldersName,
-                          style: GoogleFonts.anta(color: Colors.white, fontSize: 12.sp),
+                        SizedBox(
+                          width: 100.w,
+                          child: Text(
+                            cardHoldersName,
+                            style: GoogleFonts.anta(color: Colors.white, fontSize: 12.sp),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),

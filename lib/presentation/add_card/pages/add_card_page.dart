@@ -46,6 +46,9 @@ class _AddCardPageState extends State<AddCardPage> {
       expiryDateController.text = card.expiryDate;
 
       addCardBloc.setEditingCard(card);
+    } else {
+      /// 🧹 Clear previous card info from bloc if it's a new card
+      addCardBloc.clearEditingCard();
     }
   }
 
