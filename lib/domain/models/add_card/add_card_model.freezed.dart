@@ -20,6 +20,7 @@ mixin _$AddCardModel {
   String get cardNumber;
   String get expiryDate;
   CardType get cardType;
+  CardDesignType get cardDesignType;
 
   /// Create a copy of AddCardModel
   /// with the given fields replaced by the non-null parameter values.
@@ -45,17 +46,19 @@ mixin _$AddCardModel {
             (identical(other.expiryDate, expiryDate) ||
                 other.expiryDate == expiryDate) &&
             (identical(other.cardType, cardType) ||
-                other.cardType == cardType));
+                other.cardType == cardType) &&
+            (identical(other.cardDesignType, cardDesignType) ||
+                other.cardDesignType == cardDesignType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, cardHolderName, cardNumber, expiryDate, cardType);
+  int get hashCode => Object.hash(runtimeType, id, cardHolderName, cardNumber,
+      expiryDate, cardType, cardDesignType);
 
   @override
   String toString() {
-    return 'AddCardModel(id: $id, cardHolderName: $cardHolderName, cardNumber: $cardNumber, expiryDate: $expiryDate, cardType: $cardType)';
+    return 'AddCardModel(id: $id, cardHolderName: $cardHolderName, cardNumber: $cardNumber, expiryDate: $expiryDate, cardType: $cardType, cardDesignType: $cardDesignType)';
   }
 }
 
@@ -70,7 +73,8 @@ abstract mixin class $AddCardModelCopyWith<$Res> {
       String cardHolderName,
       String cardNumber,
       String expiryDate,
-      CardType cardType});
+      CardType cardType,
+      CardDesignType cardDesignType});
 }
 
 /// @nodoc
@@ -90,6 +94,7 @@ class _$AddCardModelCopyWithImpl<$Res> implements $AddCardModelCopyWith<$Res> {
     Object? cardNumber = null,
     Object? expiryDate = null,
     Object? cardType = null,
+    Object? cardDesignType = null,
   }) {
     return _then(_self.copyWith(
       id: freezed == id
@@ -112,6 +117,10 @@ class _$AddCardModelCopyWithImpl<$Res> implements $AddCardModelCopyWith<$Res> {
           ? _self.cardType
           : cardType // ignore: cast_nullable_to_non_nullable
               as CardType,
+      cardDesignType: null == cardDesignType
+          ? _self.cardDesignType
+          : cardDesignType // ignore: cast_nullable_to_non_nullable
+              as CardDesignType,
     ));
   }
 }
@@ -124,7 +133,8 @@ class _AddCardModel implements AddCardModel {
       required this.cardHolderName,
       required this.cardNumber,
       required this.expiryDate,
-      required this.cardType});
+      required this.cardType,
+      required this.cardDesignType});
   factory _AddCardModel.fromJson(Map<String, dynamic> json) =>
       _$AddCardModelFromJson(json);
 
@@ -138,6 +148,8 @@ class _AddCardModel implements AddCardModel {
   final String expiryDate;
   @override
   final CardType cardType;
+  @override
+  final CardDesignType cardDesignType;
 
   /// Create a copy of AddCardModel
   /// with the given fields replaced by the non-null parameter values.
@@ -167,17 +179,19 @@ class _AddCardModel implements AddCardModel {
             (identical(other.expiryDate, expiryDate) ||
                 other.expiryDate == expiryDate) &&
             (identical(other.cardType, cardType) ||
-                other.cardType == cardType));
+                other.cardType == cardType) &&
+            (identical(other.cardDesignType, cardDesignType) ||
+                other.cardDesignType == cardDesignType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, cardHolderName, cardNumber, expiryDate, cardType);
+  int get hashCode => Object.hash(runtimeType, id, cardHolderName, cardNumber,
+      expiryDate, cardType, cardDesignType);
 
   @override
   String toString() {
-    return 'AddCardModel(id: $id, cardHolderName: $cardHolderName, cardNumber: $cardNumber, expiryDate: $expiryDate, cardType: $cardType)';
+    return 'AddCardModel(id: $id, cardHolderName: $cardHolderName, cardNumber: $cardNumber, expiryDate: $expiryDate, cardType: $cardType, cardDesignType: $cardDesignType)';
   }
 }
 
@@ -194,7 +208,8 @@ abstract mixin class _$AddCardModelCopyWith<$Res>
       String cardHolderName,
       String cardNumber,
       String expiryDate,
-      CardType cardType});
+      CardType cardType,
+      CardDesignType cardDesignType});
 }
 
 /// @nodoc
@@ -215,6 +230,7 @@ class __$AddCardModelCopyWithImpl<$Res>
     Object? cardNumber = null,
     Object? expiryDate = null,
     Object? cardType = null,
+    Object? cardDesignType = null,
   }) {
     return _then(_AddCardModel(
       id: freezed == id
@@ -237,6 +253,10 @@ class __$AddCardModelCopyWithImpl<$Res>
           ? _self.cardType
           : cardType // ignore: cast_nullable_to_non_nullable
               as CardType,
+      cardDesignType: null == cardDesignType
+          ? _self.cardDesignType
+          : cardDesignType // ignore: cast_nullable_to_non_nullable
+              as CardDesignType,
     ));
   }
 }

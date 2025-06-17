@@ -13,6 +13,7 @@ import 'package:get_it/get_it.dart';
 import '../../../generated/app_icons.dart';
 import '../bloc/add_card_bloc.dart';
 import '../bloc/add_card_state.dart';
+import '../utils/card_design_type_extension.dart';
 import '../utils/card_type_extensions.dart';
 import '../widgets/custom_add_card_text_field.dart';
 
@@ -209,15 +210,13 @@ class _AddCardPageState extends State<AddCardPage> {
             CardSelector(addCardBloc: addCardBloc),
             SizedBox(height: 26.h),
             Divider(height: 1, color: Colors.grey.shade400),
-            const SizedBox(height: 26),
+            SizedBox(height: 26.h),
 
             /// 🔹 Use separate BlocBuilders for error-sensitive fields
             BlocSelector<AddCardBloc, AddCardState, String?>(
               bloc: addCardBloc,
               selector: (state) => state.cardNumberError,
               builder: (context, cardNumberError) {
-                print('Card Number textfield rebuilt');
-
                 return TextFieldLabelAndBody(
                   label: 'Card Number',
                   child: CustomAddCardTextField(
@@ -242,12 +241,79 @@ class _AddCardPageState extends State<AddCardPage> {
                 );
               },
             ),
+
+            // card designs
+            BlocSelector<AddCardBloc, AddCardState, CardDesignType>(
+              bloc: addCardBloc,
+              selector: (state) => state.selectedDesignType,
+              builder: (context, selectedDesignType) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Select Card Design", style: TextStyle(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 8.h),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: DropdownButton<CardDesignType>(
+                        value: selectedDesignType,
+                        isExpanded: true,
+                        focusColor: Colors.transparent,
+                        underline: const SizedBox(),
+
+                        // Remove splash/highlight/hover effects
+                        dropdownColor: Colors.white,
+                        borderRadius: BorderRadius.circular(12.r), // Rounded dropdown menu
+                        style: TextStyle(color: Colors.black), // Optional: set text style
+
+                        items: CardDesignType.values.map((design) {
+                          return DropdownMenuItem(
+                            value: design,
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(3.r),
+                                  child: Container(
+                                    width: 32.w,
+                                    height: 20.h,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent, // fallback color
+                                    ),
+                                    child: CustomSvgIcon(
+                                      design.svgAsset,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 12),
+                                Text(design.label),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+
+                        onChanged: (newType) {
+                          if (newType != null) {
+                            addCardBloc.onCardDesignChanged(newType);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+
+            SizedBox(height: 26.h),
+
+            // card holders name
             BlocSelector<AddCardBloc, AddCardState, String?>(
               bloc: addCardBloc,
               selector: (state) => state.cardHolderError,
               builder: (context, cardHolderError) {
-                print('Cardholder Name textfield rebuilt');
-
                 return TextFieldLabelAndBody(
                   label: 'Cardholder Name',
                   child: CustomAddCardTextField(
@@ -281,12 +347,10 @@ class _AddCardPageState extends State<AddCardPage> {
                     onChanged: (value) {
                       final numbers = value.replaceAll('/', '');
                       if (numbers.length > 2) {
-                        final formatted =
-                            '${numbers.substring(0, 2)}/${numbers.substring(2)}';
+                        final formatted = '${numbers.substring(0, 2)}/${numbers.substring(2)}';
                         expiryDateController.value = TextEditingValue(
                           text: formatted,
-                          selection:
-                              TextSelection.collapsed(offset: formatted.length),
+                          selection: TextSelection.collapsed(offset: formatted.length),
                         );
                         addCardBloc.onExpiryDateChanged(formatted);
                       } else {
@@ -315,8 +379,7 @@ class _AddCardPageState extends State<AddCardPage> {
             onPressed: () {
               addCardBloc.validateAndSubmitCardDetails();
             },
-            child:
-                const Text("Save Card", style: TextStyle(color: Colors.white)),
+            child: const Text("Save Card", style: TextStyle(color: Colors.white)),
           ),
         ),
       ),

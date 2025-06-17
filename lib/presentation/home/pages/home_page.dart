@@ -5,12 +5,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expenso_expense_tracker/config/themes/colors.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/presentation/add_card/utils/card_design_type_extension.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 import '../../../domain/models/add_card/add_card_model.dart';
 import '../../add_card/pages/add_card_page.dart';
@@ -43,14 +45,12 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Container(
-            height: 400.h,
+            height: 440.h,
             width: 390.w,
             padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
             decoration: BoxDecoration(
                 color: AppColors.kHomeBlackColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30.r),
-                    bottomRight: Radius.circular(30.r))),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -75,15 +75,13 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       height: 40.h,
                       width: 40.h,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14.r)),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14.r)),
                       // child: CustomSvgIcon(AppIconsOld.kDoubleArrow),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 20.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -108,85 +106,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   'Welcome Shinas',
-                  style: TextStyle(
-                      fontSize: 22.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 20.h,
                 ),
-                // BlocSelector<HomeBloc, HomeState, List<AddCardModel>>(
-                //   bloc: homeBloc,
-                //   selector: (state) => state.cardList,
-                //   builder: (context, cardList) {
-                //     log('cardList : ${cardList.length}');
-                //
-                //     if (cardList.isEmpty) {
-                //       return AddCardButton(
-                //         onTap: () {
-                //           Navigator.push(
-                //             context,
-                //             MaterialPageRoute(builder: (_) => AddCardPage()),
-                //           );
-                //         },
-                //       );
-                //     } else {
-                //       final extendedList = [
-                //         ...cardList,
-                //         null
-                //       ]; // `null` for AddCard slot
-                //
-                //       return SizedBox(
-                //         height: 220.h,
-                //         child: CarouselSlider.builder(
-                //           itemCount: extendedList.length,
-                //           carouselController: controller,
-                //           itemBuilder: (context, index, realIdx) {
-                //             final card = extendedList[index];
-                //             return Padding(
-                //               padding: EdgeInsets.symmetric(horizontal: 8.w),
-                //               child: Transform.scale(
-                //                 scale:
-                //                     1, // Optional: Add scale effect if needed
-                //                 child: card != null
-                //                     ? CreditCardWidget(
-                //                         cardHoldersName: card.cardHolderName,
-                //                         cardNumber: card.cardNumber,
-                //                         expiryDate: card.expiryDate,
-                //                         cardType: card.cardType,
-                //                       )
-                //                     : AddCardButton(
-                //                         onTap: () {
-                //                           Navigator.push(
-                //                             context,
-                //                             MaterialPageRoute(
-                //                                 builder: (_) => AddCardPage()),
-                //                           );
-                //                         },
-                //                       ),
-                //               ),
-                //             );
-                //           },
-                //           options: CarouselOptions(
-                //             height: 220.h,
-                //             viewportFraction: 0.85,
-                //             enlargeCenterPage: true,
-                //             enableInfiniteScroll: false,
-                //             scrollPhysics: const ClampingScrollPhysics(),
-                //             pageSnapping: true,
-                //             onPageChanged: (index, reason) {
-                //               if (index == extendedList.length - 1) {
-                //                 log('Reached Add Card Slot');
-                //               }
-                //             },
-                //           ),
-                //         ),
-                //       );
-                //     }
-                //   },
-                // )
-
                 BlocSelector<HomeBloc, HomeState, List<AddCardModel>>(
                   bloc: homeBloc,
                   selector: (state) => state.cardList,
@@ -203,55 +127,45 @@ class _HomePageState extends State<HomePage> {
                         },
                       );
                     } else {
-                      final extendedList = [
-                        ...cardList,
-                        null
-                      ]; // null = Add Card
+                      final extendedList = [...cardList, null]; // null = Add Card slot
 
                       return SizedBox(
                         height: 220.h,
-                        child: PageView.builder(
-                          controller: PageController(
-                            viewportFraction:
-                                0.85, // Same as carousel's card width
+                        child: CardSwiper(
+                          cardsCount: extendedList.length,
+                          numberOfCardsDisplayed: 2,
+                          isLoop: true,
+                          allowedSwipeDirection: AllowedSwipeDirection.only(
+                            right: true,
+                            left: true,
                           ),
-                          physics: const ClampingScrollPhysics(), // No bounce
-                          itemCount: extendedList.length,
-                          itemBuilder: (context, index) {
+                          padding: bottomPadding12,
+                          backCardOffset: Offset(0, 24.h),
+                          cardBuilder: (context, index, horizontalOffset, verticalOffset) {
                             final card = extendedList[index];
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.w),
-                              child: Transform.scale(
-                                scale: 1,
-                                child: card != null
-                                    ? CreditCardWidget(
-                                        cardHoldersName: card.cardHolderName,
-                                        cardNumber: card.cardNumber,
-                                        expiryDate: card.expiryDate,
-                                        cardType: card.cardType,
-                                      )
-                                    : AddCardButton(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) => AddCardPage()),
-                                          );
-                                        },
-                                      ),
-                              ),
-                            );
-                          },
-                          onPageChanged: (index) {
-                            if (index == extendedList.length - 1) {
-                              log('Reached Add Card Slot');
-                            }
+
+                            return card != null
+                                ? CreditCardWidget(
+                                    cardHoldersName: card.cardHolderName,
+                                    cardNumber: card.cardNumber,
+                                    expiryDate: card.expiryDate,
+                                    cardType: card.cardType,
+                                    cardDesignType: card.cardDesignType,
+                                  )
+                                : AddCardButton(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (_) => AddCardPage()),
+                                      );
+                                    },
+                                  );
                           },
                         ),
                       );
                     }
                   },
-                )
+                ),
               ],
             ),
           ),
@@ -259,9 +173,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 285.h,
             width: 360.w,
-            decoration: BoxDecoration(
-                color: AppColors.kHomeGraphBgColor,
-                borderRadius: BorderRadius.circular(20.r)),
+            decoration: BoxDecoration(color: AppColors.kHomeGraphBgColor, borderRadius: BorderRadius.circular(20.r)),
           ),
         ],
       ),
@@ -283,7 +195,7 @@ class AddCardButton extends StatelessWidget {
           width: (286 + 76).w,
           decoration: BoxDecoration(
             color: const Color(0xFFF9F7F2),
-            borderRadius: BorderRadius.circular(32.r),
+            borderRadius: BorderRadius.circular(16.r),
           ),
           child: Center(
               child: GestureDetector(
@@ -371,181 +283,130 @@ class InnerShadowContainer extends StatelessWidget {
 }
 
 class CreditCardWidget extends StatelessWidget {
-  const CreditCardWidget(
-      {super.key,
-      required this.cardHoldersName,
-      required this.cardNumber,
-      required this.expiryDate,
-      required this.cardType});
+  const CreditCardWidget({
+    super.key,
+    required this.cardHoldersName,
+    required this.cardNumber,
+    required this.expiryDate,
+    required this.cardType,
+    required this.cardDesignType,
+  });
 
   final String cardHoldersName;
   final String cardNumber;
   final String expiryDate;
 
   final CardType cardType;
+  final CardDesignType cardDesignType;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200.h,
       width: (286 + 76).w,
-      child: Row(
+      child: Stack(
         children: [
-          /// Left Section (Texts)
-          Expanded(
-            flex: 78,
-            child: Container(
-              padding: EdgeInsets.all(16.r),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(22.r),
-                  bottomLeft: Radius.circular(22.r),
-                ),
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF9F9F9F),
-                    Color(0xFF7A7A7A),
-                    Color(0xFF5E5E5E),
-                    Color(0xFF4B4B4B),
-                    Color(0xFF333333),
-                    Color(0xFF252525),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Available Credit",
-                        style: GoogleFonts.publicSans(
-                          color: Colors.white70,
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.h,
-                        width: 30.h,
-                        child: CustomSvgIcon(AppIcons.kRfid),
-                      )
-                    ],
-                  ),
-                  Text(
-                    "\$12000",
-                    style: GoogleFonts.publicSans(
-                      color: Colors.white,
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                  Text(
-                    "****  ****  ****  $cardNumber",
-                    style: GoogleFonts.publicSans(
-                      color: Colors.white,
-                      fontSize: 14.sp,
-                      letterSpacing: 2,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                  Padding(
-                    padding: rightPadding12,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Card Holder",
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white54, fontSize: 10),
-                            ),
-                            Text(
-                              cardHoldersName,
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Valid Thru",
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white54, fontSize: 10),
-                            ),
-                            Text(
-                              expiryDate,
-                              style: GoogleFonts.publicSans(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+          Positioned.fill(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: CustomSvgIcon(
+                cardDesignType.svgAsset,
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
-
-          /// Right Section (Icons area)
-          Expanded(
-            flex: 22,
-            child: Container(
-              padding: EdgeInsets.only(
-                left: 16.w,
-                right: 16.w,
-                bottom: 8.w,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(22.r),
-                  bottomRight: Radius.circular(22.r),
-                ),
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF7E7976),
-                    Color(0xFF776962),
-                    Color(0xFF70655F),
-                    Color(0xFF5A524E),
-                    Color(0xFF49423F),
-                    Color(0xFF443C39),
-                    Color(0xFF443C39),
-                    Color(0xFF443C39)
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // Tap Icon Placeholder
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: SizedBox(
-                      height: 48.r,
-                      width: 48.r,
-                      // Replace this with your tap SVG later
-                      // child: CustomSvgIcon(AppIcons.kMasterCard),
-                      child: CustomSvgIcon(cardType.icon),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20.w,
+              vertical: 12.w,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 24.h,
+                      width: 20.w,
+                      child: CustomSvgIcon(
+                        AppIcons.kRfidWhite,
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
+                    SizedBox(
+                      height: 40.h,
+                      width: 60.w,
+                      child: CustomSvgIcon(cardType.whiteIcon),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Text(
+                  "\$12000",
+                  // titilliumWeb , exo2, saira
+                  style: GoogleFonts.anta(
+                    color: Colors.white,
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.normal,
                   ),
-                  // Card Logo Placeholder
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Text(
+                  "****  ****  ****  $cardNumber",
+                  style: GoogleFonts.anta(
+                    color: Colors.white,
+                    fontSize: 14.sp,
+                    letterSpacing: 2,
+                  ),
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Card Holder",
+                          style: GoogleFonts.anta(color: Colors.white54, fontSize: 10),
+                        ),
+                        Text(
+                          cardHoldersName,
+                          style: GoogleFonts.anta(color: Colors.white, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Valid Thru",
+                          style: GoogleFonts.anta(color: Colors.white54, fontSize: 10),
+                        ),
+                        Text(
+                          expiryDate,
+                          style: GoogleFonts.anta(color: Colors.white, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                      width: 50.w,
+                      child: CustomSvgIcon(
+                        AppIcons.kChipWhite,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

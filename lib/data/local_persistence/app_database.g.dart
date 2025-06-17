@@ -41,6 +41,13 @@ class $CardsDetailsTable extends CardsDetails
       GeneratedColumn<String>('card_type', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
           .withConverter<CardType>($CardsDetailsTable.$convertercardType);
+  @override
+  late final GeneratedColumnWithTypeConverter<CardDesignType, String>
+      cardDesignType = GeneratedColumn<String>(
+              'card_design_type', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
+          .withConverter<CardDesignType>(
+              $CardsDetailsTable.$convertercardDesignType);
   static const VerificationMeta _isDefaultMeta =
       const VerificationMeta('isDefault');
   @override
@@ -52,8 +59,15 @@ class $CardsDetailsTable extends CardsDetails
           GeneratedColumn.constraintIsAlways('CHECK ("is_default" IN (0, 1))'),
       defaultValue: const Constant(false));
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, cardHolderName, cardNumber, expiryDate, cardType, isDefault];
+  List<GeneratedColumn> get $columns => [
+        id,
+        cardHolderName,
+        cardNumber,
+        expiryDate,
+        cardType,
+        cardDesignType,
+        isDefault
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -115,6 +129,9 @@ class $CardsDetailsTable extends CardsDetails
       cardType: $CardsDetailsTable.$convertercardType.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}card_type'])!),
+      cardDesignType: $CardsDetailsTable.$convertercardDesignType.fromSql(
+          attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}card_design_type'])!),
       isDefault: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_default'])!,
     );
@@ -127,6 +144,8 @@ class $CardsDetailsTable extends CardsDetails
 
   static TypeConverter<CardType, String> $convertercardType =
       const CardTypeConverter();
+  static TypeConverter<CardDesignType, String> $convertercardDesignType =
+      const CardDesignTypeConverter();
 }
 
 class CardsDetail extends DataClass implements Insertable<CardsDetail> {
@@ -135,6 +154,7 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
   final String cardNumber;
   final String expiryDate;
   final CardType cardType;
+  final CardDesignType cardDesignType;
   final bool isDefault;
   const CardsDetail(
       {required this.id,
@@ -142,6 +162,7 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
       required this.cardNumber,
       required this.expiryDate,
       required this.cardType,
+      required this.cardDesignType,
       required this.isDefault});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -154,6 +175,10 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
       map['card_type'] = Variable<String>(
           $CardsDetailsTable.$convertercardType.toSql(cardType));
     }
+    {
+      map['card_design_type'] = Variable<String>(
+          $CardsDetailsTable.$convertercardDesignType.toSql(cardDesignType));
+    }
     map['is_default'] = Variable<bool>(isDefault);
     return map;
   }
@@ -165,6 +190,7 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
       cardNumber: Value(cardNumber),
       expiryDate: Value(expiryDate),
       cardType: Value(cardType),
+      cardDesignType: Value(cardDesignType),
       isDefault: Value(isDefault),
     );
   }
@@ -178,6 +204,8 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
       cardNumber: serializer.fromJson<String>(json['cardNumber']),
       expiryDate: serializer.fromJson<String>(json['expiryDate']),
       cardType: serializer.fromJson<CardType>(json['cardType']),
+      cardDesignType:
+          serializer.fromJson<CardDesignType>(json['cardDesignType']),
       isDefault: serializer.fromJson<bool>(json['isDefault']),
     );
   }
@@ -190,6 +218,7 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
       'cardNumber': serializer.toJson<String>(cardNumber),
       'expiryDate': serializer.toJson<String>(expiryDate),
       'cardType': serializer.toJson<CardType>(cardType),
+      'cardDesignType': serializer.toJson<CardDesignType>(cardDesignType),
       'isDefault': serializer.toJson<bool>(isDefault),
     };
   }
@@ -200,6 +229,7 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
           String? cardNumber,
           String? expiryDate,
           CardType? cardType,
+          CardDesignType? cardDesignType,
           bool? isDefault}) =>
       CardsDetail(
         id: id ?? this.id,
@@ -207,6 +237,7 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
         cardNumber: cardNumber ?? this.cardNumber,
         expiryDate: expiryDate ?? this.expiryDate,
         cardType: cardType ?? this.cardType,
+        cardDesignType: cardDesignType ?? this.cardDesignType,
         isDefault: isDefault ?? this.isDefault,
       );
   CardsDetail copyWithCompanion(CardsDetailsCompanion data) {
@@ -220,6 +251,9 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
       expiryDate:
           data.expiryDate.present ? data.expiryDate.value : this.expiryDate,
       cardType: data.cardType.present ? data.cardType.value : this.cardType,
+      cardDesignType: data.cardDesignType.present
+          ? data.cardDesignType.value
+          : this.cardDesignType,
       isDefault: data.isDefault.present ? data.isDefault.value : this.isDefault,
     );
   }
@@ -232,14 +266,15 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
           ..write('cardNumber: $cardNumber, ')
           ..write('expiryDate: $expiryDate, ')
           ..write('cardType: $cardType, ')
+          ..write('cardDesignType: $cardDesignType, ')
           ..write('isDefault: $isDefault')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, cardHolderName, cardNumber, expiryDate, cardType, isDefault);
+  int get hashCode => Object.hash(id, cardHolderName, cardNumber, expiryDate,
+      cardType, cardDesignType, isDefault);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -249,6 +284,7 @@ class CardsDetail extends DataClass implements Insertable<CardsDetail> {
           other.cardNumber == this.cardNumber &&
           other.expiryDate == this.expiryDate &&
           other.cardType == this.cardType &&
+          other.cardDesignType == this.cardDesignType &&
           other.isDefault == this.isDefault);
 }
 
@@ -258,6 +294,7 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
   final Value<String> cardNumber;
   final Value<String> expiryDate;
   final Value<CardType> cardType;
+  final Value<CardDesignType> cardDesignType;
   final Value<bool> isDefault;
   const CardsDetailsCompanion({
     this.id = const Value.absent(),
@@ -265,6 +302,7 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
     this.cardNumber = const Value.absent(),
     this.expiryDate = const Value.absent(),
     this.cardType = const Value.absent(),
+    this.cardDesignType = const Value.absent(),
     this.isDefault = const Value.absent(),
   });
   CardsDetailsCompanion.insert({
@@ -273,17 +311,20 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
     required String cardNumber,
     required String expiryDate,
     required CardType cardType,
+    required CardDesignType cardDesignType,
     this.isDefault = const Value.absent(),
   })  : cardHolderName = Value(cardHolderName),
         cardNumber = Value(cardNumber),
         expiryDate = Value(expiryDate),
-        cardType = Value(cardType);
+        cardType = Value(cardType),
+        cardDesignType = Value(cardDesignType);
   static Insertable<CardsDetail> custom({
     Expression<int>? id,
     Expression<String>? cardHolderName,
     Expression<String>? cardNumber,
     Expression<String>? expiryDate,
     Expression<String>? cardType,
+    Expression<String>? cardDesignType,
     Expression<bool>? isDefault,
   }) {
     return RawValuesInsertable({
@@ -292,6 +333,7 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
       if (cardNumber != null) 'card_number': cardNumber,
       if (expiryDate != null) 'expiry_date': expiryDate,
       if (cardType != null) 'card_type': cardType,
+      if (cardDesignType != null) 'card_design_type': cardDesignType,
       if (isDefault != null) 'is_default': isDefault,
     });
   }
@@ -302,6 +344,7 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
       Value<String>? cardNumber,
       Value<String>? expiryDate,
       Value<CardType>? cardType,
+      Value<CardDesignType>? cardDesignType,
       Value<bool>? isDefault}) {
     return CardsDetailsCompanion(
       id: id ?? this.id,
@@ -309,6 +352,7 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
       cardNumber: cardNumber ?? this.cardNumber,
       expiryDate: expiryDate ?? this.expiryDate,
       cardType: cardType ?? this.cardType,
+      cardDesignType: cardDesignType ?? this.cardDesignType,
       isDefault: isDefault ?? this.isDefault,
     );
   }
@@ -332,6 +376,11 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
       map['card_type'] = Variable<String>(
           $CardsDetailsTable.$convertercardType.toSql(cardType.value));
     }
+    if (cardDesignType.present) {
+      map['card_design_type'] = Variable<String>($CardsDetailsTable
+          .$convertercardDesignType
+          .toSql(cardDesignType.value));
+    }
     if (isDefault.present) {
       map['is_default'] = Variable<bool>(isDefault.value);
     }
@@ -346,6 +395,7 @@ class CardsDetailsCompanion extends UpdateCompanion<CardsDetail> {
           ..write('cardNumber: $cardNumber, ')
           ..write('expiryDate: $expiryDate, ')
           ..write('cardType: $cardType, ')
+          ..write('cardDesignType: $cardDesignType, ')
           ..write('isDefault: $isDefault')
           ..write(')'))
         .toString();
@@ -370,6 +420,7 @@ typedef $$CardsDetailsTableCreateCompanionBuilder = CardsDetailsCompanion
   required String cardNumber,
   required String expiryDate,
   required CardType cardType,
+  required CardDesignType cardDesignType,
   Value<bool> isDefault,
 });
 typedef $$CardsDetailsTableUpdateCompanionBuilder = CardsDetailsCompanion
@@ -379,6 +430,7 @@ typedef $$CardsDetailsTableUpdateCompanionBuilder = CardsDetailsCompanion
   Value<String> cardNumber,
   Value<String> expiryDate,
   Value<CardType> cardType,
+  Value<CardDesignType> cardDesignType,
   Value<bool> isDefault,
 });
 
@@ -407,6 +459,11 @@ class $$CardsDetailsTableFilterComposer
   ColumnWithTypeConverterFilters<CardType, CardType, String> get cardType =>
       $composableBuilder(
           column: $table.cardType,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnWithTypeConverterFilters<CardDesignType, CardDesignType, String>
+      get cardDesignType => $composableBuilder(
+          column: $table.cardDesignType,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
   ColumnFilters<bool> get isDefault => $composableBuilder(
@@ -438,6 +495,10 @@ class $$CardsDetailsTableOrderingComposer
   ColumnOrderings<String> get cardType => $composableBuilder(
       column: $table.cardType, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get cardDesignType => $composableBuilder(
+      column: $table.cardDesignType,
+      builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<bool> get isDefault => $composableBuilder(
       column: $table.isDefault, builder: (column) => ColumnOrderings(column));
 }
@@ -465,6 +526,10 @@ class $$CardsDetailsTableAnnotationComposer
 
   GeneratedColumnWithTypeConverter<CardType, String> get cardType =>
       $composableBuilder(column: $table.cardType, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<CardDesignType, String> get cardDesignType =>
+      $composableBuilder(
+          column: $table.cardDesignType, builder: (column) => column);
 
   GeneratedColumn<bool> get isDefault =>
       $composableBuilder(column: $table.isDefault, builder: (column) => column);
@@ -501,6 +566,7 @@ class $$CardsDetailsTableTableManager extends RootTableManager<
             Value<String> cardNumber = const Value.absent(),
             Value<String> expiryDate = const Value.absent(),
             Value<CardType> cardType = const Value.absent(),
+            Value<CardDesignType> cardDesignType = const Value.absent(),
             Value<bool> isDefault = const Value.absent(),
           }) =>
               CardsDetailsCompanion(
@@ -509,6 +575,7 @@ class $$CardsDetailsTableTableManager extends RootTableManager<
             cardNumber: cardNumber,
             expiryDate: expiryDate,
             cardType: cardType,
+            cardDesignType: cardDesignType,
             isDefault: isDefault,
           ),
           createCompanionCallback: ({
@@ -517,6 +584,7 @@ class $$CardsDetailsTableTableManager extends RootTableManager<
             required String cardNumber,
             required String expiryDate,
             required CardType cardType,
+            required CardDesignType cardDesignType,
             Value<bool> isDefault = const Value.absent(),
           }) =>
               CardsDetailsCompanion.insert(
@@ -525,6 +593,7 @@ class $$CardsDetailsTableTableManager extends RootTableManager<
             cardNumber: cardNumber,
             expiryDate: expiryDate,
             cardType: cardType,
+            cardDesignType: cardDesignType,
             isDefault: isDefault,
           ),
           withReferenceMapper: (p0) => p0

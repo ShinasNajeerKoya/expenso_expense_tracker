@@ -8,6 +8,7 @@ class CardsDetails extends Table {
   TextColumn get cardNumber => text()();
   TextColumn get expiryDate => text()();
   TextColumn get cardType => text().map(const CardTypeConverter())();
+  TextColumn get cardDesignType => text().map(const CardDesignTypeConverter())();
 
   BoolColumn get isDefault => boolean().withDefault(const Constant(false))();
 }

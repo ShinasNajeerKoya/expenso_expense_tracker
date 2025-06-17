@@ -14,7 +14,6 @@ class CardSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('CardSelector rebuilt');
 
     return BlocSelector<AddCardBloc, AddCardState, CardType>(
       bloc: addCardBloc,
@@ -43,7 +42,7 @@ class CardSelector extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: CustomSvgIcon(
-                      type.icon,
+                      type.blackIcon,
                       width: 40.w,
                     ),
                   ),

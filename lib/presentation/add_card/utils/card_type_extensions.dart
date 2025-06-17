@@ -9,9 +9,15 @@ extension CardTypeExtension on CardType {
         CardType.visa => 'Visa',
       };
 
-  String get icon => switch (this) {
-        CardType.ruPay => AppIcons.kRuPay,
-        CardType.masterCard => AppIcons.kMasterCard,
-        CardType.visa => AppIcons.kVisa,
+  String get whiteIcon => switch (this) {
+        CardType.ruPay => AppIcons.kRupayWhite,
+        CardType.masterCard => AppIcons.kMastercardWhite,
+        CardType.visa => AppIcons.kVisaWhite,
+      };
+
+  String get blackIcon => switch (this) {
+        CardType.ruPay => AppIcons.kRupayBlack,
+        CardType.masterCard => AppIcons.kMastercardBlack,
+        CardType.visa => AppIcons.kVisaBlack,
       };
 }

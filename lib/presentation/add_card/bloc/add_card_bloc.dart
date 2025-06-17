@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/models/add_card/add_card_model.dart';
 import '../../../domain/repositories/add_card/add_card_repository.dart';
+import '../utils/card_design_type_extension.dart';
 import '../utils/card_type_extensions.dart';
 import 'add_card_state.dart';
 
@@ -30,11 +31,16 @@ class AddCardBloc extends Cubit<AddCardState> {
     emit(state.copyWith(selectedCardType: type));
   }
 
+  void onCardDesignChanged(CardDesignType designType) {
+    emit(state.copyWith(selectedDesignType: designType));
+  }
+
   void validateAndSubmitCardDetails() {
     final cardType = state.selectedCardType;
     final cardNumber = state.cardNumber;
     final cardHolderName = state.cardHolderName;
     final expiryDate = state.expiryDate;
+    final cardDesignType = state.selectedDesignType;
 
     String? cardNumberError;
     String? nameError;
@@ -80,6 +86,7 @@ class AddCardBloc extends Cubit<AddCardState> {
           cardNumber: cardNumber.trim(),
           expiryDate: expiryDate.trim(),
           cardType: cardType,
+          cardDesignType: cardDesignType,
         ),
       );
     }
