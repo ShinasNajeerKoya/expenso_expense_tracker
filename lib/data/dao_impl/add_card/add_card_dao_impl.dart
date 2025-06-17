@@ -25,8 +25,20 @@ class CardDetailsDaoImpl implements CardDetailsDao {
 
   @override
   Future<void> deleteCard(int id) async {
-    await (_db.delete(_db.cardsDetails)..where((tbl) => tbl.id.equals(id)))
-        .go();
+    await (_db.delete(_db.cardsDetails)..where((tbl) => tbl.id.equals(id))).go();
     debugPrint('data successfully deleted');
   }
+
+  @override
+  Future<void> updateCard(AddCardModel card) async {
+    if (card.id == null) {
+      throw ArgumentError('Cannot update a card without an ID');
+    }
+    await (_db.update(_db.cardsDetails)
+      ..where((tbl) => tbl.id.equals(card.id!)))
+        .write(card.toCompanion());
+
+    debugPrint('data successfully updated');
+  }
+
 }

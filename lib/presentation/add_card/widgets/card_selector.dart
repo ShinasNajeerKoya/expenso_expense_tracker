@@ -31,7 +31,7 @@ class CardSelector extends StatelessWidget {
                     height: 50.h,
                     decoration: BoxDecoration(
                       color: isSelected ? Colors.grey[100] : Colors.white,
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(6.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),

@@ -35,6 +35,79 @@ class AddCardBloc extends Cubit<AddCardState> {
     emit(state.copyWith(selectedDesignType: designType));
   }
 
+  void setEditingCard(AddCardModel card) {
+    emit(state.copyWith(
+      cardNumber: card.cardNumber,
+      cardHolderName: card.cardHolderName,
+      expiryDate: card.expiryDate,
+      selectedCardType: card.cardType,
+      selectedDesignType: card.cardDesignType,
+      editingCardModel: card,
+    ));
+  }
+
+
+
+  // void validateAndSubmitCardDetails() {
+  //   final cardType = state.selectedCardType;
+  //   final cardNumber = state.cardNumber;
+  //   final cardHolderName = state.cardHolderName;
+  //   final expiryDate = state.expiryDate;
+  //   final cardDesignType = state.selectedDesignType;
+  //
+  //   String? cardNumberError;
+  //   String? nameError;
+  //   String? expiryError;
+  //
+  //   bool hasError = false;
+  //
+  //   // Validation checks
+  //   final sanitizedCardNumber = cardNumber.trim();
+  //
+  //   if (!RegExp(r'^\d+$').hasMatch(sanitizedCardNumber)) {
+  //     cardNumberError = 'Only digits allowed.';
+  //     hasError = true;
+  //   } else if (sanitizedCardNumber.length != 4) {
+  //     cardNumberError = 'Incomplete card number.';
+  //     hasError = true;
+  //   }
+  //
+  //   if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(cardHolderName)) {
+  //     nameError = 'Only alphabets allowed.';
+  //     hasError = true;
+  //   }
+  //
+  //   if (!RegExp(r'^\d{2}/\d{2}$').hasMatch(expiryDate)) {
+  //     expiryError = 'Format must be MM/YY';
+  //     hasError = true;
+  //   }
+  //
+  //   // Emit state once with all errors (or nulls)
+  //   emit(state.copyWith(
+  //     cardNumberError: cardNumberError,
+  //     cardHolderError: nameError,
+  //     expiryDateError: expiryError,
+  //   ));
+  //
+  //   // Proceed only if there's no error
+  //   if (!hasError) {
+  //     log('card details : $cardType, $cardNumber, $cardHolderName, $expiryDate');
+  //
+  //     _repo
+  //         .insertCard(
+  //       AddCardModel(
+  //         cardHolderName: cardHolderName.trim(),
+  //         cardNumber: cardNumber.trim(),
+  //         expiryDate: expiryDate.trim(),
+  //         cardType: cardType,
+  //         cardDesignType: cardDesignType,
+  //       ),
+  //     )
+  //         .then((_) {
+  //       emit(state.copyWith(isFormSaved: true));
+  //     });
+  //   }
+  // }
   void validateAndSubmitCardDetails() {
     final cardType = state.selectedCardType;
     final cardNumber = state.cardNumber;
@@ -48,7 +121,7 @@ class AddCardBloc extends Cubit<AddCardState> {
 
     bool hasError = false;
 
-    // Validation checks
+    // Validation
     final sanitizedCardNumber = cardNumber.trim();
 
     if (!RegExp(r'^\d+$').hasMatch(sanitizedCardNumber)) {
@@ -69,30 +142,36 @@ class AddCardBloc extends Cubit<AddCardState> {
       hasError = true;
     }
 
-    // Emit state once with all errors (or nulls)
     emit(state.copyWith(
       cardNumberError: cardNumberError,
       cardHolderError: nameError,
       expiryDateError: expiryError,
     ));
 
-    // Proceed only if there's no error
     if (!hasError) {
-      log('card details : $cardType, $cardNumber, $cardHolderName, $expiryDate');
+      final card = AddCardModel(
+        id: state.editingCardModel?.id,
+        cardHolderName: cardHolderName.trim(),
+        cardNumber: cardNumber.trim(),
+        expiryDate: expiryDate.trim(),
+        cardType: cardType,
+        cardDesignType: cardDesignType,
+      );
 
-      _repo
-          .insertCard(
-        AddCardModel(
-          cardHolderName: cardHolderName.trim(),
-          cardNumber: cardNumber.trim(),
-          expiryDate: expiryDate.trim(),
-          cardType: cardType,
-          cardDesignType: cardDesignType,
-        ),
-      )
-          .then((_) {
+      final Future<void> dbCall = state.editingCardModel != null
+          ? _repo.updateCard(card)
+          : _repo.insertCard(card);
+
+      dbCall.then((_) {
         emit(state.copyWith(isFormSaved: true));
+
+        // Reset after short delay
+        Future.delayed(const Duration(milliseconds: 100), () {
+          emit(state.copyWith(isFormSaved: false));
+        });
       });
+
     }
   }
+
 }

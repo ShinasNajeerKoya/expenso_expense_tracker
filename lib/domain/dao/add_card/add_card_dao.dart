@@ -8,4 +8,7 @@ abstract class CardDetailsDao {
   Future<void> insertCard(CardsDetailsCompanion card);
   Future<List<AddCardModel>> getAllCards();
   Future<void> deleteCard(int id);
+
+  Future<void> updateCard(AddCardModel card);
+
 }

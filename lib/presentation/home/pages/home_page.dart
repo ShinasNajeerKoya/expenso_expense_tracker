@@ -184,21 +184,35 @@ class SavedCardsSectionWidget extends StatelessWidget {
                 final card = extendedList[index];
 
                 return card != null
-                    ? CreditCardWidget(
-                        cardHoldersName: card.cardHolderName,
-                        cardNumber: card.cardNumber,
-                        expiryDate: card.expiryDate,
-                        cardType: card.cardType,
-                        cardDesignType: card.cardDesignType,
-                      )
-                    : AddCardButton(
-                        onTap: () {
-                          Navigator.push(
+                    ? GestureDetector(
+                        onTap: () async {
+                          final result = await Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => AddCardPage()),
+                            MaterialPageRoute(builder: (_) => AddCardPage(existingCard: card)),
                           ).then((_) {
                             homeBloc.loadAllCards();
                           });
+                        },
+                        child: CreditCardWidget(
+                          cardHoldersName: card.cardHolderName,
+                          cardNumber: card.cardNumber,
+                          expiryDate: card.expiryDate,
+                          cardType: card.cardType,
+                          cardDesignType: card.cardDesignType,
+                        ),
+                      )
+                    : AddCardButton(
+                        onTap: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AddCardPage(),
+                            ),
+                          );
+
+                          if (result == true) {
+                            homeBloc.loadAllCards();
+                          }
                         },
                       );
               },
@@ -404,11 +418,11 @@ class CreditCardWidget extends StatelessWidget {
                       children: [
                         Text(
                           "Card Holder",
-                          style: GoogleFonts.anta(color: Colors.white54, fontSize: 10),
+                          style: GoogleFonts.anta(color: Colors.white54, fontSize: 10.sp),
                         ),
                         Text(
                           cardHoldersName,
-                          style: GoogleFonts.anta(color: Colors.white, fontSize: 12),
+                          style: GoogleFonts.anta(color: Colors.white, fontSize: 12.sp),
                         ),
                       ],
                     ),
@@ -417,11 +431,11 @@ class CreditCardWidget extends StatelessWidget {
                       children: [
                         Text(
                           "Valid Thru",
-                          style: GoogleFonts.anta(color: Colors.white54, fontSize: 10),
+                          style: GoogleFonts.anta(color: Colors.white54, fontSize: 10.sp),
                         ),
                         Text(
                           expiryDate,
-                          style: GoogleFonts.anta(color: Colors.white, fontSize: 12),
+                          style: GoogleFonts.anta(color: Colors.white, fontSize: 12.sp),
                         ),
                       ],
                     ),

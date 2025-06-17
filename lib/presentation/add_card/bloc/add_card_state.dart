@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../domain/models/add_card/add_card_model.dart';
 import '../utils/card_design_type_extension.dart';
 import '../utils/card_type_extensions.dart';
 
@@ -27,6 +28,9 @@ abstract class AddCardState with _$AddCardState {
     @Default(CardDesignType.card1) CardDesignType selectedDesignType,
 
     @Default(false) bool isFormSaved,
+
+    final AddCardModel? editingCardModel,
+
 
 
 

@@ -23,6 +23,10 @@ _AddCardState _$AddCardStateFromJson(Map<String, dynamic> json) =>
               _$CardDesignTypeEnumMap, json['selectedDesignType']) ??
           CardDesignType.card1,
       isFormSaved: json['isFormSaved'] as bool? ?? false,
+      editingCardModel: json['editingCardModel'] == null
+          ? null
+          : AddCardModel.fromJson(
+              json['editingCardModel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AddCardStateToJson(_AddCardState instance) =>
@@ -39,6 +43,7 @@ Map<String, dynamic> _$AddCardStateToJson(_AddCardState instance) =>
       'selectedDesignType':
           _$CardDesignTypeEnumMap[instance.selectedDesignType]!,
       'isFormSaved': instance.isFormSaved,
+      'editingCardModel': instance.editingCardModel,
     };
 
 const _$CardTypeEnumMap = {

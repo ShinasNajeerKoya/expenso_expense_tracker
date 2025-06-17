@@ -16,6 +16,12 @@ class AddCardRepositoryImpl implements AddCardRepository {
   }
 
   @override
+  Future<void> updateCard(AddCardModel card) async {
+    await _dao.updateCard(card);
+  }
+
+
+  @override
   Future<List<AddCardModel>> getAllCards() async {
     return await _dao.getAllCards();
   }

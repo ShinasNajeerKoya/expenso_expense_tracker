@@ -26,6 +26,7 @@ mixin _$AddCardState {
   CardType get selectedCardType;
   CardDesignType get selectedDesignType;
   bool get isFormSaved;
+  AddCardModel? get editingCardModel;
 
   /// Create a copy of AddCardState
   /// with the given fields replaced by the non-null parameter values.
@@ -63,7 +64,9 @@ mixin _$AddCardState {
             (identical(other.selectedDesignType, selectedDesignType) ||
                 other.selectedDesignType == selectedDesignType) &&
             (identical(other.isFormSaved, isFormSaved) ||
-                other.isFormSaved == isFormSaved));
+                other.isFormSaved == isFormSaved) &&
+            (identical(other.editingCardModel, editingCardModel) ||
+                other.editingCardModel == editingCardModel));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -80,11 +83,12 @@ mixin _$AddCardState {
       expiryDateError,
       selectedCardType,
       selectedDesignType,
-      isFormSaved);
+      isFormSaved,
+      editingCardModel);
 
   @override
   String toString() {
-    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType, isFormSaved: $isFormSaved)';
+    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType, isFormSaved: $isFormSaved, editingCardModel: $editingCardModel)';
   }
 }
 
@@ -105,7 +109,10 @@ abstract mixin class $AddCardStateCopyWith<$Res> {
       String? expiryDateError,
       CardType selectedCardType,
       CardDesignType selectedDesignType,
-      bool isFormSaved});
+      bool isFormSaved,
+      AddCardModel? editingCardModel});
+
+  $AddCardModelCopyWith<$Res>? get editingCardModel;
 }
 
 /// @nodoc
@@ -131,6 +138,7 @@ class _$AddCardStateCopyWithImpl<$Res> implements $AddCardStateCopyWith<$Res> {
     Object? selectedCardType = null,
     Object? selectedDesignType = null,
     Object? isFormSaved = null,
+    Object? editingCardModel = freezed,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -177,7 +185,25 @@ class _$AddCardStateCopyWithImpl<$Res> implements $AddCardStateCopyWith<$Res> {
           ? _self.isFormSaved
           : isFormSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      editingCardModel: freezed == editingCardModel
+          ? _self.editingCardModel
+          : editingCardModel // ignore: cast_nullable_to_non_nullable
+              as AddCardModel?,
     ));
+  }
+
+  /// Create a copy of AddCardState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddCardModelCopyWith<$Res>? get editingCardModel {
+    if (_self.editingCardModel == null) {
+      return null;
+    }
+
+    return $AddCardModelCopyWith<$Res>(_self.editingCardModel!, (value) {
+      return _then(_self.copyWith(editingCardModel: value));
+    });
   }
 }
 
@@ -195,7 +221,8 @@ class _AddCardState implements AddCardState {
       this.expiryDateError,
       this.selectedCardType = CardType.masterCard,
       this.selectedDesignType = CardDesignType.card1,
-      this.isFormSaved = false});
+      this.isFormSaved = false,
+      this.editingCardModel});
   factory _AddCardState.fromJson(Map<String, dynamic> json) =>
       _$AddCardStateFromJson(json);
 
@@ -231,6 +258,8 @@ class _AddCardState implements AddCardState {
   @override
   @JsonKey()
   final bool isFormSaved;
+  @override
+  final AddCardModel? editingCardModel;
 
   /// Create a copy of AddCardState
   /// with the given fields replaced by the non-null parameter values.
@@ -272,7 +301,9 @@ class _AddCardState implements AddCardState {
             (identical(other.selectedDesignType, selectedDesignType) ||
                 other.selectedDesignType == selectedDesignType) &&
             (identical(other.isFormSaved, isFormSaved) ||
-                other.isFormSaved == isFormSaved));
+                other.isFormSaved == isFormSaved) &&
+            (identical(other.editingCardModel, editingCardModel) ||
+                other.editingCardModel == editingCardModel));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -289,11 +320,12 @@ class _AddCardState implements AddCardState {
       expiryDateError,
       selectedCardType,
       selectedDesignType,
-      isFormSaved);
+      isFormSaved,
+      editingCardModel);
 
   @override
   String toString() {
-    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType, isFormSaved: $isFormSaved)';
+    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType, isFormSaved: $isFormSaved, editingCardModel: $editingCardModel)';
   }
 }
 
@@ -316,7 +348,11 @@ abstract mixin class _$AddCardStateCopyWith<$Res>
       String? expiryDateError,
       CardType selectedCardType,
       CardDesignType selectedDesignType,
-      bool isFormSaved});
+      bool isFormSaved,
+      AddCardModel? editingCardModel});
+
+  @override
+  $AddCardModelCopyWith<$Res>? get editingCardModel;
 }
 
 /// @nodoc
@@ -343,6 +379,7 @@ class __$AddCardStateCopyWithImpl<$Res>
     Object? selectedCardType = null,
     Object? selectedDesignType = null,
     Object? isFormSaved = null,
+    Object? editingCardModel = freezed,
   }) {
     return _then(_AddCardState(
       error: null == error
@@ -389,7 +426,25 @@ class __$AddCardStateCopyWithImpl<$Res>
           ? _self.isFormSaved
           : isFormSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      editingCardModel: freezed == editingCardModel
+          ? _self.editingCardModel
+          : editingCardModel // ignore: cast_nullable_to_non_nullable
+              as AddCardModel?,
     ));
+  }
+
+  /// Create a copy of AddCardState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddCardModelCopyWith<$Res>? get editingCardModel {
+    if (_self.editingCardModel == null) {
+      return null;
+    }
+
+    return $AddCardModelCopyWith<$Res>(_self.editingCardModel!, (value) {
+      return _then(_self.copyWith(editingCardModel: value));
+    });
   }
 }
 

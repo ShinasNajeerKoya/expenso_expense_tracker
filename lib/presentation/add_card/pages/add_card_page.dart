@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../domain/models/add_card/add_card_model.dart';
 import '../../../generated/app_icons.dart';
 import '../bloc/add_card_bloc.dart';
 import '../bloc/add_card_state.dart';
@@ -17,152 +18,10 @@ import '../utils/card_design_type_extension.dart';
 import '../utils/card_type_extensions.dart';
 import '../widgets/custom_add_card_text_field.dart';
 
-// class AddCardPage extends StatelessWidget {
-//   AddCardPage({super.key});
-//
-//   final addCardBloc = GetIt.I<AddCardBloc>();
-//
-//   final cardNumberController = TextEditingController();
-//   final cardHolderController = TextEditingController();
-//   final expiryDateController = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(
-//         title: const Text('Add Card', style: TextStyle(color: Colors.black)),
-//         backgroundColor: Colors.white,
-//         elevation: 0,
-//         iconTheme: const IconThemeData(color: Colors.black),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               _CardSelector(addCardBloc: addCardBloc),
-//               SizedBox(height: 26.h),
-//               Divider(height: 1, color: Colors.grey.shade400),
-//               const SizedBox(height: 26),
-//               BlocBuilder<AddCardBloc, AddCardState>(
-//                 bloc: addCardBloc,
-//                 builder: (context, state) {
-//                   return _LabeledField(
-//                       label: 'Card Number',
-//                       child: CustomAddCardTextField(
-//                         controller: cardNumberController,
-//                         hintText: "0000",
-//                         height: 55.h,
-//                         prefixText: "****  ****  ****  ",
-//                         trailing: InkWell(
-//                           onTap: () {},
-//                           child: SizedBox(
-//                             height: 24,
-//                             width: 24,
-//                             child: CustomSvgIcon(AppIcons.kScanCard),
-//                           ),
-//                         ),
-//                         keyboardType: TextInputType.number,
-//                         errorMessage: state.cardNumberError,
-//                         isEditable: true,
-//                         maxCharacterLength: 4,
-//                         onChanged: addCardBloc.onCardNumberChanged,
-//                       ));
-//                 },
-//               ),
-//               BlocBuilder<AddCardBloc, AddCardState>(
-//                 bloc: addCardBloc,
-//                 builder: (context, state) {
-//                   return _LabeledField(
-//                       label: 'Cardholder Name',
-//                       child: CustomAddCardTextField(
-//                         controller: cardHolderController,
-//                         hintText: "Name on the card",
-//                         height: 55.h,
-//                         keyboardType: TextInputType.text,
-//                         errorMessage: state.cardHolderError,
-//                         isEditable: true,
-//                         onChanged: addCardBloc.onCardHolderChanged,
-//                       ));
-//                 },
-//               ),
-//               BlocBuilder<AddCardBloc, AddCardState>(
-//                 bloc: addCardBloc,
-//                 builder: (context, state) {
-//                   return _LabeledField(
-//                       label: 'Expiry Date',
-//                       child: CustomAddCardTextField(
-//                         controller: expiryDateController,
-//                         hintText: "MM/YY",
-//                         height: 44.h,
-//                         width: 180.w,
-//                         keyboardType: TextInputType.number,
-//                         errorMessage: state.expiryDateError,
-//                         maxCharacterLength: 5,
-//                         onChanged: (value) {
-//                           final numbers = value.replaceAll('/', '');
-//                           if (numbers.length > 2) {
-//                             final formatted =
-//                                 '${numbers.substring(0, 2)}/${numbers.substring(2)}';
-//                             expiryDateController.value = TextEditingValue(
-//                               text: formatted,
-//                               selection: TextSelection.collapsed(
-//                                   offset: formatted.length),
-//                             );
-//                             addCardBloc.onExpiryDateChanged(formatted);
-//                           } else {
-//                             addCardBloc.onExpiryDateChanged(numbers);
-//                           }
-//                         },
-//                       ));
-//                 },
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//       bottomNavigationBar: Padding(
-//         padding: allPadding20,
-//         child: BlocBuilder<AddCardBloc, AddCardState>(
-//           bloc: addCardBloc,
-//           builder: (context, state) {
-//             return SizedBox(
-//               width: double.infinity,
-//               child: ElevatedButton(
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Colors.black,
-//                   padding: const EdgeInsets.symmetric(vertical: 14),
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(8),
-//                   ),
-//                 ),
-//                 onPressed: () {
-//                   final cardType = state.selectedCardType;
-//                   final cardNumber = cardNumberController.text;
-//                   final cardHolderName = cardHolderController.text;
-//                   final expiryDate = expiryDateController.text;
-//
-//                   addCardBloc.validateAndSubmitCardDetails(
-//                       cardType: cardType,
-//                       cardNumber: cardNumber,
-//                       cardHolderName: cardHolderName,
-//                       expiryDate: expiryDate);
-//                 },
-//                 child: const Text("Save Card",
-//                     style: TextStyle(color: Colors.white)),
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class AddCardPage extends StatefulWidget {
-  const AddCardPage({super.key});
+  final AddCardModel? existingCard;
+
+  const AddCardPage({super.key, this.existingCard});
 
   @override
   State<AddCardPage> createState() => _AddCardPageState();
@@ -179,6 +38,15 @@ class _AddCardPageState extends State<AddCardPage> {
   void initState() {
     super.initState();
     addCardBloc = GetIt.I<AddCardBloc>();
+
+    final card = widget.existingCard;
+    if (card != null) {
+      cardNumberController.text = card.cardNumber;
+      cardHolderController.text = card.cardHolderName;
+      expiryDateController.text = card.expiryDate;
+
+      addCardBloc.setEditingCard(card);
+    }
   }
 
   @override
@@ -194,22 +62,28 @@ class _AddCardPageState extends State<AddCardPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Add Card', style: TextStyle(color: Colors.black)),
+        title: Text(addCardBloc.state.editingCardModel != null ? "Update Card" : "Add Card",
+            style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
         child: BlocListener<AddCardBloc, AddCardState>(
           bloc: addCardBloc,
           listenWhen: (previous, current) => current.isFormSaved && !previous.isFormSaved,
           listener: (context, state) {
-            cardNumberController.clear();
-            cardHolderController.clear();
-            expiryDateController.clear();
-            addCardBloc.onCardTypeChanged(CardType.masterCard);
-            addCardBloc.onCardDesignChanged(CardDesignType.card1);
+            if (widget.existingCard == null) {
+              // Only clear if it was a new card
+              cardNumberController.clear();
+              cardHolderController.clear();
+              expiryDateController.clear();
+              addCardBloc.onCardTypeChanged(CardType.masterCard);
+              addCardBloc.onCardDesignChanged(CardDesignType.card1);
+            }
+
+            Navigator.pop(context, true);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,15 +118,18 @@ class _AddCardPageState extends State<AddCardPage> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: EdgeInsets.symmetric(vertical: 14.h),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
             ),
             onPressed: () {
               addCardBloc.validateAndSubmitCardDetails();
             },
-            child: const Text("Save Card", style: TextStyle(color: Colors.white)),
+            child: Text(
+              addCardBloc.state.editingCardModel != null ? "Update Card" : "Save Card",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
@@ -396,7 +273,7 @@ class CardDesignDropDownWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 12),
+                        SizedBox(width: 12.w),
                         Text(design.label),
                       ],
                     ),
@@ -443,8 +320,8 @@ class CardNumberTextFieldWidget extends StatelessWidget {
             trailing: InkWell(
               onTap: () {},
               child: SizedBox(
-                height: 24,
-                width: 24,
+                height: 24.h,
+                width: 24.w,
                 child: CustomSvgIcon(AppIcons.kScanCard),
               ),
             ),

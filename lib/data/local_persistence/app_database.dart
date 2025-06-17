@@ -9,7 +9,6 @@ import '../../presentation/add_card/utils/card_type_extensions.dart';
 import 'converters/add_card_model_converter_extensions.dart';
 import 'drift_tables/card_details_table.dart';
 
-
 part 'app_database.g.dart';
 
 @DriftDatabase(tables: [CardsDetails])
@@ -26,17 +25,20 @@ class AppDatabase extends _$AppDatabase {
   // You can run migrations here if needed
   @override
   MigrationStrategy get migration => MigrationStrategy(
-    onCreate: (m) => m.createAll(),
-    onUpgrade: (m, from, to) async {
-      // handle migrations
-    },
-  );
+        onCreate: (m) => m.createAll(),
+        onUpgrade: (m, from, to) async {
+          // handle migrations
+        },
+      );
 }
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dir = await getApplicationDocumentsDirectory();
     final file = File(p.join(dir.path, 'app.sqlite'));
-    return NativeDatabase(file);
+    return NativeDatabase(
+      file,
+      logStatements: true,
+    );
   });
 }
