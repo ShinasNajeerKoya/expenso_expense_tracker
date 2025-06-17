@@ -1,7 +1,11 @@
-build-base:
-	flutter pub get;\
-	cd ios;\
-	pod install --repo-update;\
+app:
+	flutter clean; \
+	flutter pub get; \
+	cd ios && pod deintegrate && pod install --repo-update; \
+	cd ..; \
+	flutter build apk; \
+	cd build/app/outputs/flutter-apk && open .
+
 
 feature:
 	fvm flutter pub run tool/feature_generator.dart
