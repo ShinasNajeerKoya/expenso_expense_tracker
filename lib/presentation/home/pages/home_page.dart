@@ -14,6 +14,7 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
+import '../../../config/font_manager/font_styles.dart';
 import '../../../domain/models/add_card/add_card_model.dart';
 import '../../add_card/pages/add_card_page.dart';
 import '../../add_card/utils/card_type_extensions.dart';
@@ -384,26 +385,22 @@ class CreditCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 12.h,
-                ),
+                verticalMargin24,
                 Text(
                   "\$12000",
                   // titilliumWeb , exo2, saira
-                  style: GoogleFonts.anta(
+                  style: FontStyles.creditCard(
                     color: Colors.white,
-                    fontSize: 32.sp,
-                    fontWeight: FontWeight.normal,
+                    size: 24.sp,
+                    // fontWeight: FontWeight.normal,
                   ),
                 ),
-                SizedBox(
-                  height: 12.h,
-                ),
+                verticalMargin16,
                 Text(
                   "****  ****  ****  $cardNumber",
-                  style: GoogleFonts.anta(
+                  style: FontStyles.creditCard(
                     color: Colors.white,
-                    fontSize: 14.sp,
+                    size: 12.sp,
                     letterSpacing: 2,
                   ),
                 ),
