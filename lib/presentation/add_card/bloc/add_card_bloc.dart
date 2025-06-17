@@ -31,6 +31,7 @@ class AddCardBloc extends Cubit<AddCardState> {
     emit(state.copyWith(selectedCardType: type));
   }
   //
+  //
 
   void onCardDesignChanged(CardDesignType designType) {
     emit(state.copyWith(selectedDesignType: designType));
