@@ -7,6 +7,9 @@ import '../../../domain/repositories/home/home_repository.dart';
 
 import 'home_state.dart';
 
+///
+///
+
 class HomeBloc extends Cubit<HomeState> {
   HomeBloc({required this.cardRepo}) : super(const HomeState());
 
