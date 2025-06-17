@@ -80,7 +80,8 @@ class AddCardBloc extends Cubit<AddCardState> {
     if (!hasError) {
       log('card details : $cardType, $cardNumber, $cardHolderName, $expiryDate');
 
-      _repo.insertCard(
+      _repo
+          .insertCard(
         AddCardModel(
           cardHolderName: cardHolderName.trim(),
           cardNumber: cardNumber.trim(),
@@ -88,7 +89,10 @@ class AddCardBloc extends Cubit<AddCardState> {
           cardType: cardType,
           cardDesignType: cardDesignType,
         ),
-      );
+      )
+          .then((_) {
+        emit(state.copyWith(isFormSaved: true));
+      });
     }
   }
 }

@@ -25,6 +25,7 @@ mixin _$AddCardState {
   String? get expiryDateError;
   CardType get selectedCardType;
   CardDesignType get selectedDesignType;
+  bool get isFormSaved;
 
   /// Create a copy of AddCardState
   /// with the given fields replaced by the non-null parameter values.
@@ -60,7 +61,9 @@ mixin _$AddCardState {
             (identical(other.selectedCardType, selectedCardType) ||
                 other.selectedCardType == selectedCardType) &&
             (identical(other.selectedDesignType, selectedDesignType) ||
-                other.selectedDesignType == selectedDesignType));
+                other.selectedDesignType == selectedDesignType) &&
+            (identical(other.isFormSaved, isFormSaved) ||
+                other.isFormSaved == isFormSaved));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -76,11 +79,12 @@ mixin _$AddCardState {
       cardHolderError,
       expiryDateError,
       selectedCardType,
-      selectedDesignType);
+      selectedDesignType,
+      isFormSaved);
 
   @override
   String toString() {
-    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType)';
+    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType, isFormSaved: $isFormSaved)';
   }
 }
 
@@ -100,7 +104,8 @@ abstract mixin class $AddCardStateCopyWith<$Res> {
       String? cardHolderError,
       String? expiryDateError,
       CardType selectedCardType,
-      CardDesignType selectedDesignType});
+      CardDesignType selectedDesignType,
+      bool isFormSaved});
 }
 
 /// @nodoc
@@ -125,6 +130,7 @@ class _$AddCardStateCopyWithImpl<$Res> implements $AddCardStateCopyWith<$Res> {
     Object? expiryDateError = freezed,
     Object? selectedCardType = null,
     Object? selectedDesignType = null,
+    Object? isFormSaved = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -167,6 +173,10 @@ class _$AddCardStateCopyWithImpl<$Res> implements $AddCardStateCopyWith<$Res> {
           ? _self.selectedDesignType
           : selectedDesignType // ignore: cast_nullable_to_non_nullable
               as CardDesignType,
+      isFormSaved: null == isFormSaved
+          ? _self.isFormSaved
+          : isFormSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -184,7 +194,8 @@ class _AddCardState implements AddCardState {
       this.cardHolderError,
       this.expiryDateError,
       this.selectedCardType = CardType.masterCard,
-      this.selectedDesignType = CardDesignType.card1});
+      this.selectedDesignType = CardDesignType.card1,
+      this.isFormSaved = false});
   factory _AddCardState.fromJson(Map<String, dynamic> json) =>
       _$AddCardStateFromJson(json);
 
@@ -217,6 +228,9 @@ class _AddCardState implements AddCardState {
   @override
   @JsonKey()
   final CardDesignType selectedDesignType;
+  @override
+  @JsonKey()
+  final bool isFormSaved;
 
   /// Create a copy of AddCardState
   /// with the given fields replaced by the non-null parameter values.
@@ -256,7 +270,9 @@ class _AddCardState implements AddCardState {
             (identical(other.selectedCardType, selectedCardType) ||
                 other.selectedCardType == selectedCardType) &&
             (identical(other.selectedDesignType, selectedDesignType) ||
-                other.selectedDesignType == selectedDesignType));
+                other.selectedDesignType == selectedDesignType) &&
+            (identical(other.isFormSaved, isFormSaved) ||
+                other.isFormSaved == isFormSaved));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -272,11 +288,12 @@ class _AddCardState implements AddCardState {
       cardHolderError,
       expiryDateError,
       selectedCardType,
-      selectedDesignType);
+      selectedDesignType,
+      isFormSaved);
 
   @override
   String toString() {
-    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType)';
+    return 'AddCardState(error: $error, isLoading: $isLoading, cardNumber: $cardNumber, cardHolderName: $cardHolderName, expiryDate: $expiryDate, cardNumberError: $cardNumberError, cardHolderError: $cardHolderError, expiryDateError: $expiryDateError, selectedCardType: $selectedCardType, selectedDesignType: $selectedDesignType, isFormSaved: $isFormSaved)';
   }
 }
 
@@ -298,7 +315,8 @@ abstract mixin class _$AddCardStateCopyWith<$Res>
       String? cardHolderError,
       String? expiryDateError,
       CardType selectedCardType,
-      CardDesignType selectedDesignType});
+      CardDesignType selectedDesignType,
+      bool isFormSaved});
 }
 
 /// @nodoc
@@ -324,6 +342,7 @@ class __$AddCardStateCopyWithImpl<$Res>
     Object? expiryDateError = freezed,
     Object? selectedCardType = null,
     Object? selectedDesignType = null,
+    Object? isFormSaved = null,
   }) {
     return _then(_AddCardState(
       error: null == error
@@ -366,6 +385,10 @@ class __$AddCardStateCopyWithImpl<$Res>
           ? _self.selectedDesignType
           : selectedDesignType // ignore: cast_nullable_to_non_nullable
               as CardDesignType,
+      isFormSaved: null == isFormSaved
+          ? _self.isFormSaved
+          : isFormSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

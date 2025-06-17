@@ -26,6 +26,9 @@ abstract class AddCardState with _$AddCardState {
 
     @Default(CardDesignType.card1) CardDesignType selectedDesignType,
 
+    @Default(false) bool isFormSaved,
+
+
 
   }) = _AddCardState;
 

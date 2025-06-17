@@ -22,6 +22,7 @@ _AddCardState _$AddCardStateFromJson(Map<String, dynamic> json) =>
       selectedDesignType: $enumDecodeNullable(
               _$CardDesignTypeEnumMap, json['selectedDesignType']) ??
           CardDesignType.card1,
+      isFormSaved: json['isFormSaved'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$AddCardStateToJson(_AddCardState instance) =>
@@ -37,6 +38,7 @@ Map<String, dynamic> _$AddCardStateToJson(_AddCardState instance) =>
       'selectedCardType': _$CardTypeEnumMap[instance.selectedCardType]!,
       'selectedDesignType':
           _$CardDesignTypeEnumMap[instance.selectedDesignType]!,
+      'isFormSaved': instance.isFormSaved,
     };
 
 const _$CardTypeEnumMap = {

@@ -63,7 +63,9 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (_) => AddCardPage()),
-                        );
+                        ).then((_) {
+                          homeBloc.loadAllCards();
+                        });
                       },
                       child: SizedBox(
                         height: 40.h,
@@ -80,92 +82,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 20.h,
-                      width: 20.h,
-                      // child: CustomSvgIcon(AppIconsOld.kDoubleArrow),
-                      child: CustomSvgIcon(AppIcons.kSunrise),
-                    ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    Text(
-                      'Good Morning',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                Text(
-                  'Welcome Shinas',
-                  style: TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                BlocSelector<HomeBloc, HomeState, List<AddCardModel>>(
-                  bloc: homeBloc,
-                  selector: (state) => state.cardList,
-                  builder: (context, cardList) {
-                    log('cardList : ${cardList.length}');
-
-                    if (cardList.isEmpty) {
-                      return AddCardButton(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => AddCardPage()),
-                          );
-                        },
-                      );
-                    } else {
-                      final extendedList = [...cardList, null]; // null = Add Card slot
-
-                      return SizedBox(
-                        height: 220.h,
-                        child: CardSwiper(
-                          cardsCount: extendedList.length,
-                          numberOfCardsDisplayed: 2,
-                          isLoop: true,
-                          allowedSwipeDirection: AllowedSwipeDirection.only(
-                            right: true,
-                            left: true,
-                          ),
-                          padding: bottomPadding12,
-                          backCardOffset: Offset(0, 24.h),
-                          cardBuilder: (context, index, horizontalOffset, verticalOffset) {
-                            final card = extendedList[index];
-
-                            return card != null
-                                ? CreditCardWidget(
-                                    cardHoldersName: card.cardHolderName,
-                                    cardNumber: card.cardNumber,
-                                    expiryDate: card.expiryDate,
-                                    cardType: card.cardType,
-                                    cardDesignType: card.cardDesignType,
-                                  )
-                                : AddCardButton(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (_) => AddCardPage()),
-                                      );
-                                    },
-                                  );
-                          },
-                        ),
-                      );
-                    }
-                  },
-                ),
+                verticalMargin20,
+                BasicDetailsSection(),
+                verticalMargin20,
+                SavedCardsSectionWidget(homeBloc: homeBloc),
               ],
             ),
           ),
@@ -177,6 +97,115 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class BasicDetailsSection extends StatelessWidget {
+  const BasicDetailsSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20.h,
+              width: 20.h,
+              child: CustomSvgIcon(AppIcons.kSunrise),
+            ),
+            SizedBox(
+              width: 8.w,
+            ),
+            Text(
+              'Good Morning',
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 8.h,
+        ),
+        Text(
+          'Welcome Shinas',
+          style: TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+}
+
+class SavedCardsSectionWidget extends StatelessWidget {
+  const SavedCardsSectionWidget({
+    super.key,
+    required this.homeBloc,
+  });
+
+  final HomeBloc homeBloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<HomeBloc, HomeState, List<AddCardModel>>(
+      bloc: homeBloc,
+      selector: (state) => state.cardList,
+      builder: (context, cardList) {
+        if (cardList.isEmpty) {
+          return AddCardButton(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => AddCardPage()),
+              ).then((_) {
+                homeBloc.loadAllCards();
+              });
+            },
+          );
+        } else {
+          final extendedList = [...cardList, null]; // null = Add Card slot
+
+          return SizedBox(
+            height: 220.h,
+            child: CardSwiper(
+              cardsCount: extendedList.length,
+              numberOfCardsDisplayed: 2,
+              isLoop: true,
+              allowedSwipeDirection: AllowedSwipeDirection.only(
+                right: true,
+                left: true,
+              ),
+              padding: bottomPadding12,
+              backCardOffset: Offset(0, 24.h),
+              cardBuilder: (context, index, horizontalOffset, verticalOffset) {
+                final card = extendedList[index];
+
+                return card != null
+                    ? CreditCardWidget(
+                        cardHoldersName: card.cardHolderName,
+                        cardNumber: card.cardNumber,
+                        expiryDate: card.expiryDate,
+                        cardType: card.cardType,
+                        cardDesignType: card.cardDesignType,
+                      )
+                    : AddCardButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => AddCardPage()),
+                          ).then((_) {
+                            homeBloc.loadAllCards();
+                          });
+                        },
+                      );
+              },
+            ),
+          );
+        }
+      },
     );
   }
 }
