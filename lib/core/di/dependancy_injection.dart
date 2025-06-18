@@ -2,9 +2,12 @@
 
 import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository_impl.dart';
+import 'package:expenso_expense_tracker/domain/repositories/app_settings/app_settings_repository.dart';
+import 'package:expenso_expense_tracker/domain/repositories/app_settings/app_settings_repository_impl.dart';
 import 'package:expenso_expense_tracker/domain/repositories/home/home_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/home/home_repository_impl.dart';
 import 'package:expenso_expense_tracker/presentation/add_card/bloc/add_card_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/home/bloc/home_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/onboarding/bloc/onboarding_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -19,25 +22,23 @@ class GetItHelper {
   static void init() {
     final getIt = GetIt.instance;
 
-    /// local db
+    /// local db instance
     getIt.registerSingleton<AppDatabase>(AppDatabase.instance);
-    getIt.registerLazySingleton<CardDetailsDao>(
-        () => CardDetailsDaoImpl(getIt<AppDatabase>()));
+
+    /// local db
+    getIt.registerLazySingleton<CardDetailsDao>(() => CardDetailsDaoImpl(getIt<AppDatabase>()));
 
     /// Repositories
     getIt.registerSingleton<OnboardingRepository>(OnboardingRepositoryImpl());
     getIt.registerSingleton<HomeRepository>(HomeRepositoryImpl());
-    getIt.registerSingleton<AddCardRepository>(
-        AddCardRepositoryImpl(getIt<CardDetailsDao>()));
+    getIt.registerSingleton<AddCardRepository>(AddCardRepositoryImpl(getIt<CardDetailsDao>()));
+    getIt.registerSingleton<AppSettingsRepository>(AppSettingsRepositoryImpl());
 
     /// BloCs
-    getIt.registerSingleton<OnboardingBloc>(
-        OnboardingBloc(getIt<OnboardingRepository>()));
-    getIt.registerSingleton<HomeBloc>(
-        HomeBloc(cardRepo: getIt<AddCardRepository>()));
-    getIt.registerSingleton<AddCardBloc>(
-        AddCardBloc(getIt<AddCardRepository>()));
-    // getIt.registerSingleton<InboxBloc>(InboxBloc());
+    getIt.registerSingleton<OnboardingBloc>(OnboardingBloc(getIt<OnboardingRepository>()));
+    getIt.registerSingleton<HomeBloc>(HomeBloc(cardRepo: getIt<AddCardRepository>()));
+    getIt.registerSingleton<AddCardBloc>(AddCardBloc(getIt<AddCardRepository>()));
+    getIt.registerSingleton<AppSettingsBloc>(AppSettingsBloc(getIt<AppSettingsRepository>()));
   }
 
   void dispose() {
