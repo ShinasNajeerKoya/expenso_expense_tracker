@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'config/themes/fonts.dart';
 import 'core/di/dependancy_injection.dart';
 
 void main() async {
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
+            // fontFamily: AppFonts.poppins,
+            // textTheme: Theme.of(context).textTheme.apply(fontSizeFactor: 1.sp),
             textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).apply(fontSizeFactor: 1.sp),
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,

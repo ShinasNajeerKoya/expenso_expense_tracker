@@ -76,6 +76,7 @@ flutter:
     - assets/languages/
     - assets/icons/
     - assets/fonts/
+    - assets/fonts/poppins/
 
 
 
@@ -87,6 +88,29 @@ flutter:
     - family: credit card new
       fonts:
         - asset: assets/fonts/Kredit_Back.otf
+
+
+    - family: poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins_Regular_400.ttf
+        - asset: assets/fonts/poppins/Poppins_Black_900.ttf
+          weight: 900
+        - asset: assets/fonts/poppins/Poppins_ExtraBold_800.ttf
+          weight: 800
+        - asset: assets/fonts/poppins/Poppins_Bold_700.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/Poppins_SemiBold_600.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/Poppins_Medium_500.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/Poppins_Regular_400.ttf
+          weight: 400
+        - asset: assets/fonts/poppins/Poppins_Light_300.ttf
+          weight: 300
+        - asset: assets/fonts/poppins/Poppins_ExtraLight_275.ttf
+          weight: 200
+        - asset: assets/fonts/poppins/Poppins_Thin_250.ttf
+          weight: 100
 
 
 
