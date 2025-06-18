@@ -28,12 +28,8 @@ pipeline:
 
 	@echo "📌 Committing and pushing to ci/release-builds..."
 	git add .
-	@if ! git diff --cached --quiet; then \
-		git commit -m "Trigger release build pipeline"; \
-		git push origin ci/release-builds; \
-	else \
-		echo "✅ No changes to commit."; \
-	fi
+	git commit -m "Trigger release build pipeline"
+	git push origin ci/release-builds
 
 
 
