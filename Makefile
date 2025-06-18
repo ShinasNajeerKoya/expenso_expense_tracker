@@ -7,12 +7,36 @@ app:
 	cd build/app/outputs/flutter-apk && open .
 
 
+
 feature:
 	fvm flutter pub run tool/feature_generator.dart
 
 br:
 	dart run build_runner clean
 	dart run build_runner build --delete-conflicting-outputs
+
+
+pipeline:
+	@echo "🧹 Cleaning Flutter project..."
+	flutter clean
+
+	@echo "📦 Getting Flutter dependencies..."
+	flutter pub get
+
+	@echo "🔧 Reinstalling CocoaPods..."
+	cd ios && pod deintegrate && pod install --repo-update
+
+	@echo "📌 Committing and pushing to ci/release-builds..."
+	git add .
+	@if ! git diff --cached --quiet; then \
+		git commit -m "Trigger release build pipeline"; \
+		git push origin ci/release-builds; \
+	else \
+		echo "✅ No changes to commit."; \
+	fi
+
+
+
 
 
 
