@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class AppSettingsPage extends StatelessWidget {
+  static const id = '/appSettingsPage';
   const AppSettingsPage({super.key});
 
   @override

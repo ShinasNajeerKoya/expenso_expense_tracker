@@ -17,10 +17,19 @@ import '../../data/local_persistence/app_database.dart';
 import '../../domain/dao/add_card/add_card_dao.dart';
 import '../../domain/repositories/onboarding/onboarding_repository.dart';
 import '../../domain/repositories/onboarding/onboarding_repository_impl.dart';
+import '../routes/route_config.dart';
+
+
+final getIt = GetIt.instance;
+
 
 class GetItHelper {
   static void init() {
-    final getIt = GetIt.instance;
+
+
+    // AppRouter
+    getIt.registerSingleton<AppRouter>(AppRouter());
+
 
     /// local db instance
     getIt.registerSingleton<AppDatabase>(AppDatabase.instance);

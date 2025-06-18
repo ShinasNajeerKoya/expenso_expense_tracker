@@ -42,6 +42,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.21
   carousel_slider: ^5.1.1
   flutter_card_swiper: ^7.0.2
+  auto_route: ^10.1.0+1
 
 
 
@@ -63,6 +64,7 @@ dev_dependencies:
   freezed: ^3.0.6
   json_serializable: ^6.9.5
   flutter_lints: ^5.0.0
+  auto_route_generator: ^10.0.1
 
 
 

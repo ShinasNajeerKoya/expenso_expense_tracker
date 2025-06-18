@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/themes/units.dart';
+import '../../../core/routes/route_config.dart';
 import '../../../domain/models/add_card/add_card_model.dart';
 import '../../../generated/app_icons.dart';
 import '../../../shared/helper_functions/custom_svg_icon.dart';
@@ -30,13 +32,18 @@ class SavedCardsSectionWidget extends StatelessWidget {
       builder: (context, cardList) {
         if (cardList.isEmpty) {
           return AddCardButton(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => AddCardPage()),
-              ).then((_) {
+            onTap: () async {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (_) => AddCardPage()),
+              // ).then((_) {
+              //   homeBloc.loadAllCards();
+              // });
+              final result = await context.pushRoute(AddCardRoute());
+
+              if (result == true) {
                 homeBloc.loadAllCards();
-              });
+              }
             },
           );
         } else {
@@ -59,36 +66,36 @@ class SavedCardsSectionWidget extends StatelessWidget {
 
                 return card != null
                     ? GestureDetector(
-                  onTap: () async {
-                    final result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => AddCardPage(existingCard: card)),
-                    ).then((_) {
-                      homeBloc.loadAllCards();
-                    });
-                  },
-                  child: CreditCardWidget(
-                    cardHoldersName: card.cardHolderName,
-                    cardNumber: card.cardNumber,
-                    expiryDate: card.expiryDate,
-                    cardType: card.cardType,
-                    cardDesignType: card.cardDesignType,
-                  ),
-                )
-                    : AddCardButton(
-                  onTap: () async {
-                    final result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => AddCardPage(),
-                      ),
-                    );
+                        onTap: () async {
+                          // final result = await Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (_) => AddCardPage(existingCard: card)),
+                          // ).then((_) {
+                          //   homeBloc.loadAllCards();
+                          // });
+                          final result = await context.pushRoute(AddCardRoute());
 
-                    if (result == true) {
-                      homeBloc.loadAllCards();
-                    }
-                  },
-                );
+                          if (result == true) {
+                            homeBloc.loadAllCards();
+                          }
+                        },
+                        child: CreditCardWidget(
+                          cardHoldersName: card.cardHolderName,
+                          cardNumber: card.cardNumber,
+                          expiryDate: card.expiryDate,
+                          cardType: card.cardType,
+                          cardDesignType: card.cardDesignType,
+                        ),
+                      )
+                    : AddCardButton(
+                        onTap: () async {
+                          final result = await context.pushRoute(AddCardRoute());
+
+                          if (result == true) {
+                            homeBloc.loadAllCards();
+                          }
+                        },
+                      );
               },
             ),
           );

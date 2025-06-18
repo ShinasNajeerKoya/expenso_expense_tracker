@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/presentation/add_card/widgets/card_selector.dart';
 import 'package:expenso_expense_tracker/presentation/add_card/widgets/text_field_label_and_body.dart';
@@ -18,6 +19,7 @@ import '../utils/card_design_type_extension.dart';
 import '../utils/card_type_extensions.dart';
 import '../widgets/custom_add_card_text_field.dart';
 
+@RoutePage()
 class AddCardPage extends StatefulWidget {
   final AddCardModel? existingCard;
 

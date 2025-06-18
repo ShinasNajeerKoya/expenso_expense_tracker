@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expenso_expense_tracker/config/themes/colors.dart';
@@ -16,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 import '../../../config/font_manager/font_styles.dart';
+import '../../../core/routes/route_config.dart';
 import '../../../domain/models/add_card/add_card_model.dart';
 import '../../add_card/pages/add_card_page.dart';
 import '../../add_card/utils/card_type_extensions.dart';
@@ -26,8 +28,9 @@ import '../widgets/basic_details_section.dart';
 import '../widgets/menu_drawer_widget.dart';
 import '../widgets/saved_cards_section_widget.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -65,13 +68,18 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => AddCardPage()),
-                        ).then((_) {
+                      onTap: () async {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (_) => AddCardPage()),
+                        // ).then((_) {
+                        //   homeBloc.loadAllCards();
+                        // });
+                        final result = await context.pushRoute(AddCardRoute());
+
+                        if (result == true) {
                           homeBloc.loadAllCards();
-                        });
+                        }
                       },
                       child: SizedBox(
                         height: 40.h,
