@@ -385,28 +385,28 @@ class CreditCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                verticalMargin24,
+                verticalMargin20,
                 Text(
                   "\$12000",
                   // titilliumWeb , exo2, saira
                   style: FontStyles.creditCard(
                     color: Colors.white,
-                    size: 24.sp,
+                    size: 30.sp,
+                    letterSpacing: 2,
+
                     // fontWeight: FontWeight.normal,
                   ),
                 ),
-                verticalMargin16,
+                verticalMargin12,
                 Text(
                   "****  ****  ****  $cardNumber",
                   style: FontStyles.creditCard(
                     color: Colors.white,
-                    size: 12.sp,
-                    letterSpacing: 2,
+                    size: 16.sp,
+                    letterSpacing: 3,
                   ),
                 ),
-                SizedBox(
-                  height: 12.h,
-                ),
+                verticalMargin12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

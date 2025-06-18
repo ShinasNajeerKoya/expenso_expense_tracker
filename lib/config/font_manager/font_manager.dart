@@ -14,7 +14,7 @@ class FontManager {
 
   TextStyle regular(double fontSize, {Color? color}) {
     return TextStyle(
-      fontFamily: AppFonts.creditCard,
+      fontFamily: AppFonts.creditCardNew,
       fontSize: fontSize,
       color: color,
       fontWeight: FontWeight.normal,
@@ -23,7 +23,7 @@ class FontManager {
 
   TextStyle bold(double fontSize, {Color? color}) {
     return TextStyle(
-      fontFamily: AppFonts.creditCard,
+      fontFamily: AppFonts.creditCardNew,
       fontSize: fontSize,
       color: color,
       fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ class FontManager {
 
   TextStyle italic(double fontSize, {Color? color}) {
     return TextStyle(
-      fontFamily: AppFonts.creditCard,
+      fontFamily: AppFonts.creditCardNew,
       fontSize: fontSize,
       color: color,
       fontStyle: FontStyle.italic,

@@ -2,6 +2,7 @@
 
 class AppFonts {
   static const String creditCard = 'credit card';
+  static const String creditCardNew = 'credit card new';
 }
 
 class FontSizes {

@@ -84,6 +84,10 @@ flutter:
       fonts:
         - asset: assets/fonts/credit_card.ttf
 
+    - family: credit card new
+      fonts:
+        - asset: assets/fonts/Kredit_Back.otf
+
 
 
 

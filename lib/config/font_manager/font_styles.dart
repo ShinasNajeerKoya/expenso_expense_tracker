@@ -9,7 +9,7 @@ extension FontStyles on TextStyle {
       FontStyle style = FontStyle.normal,
       double? letterSpacing}) {
     return TextStyle(
-      fontFamily: AppFonts.creditCard,
+      fontFamily: AppFonts.creditCardNew,
       fontSize: size,
       color: color,
       fontWeight: weight,
