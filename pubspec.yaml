@@ -44,6 +44,7 @@ dependencies:
   flutter_card_swiper: ^7.0.2
   auto_route: ^10.1.0+1
   shared_preferences: ^2.5.3
+  animated_toggle_switch: ^0.8.5
 
 
 

@@ -8,6 +8,9 @@ abstract class AppSettingsState with _$AppSettingsState {
   const factory AppSettingsState({
     @Default(false) bool error,
     @Default(false) bool isLoading,
+
+    @Default(false) bool landingPageDisabled,
+
   }) = _AppSettingsState;
 
   factory AppSettingsState.fromJson(Map<String, dynamic> json) =>

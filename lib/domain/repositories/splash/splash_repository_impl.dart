@@ -8,8 +8,8 @@ class SplashRepositoryImpl implements SplashRepository {
   }
 
   @override
-  Future<bool> shouldShowOnboarding() async {
-    final hasSeenLanding = await LandingPagePref.isLandingPageSeen();
+  Future<bool> isLandingPageDisabled() async {
+    final hasSeenLanding = await LandingPagePref.isLandingPageDisabled();
 
     return hasSeenLanding;
   }

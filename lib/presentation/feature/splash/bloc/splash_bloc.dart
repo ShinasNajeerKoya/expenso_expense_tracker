@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:expenso_expense_tracker/core/routes/route_config.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +18,9 @@ class SplashBloc extends Cubit<SplashState> {
     try {
       await Future.delayed(const Duration(milliseconds: 900));
 
-      final showOnboarding = await _repo.shouldShowOnboarding();
+      final isLandingPageDisabled = await _repo.isLandingPageDisabled();
 
-      final targetRoute = showOnboarding ? OnboardingRoute.name : HomeRoute.name;
+      final targetRoute = isLandingPageDisabled ? HomeRoute.name : OnboardingRoute.name;
 
       emit(state.copyWith(isLoading: false, targetRoute: targetRoute));
     } catch (_) {

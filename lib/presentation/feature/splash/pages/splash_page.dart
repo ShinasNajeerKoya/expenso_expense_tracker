@@ -39,7 +39,9 @@ class _SplashPageState extends State<SplashPage> {
       },
       child: const Scaffold(
         body: Center(
-          child: Text('Splash Page'),
+          child: FlutterLogo(
+            size: 200,
+          ),
         ),
       ),
     );

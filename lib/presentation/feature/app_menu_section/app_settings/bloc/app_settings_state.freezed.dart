@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$AppSettingsState {
   bool get error;
   bool get isLoading;
+  bool get landingPageDisabled;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -36,16 +37,19 @@ mixin _$AppSettingsState {
             other is AppSettingsState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.landingPageDisabled, landingPageDisabled) ||
+                other.landingPageDisabled == landingPageDisabled));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode =>
+      Object.hash(runtimeType, error, isLoading, landingPageDisabled);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled)';
   }
 }
 
@@ -55,7 +59,7 @@ abstract mixin class $AppSettingsStateCopyWith<$Res> {
           AppSettingsState value, $Res Function(AppSettingsState) _then) =
       _$AppSettingsStateCopyWithImpl;
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call({bool error, bool isLoading, bool landingPageDisabled});
 }
 
 /// @nodoc
@@ -73,6 +77,7 @@ class _$AppSettingsStateCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? landingPageDisabled = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -83,6 +88,10 @@ class _$AppSettingsStateCopyWithImpl<$Res>
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      landingPageDisabled: null == landingPageDisabled
+          ? _self.landingPageDisabled
+          : landingPageDisabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -90,7 +99,10 @@ class _$AppSettingsStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _AppSettingsState implements AppSettingsState {
-  const _AppSettingsState({this.error = false, this.isLoading = false});
+  const _AppSettingsState(
+      {this.error = false,
+      this.isLoading = false,
+      this.landingPageDisabled = false});
   factory _AppSettingsState.fromJson(Map<String, dynamic> json) =>
       _$AppSettingsStateFromJson(json);
 
@@ -100,6 +112,9 @@ class _AppSettingsState implements AppSettingsState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool landingPageDisabled;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -123,16 +138,19 @@ class _AppSettingsState implements AppSettingsState {
             other is _AppSettingsState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.landingPageDisabled, landingPageDisabled) ||
+                other.landingPageDisabled == landingPageDisabled));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode =>
+      Object.hash(runtimeType, error, isLoading, landingPageDisabled);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled)';
   }
 }
 
@@ -144,7 +162,7 @@ abstract mixin class _$AppSettingsStateCopyWith<$Res>
       __$AppSettingsStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call({bool error, bool isLoading, bool landingPageDisabled});
 }
 
 /// @nodoc
@@ -162,6 +180,7 @@ class __$AppSettingsStateCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? landingPageDisabled = null,
   }) {
     return _then(_AppSettingsState(
       error: null == error
@@ -171,6 +190,10 @@ class __$AppSettingsStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      landingPageDisabled: null == landingPageDisabled
+          ? _self.landingPageDisabled
+          : landingPageDisabled // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }

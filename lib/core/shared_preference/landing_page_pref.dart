@@ -10,7 +10,7 @@ class LandingPagePref {
   }
 
   /// Get whether the landing page has been seen
-  static Future<bool> isLandingPageSeen() async {
+  static Future<bool> isLandingPageDisabled() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_landingPageSeenKey) ?? false;
   }
