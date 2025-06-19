@@ -16,6 +16,7 @@ class AppIcons {
   static const String kScanCard = 'assets/icons/scan_card.svg';
   static const String kFileAdd = 'assets/icons/file_add.svg';
   static const String kRuPay = 'assets/icons/RuPay.svg';
+  static const String kBottomSheetHandle = 'assets/icons/bottom_sheet_handle.svg';
   static const String kRupayWhite = 'assets/icons/rupay_white.svg';
   static const String kVisaBlack = 'assets/icons/visa_black.svg';
   static const String kDoubleArrowMark = 'assets/icons/double_arrow_mark.svg';

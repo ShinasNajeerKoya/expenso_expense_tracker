@@ -18,6 +18,7 @@ mixin _$AppSettingsState {
   bool get error;
   bool get isLoading;
   bool get landingPageDisabled;
+  SplashDurationTypeEnum get splashDuration;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -39,17 +40,19 @@ mixin _$AppSettingsState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.landingPageDisabled, landingPageDisabled) ||
-                other.landingPageDisabled == landingPageDisabled));
+                other.landingPageDisabled == landingPageDisabled) &&
+            (identical(other.splashDuration, splashDuration) ||
+                other.splashDuration == splashDuration));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, error, isLoading, landingPageDisabled);
+  int get hashCode => Object.hash(
+      runtimeType, error, isLoading, landingPageDisabled, splashDuration);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration)';
   }
 }
 
@@ -59,7 +62,11 @@ abstract mixin class $AppSettingsStateCopyWith<$Res> {
           AppSettingsState value, $Res Function(AppSettingsState) _then) =
       _$AppSettingsStateCopyWithImpl;
   @useResult
-  $Res call({bool error, bool isLoading, bool landingPageDisabled});
+  $Res call(
+      {bool error,
+      bool isLoading,
+      bool landingPageDisabled,
+      SplashDurationTypeEnum splashDuration});
 }
 
 /// @nodoc
@@ -78,6 +85,7 @@ class _$AppSettingsStateCopyWithImpl<$Res>
     Object? error = null,
     Object? isLoading = null,
     Object? landingPageDisabled = null,
+    Object? splashDuration = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -92,6 +100,10 @@ class _$AppSettingsStateCopyWithImpl<$Res>
           ? _self.landingPageDisabled
           : landingPageDisabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      splashDuration: null == splashDuration
+          ? _self.splashDuration
+          : splashDuration // ignore: cast_nullable_to_non_nullable
+              as SplashDurationTypeEnum,
     ));
   }
 }
@@ -102,7 +114,8 @@ class _AppSettingsState implements AppSettingsState {
   const _AppSettingsState(
       {this.error = false,
       this.isLoading = false,
-      this.landingPageDisabled = false});
+      this.landingPageDisabled = false,
+      this.splashDuration = SplashDurationTypeEnum.medium});
   factory _AppSettingsState.fromJson(Map<String, dynamic> json) =>
       _$AppSettingsStateFromJson(json);
 
@@ -115,6 +128,9 @@ class _AppSettingsState implements AppSettingsState {
   @override
   @JsonKey()
   final bool landingPageDisabled;
+  @override
+  @JsonKey()
+  final SplashDurationTypeEnum splashDuration;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -140,17 +156,19 @@ class _AppSettingsState implements AppSettingsState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.landingPageDisabled, landingPageDisabled) ||
-                other.landingPageDisabled == landingPageDisabled));
+                other.landingPageDisabled == landingPageDisabled) &&
+            (identical(other.splashDuration, splashDuration) ||
+                other.splashDuration == splashDuration));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, error, isLoading, landingPageDisabled);
+  int get hashCode => Object.hash(
+      runtimeType, error, isLoading, landingPageDisabled, splashDuration);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration)';
   }
 }
 
@@ -162,7 +180,11 @@ abstract mixin class _$AppSettingsStateCopyWith<$Res>
       __$AppSettingsStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool error, bool isLoading, bool landingPageDisabled});
+  $Res call(
+      {bool error,
+      bool isLoading,
+      bool landingPageDisabled,
+      SplashDurationTypeEnum splashDuration});
 }
 
 /// @nodoc
@@ -181,6 +203,7 @@ class __$AppSettingsStateCopyWithImpl<$Res>
     Object? error = null,
     Object? isLoading = null,
     Object? landingPageDisabled = null,
+    Object? splashDuration = null,
   }) {
     return _then(_AppSettingsState(
       error: null == error
@@ -195,6 +218,10 @@ class __$AppSettingsStateCopyWithImpl<$Res>
           ? _self.landingPageDisabled
           : landingPageDisabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      splashDuration: null == splashDuration
+          ? _self.splashDuration
+          : splashDuration // ignore: cast_nullable_to_non_nullable
+              as SplashDurationTypeEnum,
     ));
   }
 }

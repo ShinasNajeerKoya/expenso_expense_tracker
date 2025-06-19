@@ -1,3 +1,4 @@
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'splash_state.freezed.dart';
@@ -10,6 +11,9 @@ abstract class SplashState with _$SplashState {
     @Default(false) bool isLoading,
 
     String? targetRoute,
+
+    @Default(SplashDurationTypeEnum.medium) SplashDurationTypeEnum splashDuration,
+
 
   }) = _SplashState;
 

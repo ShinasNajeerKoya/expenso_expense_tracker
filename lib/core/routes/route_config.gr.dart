@@ -62,7 +62,8 @@ class AddCardRouteArgs {
 /// generated route for
 /// [AppAboutPage]
 class AppAboutRoute extends PageRouteInfo<void> {
-  const AppAboutRoute({List<PageRouteInfo>? children}) : super(AppAboutRoute.name, initialChildren: children);
+  const AppAboutRoute({List<PageRouteInfo>? children})
+      : super(AppAboutRoute.name, initialChildren: children);
 
   static const String name = 'AppAboutRoute';
 
@@ -77,7 +78,8 @@ class AppAboutRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [AppAccountsPage]
 class AppAccountsRoute extends PageRouteInfo<void> {
-  const AppAccountsRoute({List<PageRouteInfo>? children}) : super(AppAccountsRoute.name, initialChildren: children);
+  const AppAccountsRoute({List<PageRouteInfo>? children})
+      : super(AppAccountsRoute.name, initialChildren: children);
 
   static const String name = 'AppAccountsRoute';
 
@@ -107,18 +109,47 @@ class AppCurrencySelectionRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AppGeneralSettingsPage]
-class AppGeneralSettingsRoute extends PageRouteInfo<void> {
-  const AppGeneralSettingsRoute({List<PageRouteInfo>? children})
-      : super(AppGeneralSettingsRoute.name, initialChildren: children);
+class AppGeneralSettingsRoute
+    extends PageRouteInfo<AppGeneralSettingsRouteArgs> {
+  AppGeneralSettingsRoute({Key? key, List<PageRouteInfo>? children})
+      : super(
+          AppGeneralSettingsRoute.name,
+          args: AppGeneralSettingsRouteArgs(key: key),
+          initialChildren: children,
+        );
 
   static const String name = 'AppGeneralSettingsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return AppGeneralSettingsPage();
+      final args = data.argsAs<AppGeneralSettingsRouteArgs>(
+        orElse: () => const AppGeneralSettingsRouteArgs(),
+      );
+      return AppGeneralSettingsPage(key: args.key);
     },
   );
+}
+
+class AppGeneralSettingsRouteArgs {
+  const AppGeneralSettingsRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AppGeneralSettingsRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AppGeneralSettingsRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }
 
 /// generated route for
@@ -140,7 +171,8 @@ class AppLanguageSelectionRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children}) : super(HomeRoute.name, initialChildren: children);
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
@@ -199,7 +231,8 @@ class OnboardingRouteArgs {
 /// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute({List<PageRouteInfo>? children}) : super(ProfileRoute.name, initialChildren: children);
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
@@ -214,7 +247,8 @@ class ProfileRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [SplashPage]
 class SplashRoute extends PageRouteInfo<void> {
-  const SplashRoute({List<PageRouteInfo>? children}) : super(SplashRoute.name, initialChildren: children);
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 

@@ -3,8 +3,11 @@ import 'package:expenso_expense_tracker/config/themes/colors.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_state.dart';
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/widgets/splash_disable_toggle_button_widget.dart';
 import 'package:expenso_expense_tracker/presentation/widgets/custom_app_bar.dart';
 import 'package:expenso_expense_tracker/presentation/widgets/my_text.dart';
+import 'package:expenso_expense_tracker/shared/helper_functions/bottom_sheet_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,50 +28,126 @@ class AppGeneralSettingsPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: "App Settings",
       ),
-      body: Padding(
-        padding: horizontalPadding12,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 52.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MyText(
-                    'Disable landing page',
-                    fontSize: 12.sp,
-                  ),
-                  BlocSelector<AppSettingsBloc, AppSettingsState, bool>(
-                    bloc: appSettingsBloc,
-                    selector: (state) => state.landingPageDisabled,
-                    builder: (context, isEnabled) {
-                      return AnimatedToggleSwitch<bool>.dual(
-                        current: isEnabled,
-                        first: false,
-                        second: true,
-                        spacing: -4.w,
-                        style: ToggleStyle(
-                          borderColor: AppColors.kTransparent,
-                          backgroundColor: Color(0xffFFF7EE),
-                        ),
-                        borderWidth: 5.w,
-                        height: 22.h,
-                        onChanged: (val) => appSettingsBloc.toggleLandingPage(val),
-                        indicatorSize: Size.fromRadius(8.r),
-                        styleBuilder: (b) => ToggleStyle(
-                          indicatorColor: isEnabled ? Color(0xff885B2B) : Colors.grey,
-                          borderRadius: BorderRadius.circular(30.r),
-                          indicatorBorderRadius: BorderRadius.circular(100.r),
-                        ),
-                      );
+      body: Column(
+        children: [
+          SplashDisableToggleButtonWidget(appSettingsBloc: appSettingsBloc),
+          BlocSelector<AppSettingsBloc, AppSettingsState, SplashDurationTypeEnum>(
+            bloc: appSettingsBloc,
+            selector: (state) => state.splashDuration,
+            builder: (context, splashDuration) {
+              return InkWell(
+                onTap: () {
+                  showSplashDurationBottomSheet(
+                    context: context,
+                    appSettingsBloc: appSettingsBloc,
+                    onSelected: (value) {
+                      appSettingsBloc.setSplashDuration(value);
                     },
+                  );
+                },
+                child: Padding(
+                  padding: horizontalPadding12,
+                  child: SizedBox(
+                    height: 60.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MyText(
+                          'Splash Duration',
+                          fontSize: 12.sp,
+                        ),
+                        Padding(
+                          padding: rightPadding8,
+                          child: MyText(
+                            splashDuration.displayName,
+                            fontSize: 9.sp,
+                            fontColor: const Color(0xe2c49a6c),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+              );
+            },
+          )
+        ],
       ),
+    );
+  }
+}
+
+Future<void> showSplashDurationBottomSheet({
+  required BuildContext context,
+  required AppSettingsBloc appSettingsBloc,
+  required ValueChanged<SplashDurationTypeEnum> onSelected,
+}) {
+  return ShowBottomSheet.draggableSheet(
+    context: context,
+    initialSize: 0.5.h,
+    handleBottomPadding: 16.h,
+    builder: (context, scrollController, _) {
+      return _SplashDurationSelector(
+        scrollController: scrollController,
+        onSelected: onSelected,
+        appSettingsBloc: appSettingsBloc,
+      );
+    },
+  );
+}
+
+class _SplashDurationSelector extends StatelessWidget {
+  const _SplashDurationSelector({
+    required this.scrollController,
+    required this.onSelected,
+    required this.appSettingsBloc,
+  });
+
+  final ScrollController scrollController;
+  final ValueChanged<SplashDurationTypeEnum> onSelected;
+  final AppSettingsBloc appSettingsBloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<AppSettingsBloc, AppSettingsState, SplashDurationTypeEnum>(
+      bloc: appSettingsBloc,
+      selector: (state) => state.splashDuration,
+      builder: (context, selectedDuration) {
+        return ListView.separated(
+          controller: scrollController,
+          itemCount: SplashDurationTypeEnum.values.length,
+          separatorBuilder: (_, __) => Padding(
+            padding: horizontalPadding12,
+            child: Divider(height: 0.5, color: Colors.transparent),
+          ),
+          itemBuilder: (context, index) {
+            final value = SplashDurationTypeEnum.values[index];
+            final isSelected = selectedDuration == value;
+
+            return InkWell(
+              onTap: () {
+                if (!isSelected) {
+                  onSelected(value);
+                }
+              },
+              child: Container(
+                height: 60.h,
+                alignment: Alignment.center,
+                padding: horizontalPadding12,
+                decoration: BoxDecoration(
+                  color: isSelected ? const Color(0xffFFF8EE) : Colors.white,
+                ),
+                child: MyText(
+                  value.displayName,
+                  fontSize: 12.sp,
+                  letterSpacing: 0.5.w,
+                  fontColor: isSelected ? const Color(0xffC49A6C) : null,
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

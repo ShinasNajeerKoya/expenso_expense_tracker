@@ -11,6 +11,9 @@ _AppSettingsState _$AppSettingsStateFromJson(Map<String, dynamic> json) =>
       error: json['error'] as bool? ?? false,
       isLoading: json['isLoading'] as bool? ?? false,
       landingPageDisabled: json['landingPageDisabled'] as bool? ?? false,
+      splashDuration: $enumDecodeNullable(
+              _$SplashDurationTypeEnumEnumMap, json['splashDuration']) ??
+          SplashDurationTypeEnum.medium,
     );
 
 Map<String, dynamic> _$AppSettingsStateToJson(_AppSettingsState instance) =>
@@ -18,4 +21,14 @@ Map<String, dynamic> _$AppSettingsStateToJson(_AppSettingsState instance) =>
       'error': instance.error,
       'isLoading': instance.isLoading,
       'landingPageDisabled': instance.landingPageDisabled,
+      'splashDuration':
+          _$SplashDurationTypeEnumEnumMap[instance.splashDuration]!,
     };
+
+const _$SplashDurationTypeEnumEnumMap = {
+  SplashDurationTypeEnum.verySlow: 'verySlow',
+  SplashDurationTypeEnum.slow: 'slow',
+  SplashDurationTypeEnum.medium: 'medium',
+  SplashDurationTypeEnum.fast: 'fast',
+  SplashDurationTypeEnum.veryFast: 'veryFast',
+};

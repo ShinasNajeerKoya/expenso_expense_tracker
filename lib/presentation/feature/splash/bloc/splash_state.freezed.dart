@@ -18,6 +18,7 @@ mixin _$SplashState {
   bool get error;
   bool get isLoading;
   String? get targetRoute;
+  SplashDurationTypeEnum get splashDuration;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.
@@ -38,16 +39,19 @@ mixin _$SplashState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.targetRoute, targetRoute) ||
-                other.targetRoute == targetRoute));
+                other.targetRoute == targetRoute) &&
+            (identical(other.splashDuration, splashDuration) ||
+                other.splashDuration == splashDuration));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading, targetRoute);
+  int get hashCode =>
+      Object.hash(runtimeType, error, isLoading, targetRoute, splashDuration);
 
   @override
   String toString() {
-    return 'SplashState(error: $error, isLoading: $isLoading, targetRoute: $targetRoute)';
+    return 'SplashState(error: $error, isLoading: $isLoading, targetRoute: $targetRoute, splashDuration: $splashDuration)';
   }
 }
 
@@ -57,7 +61,11 @@ abstract mixin class $SplashStateCopyWith<$Res> {
           SplashState value, $Res Function(SplashState) _then) =
       _$SplashStateCopyWithImpl;
   @useResult
-  $Res call({bool error, bool isLoading, String? targetRoute});
+  $Res call(
+      {bool error,
+      bool isLoading,
+      String? targetRoute,
+      SplashDurationTypeEnum splashDuration});
 }
 
 /// @nodoc
@@ -75,6 +83,7 @@ class _$SplashStateCopyWithImpl<$Res> implements $SplashStateCopyWith<$Res> {
     Object? error = null,
     Object? isLoading = null,
     Object? targetRoute = freezed,
+    Object? splashDuration = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -89,6 +98,10 @@ class _$SplashStateCopyWithImpl<$Res> implements $SplashStateCopyWith<$Res> {
           ? _self.targetRoute
           : targetRoute // ignore: cast_nullable_to_non_nullable
               as String?,
+      splashDuration: null == splashDuration
+          ? _self.splashDuration
+          : splashDuration // ignore: cast_nullable_to_non_nullable
+              as SplashDurationTypeEnum,
     ));
   }
 }
@@ -97,7 +110,10 @@ class _$SplashStateCopyWithImpl<$Res> implements $SplashStateCopyWith<$Res> {
 @JsonSerializable()
 class _SplashState implements SplashState {
   const _SplashState(
-      {this.error = false, this.isLoading = false, this.targetRoute});
+      {this.error = false,
+      this.isLoading = false,
+      this.targetRoute,
+      this.splashDuration = SplashDurationTypeEnum.medium});
   factory _SplashState.fromJson(Map<String, dynamic> json) =>
       _$SplashStateFromJson(json);
 
@@ -109,6 +125,9 @@ class _SplashState implements SplashState {
   final bool isLoading;
   @override
   final String? targetRoute;
+  @override
+  @JsonKey()
+  final SplashDurationTypeEnum splashDuration;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.
@@ -134,16 +153,19 @@ class _SplashState implements SplashState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.targetRoute, targetRoute) ||
-                other.targetRoute == targetRoute));
+                other.targetRoute == targetRoute) &&
+            (identical(other.splashDuration, splashDuration) ||
+                other.splashDuration == splashDuration));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading, targetRoute);
+  int get hashCode =>
+      Object.hash(runtimeType, error, isLoading, targetRoute, splashDuration);
 
   @override
   String toString() {
-    return 'SplashState(error: $error, isLoading: $isLoading, targetRoute: $targetRoute)';
+    return 'SplashState(error: $error, isLoading: $isLoading, targetRoute: $targetRoute, splashDuration: $splashDuration)';
   }
 }
 
@@ -155,7 +177,11 @@ abstract mixin class _$SplashStateCopyWith<$Res>
       __$SplashStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool error, bool isLoading, String? targetRoute});
+  $Res call(
+      {bool error,
+      bool isLoading,
+      String? targetRoute,
+      SplashDurationTypeEnum splashDuration});
 }
 
 /// @nodoc
@@ -173,6 +199,7 @@ class __$SplashStateCopyWithImpl<$Res> implements _$SplashStateCopyWith<$Res> {
     Object? error = null,
     Object? isLoading = null,
     Object? targetRoute = freezed,
+    Object? splashDuration = null,
   }) {
     return _then(_SplashState(
       error: null == error
@@ -187,6 +214,10 @@ class __$SplashStateCopyWithImpl<$Res> implements _$SplashStateCopyWith<$Res> {
           ? _self.targetRoute
           : targetRoute // ignore: cast_nullable_to_non_nullable
               as String?,
+      splashDuration: null == splashDuration
+          ? _self.splashDuration
+          : splashDuration // ignore: cast_nullable_to_non_nullable
+              as SplashDurationTypeEnum,
     ));
   }
 }

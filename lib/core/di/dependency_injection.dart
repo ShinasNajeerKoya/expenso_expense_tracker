@@ -47,8 +47,15 @@ class GetItHelper {
     getIt.registerSingleton<ProfileRepository>(ProfileRepositoryImpl());
 
     /// BloCs
-    getIt.registerSingleton<SplashBloc>(SplashBloc(getIt<SplashRepository>()));
-    getIt.registerSingleton<OnboardingBloc>(OnboardingBloc(getIt<OnboardingRepository>()));
+    getIt.registerSingleton<SplashBloc>(
+      SplashBloc(
+        splashRepository: getIt<SplashRepository>(),
+        appSettingsRepository: getIt<AppSettingsRepository>(),
+      ),
+    );
+    getIt.registerSingleton<OnboardingBloc>(
+      OnboardingBloc(getIt<OnboardingRepository>()),
+    );
     getIt.registerSingleton<HomeBloc>(HomeBloc(cardRepo: getIt<AddCardRepository>()));
     getIt.registerSingleton<AddCardBloc>(AddCardBloc(getIt<AddCardRepository>()));
     getIt.registerSingleton<AppSettingsBloc>(AppSettingsBloc(getIt<AppSettingsRepository>()));

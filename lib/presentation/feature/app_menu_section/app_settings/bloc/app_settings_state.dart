@@ -1,3 +1,4 @@
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_settings_state.freezed.dart';
@@ -10,6 +11,8 @@ abstract class AppSettingsState with _$AppSettingsState {
     @Default(false) bool isLoading,
 
     @Default(false) bool landingPageDisabled,
+
+    @Default(SplashDurationTypeEnum.medium) SplashDurationTypeEnum splashDuration,
 
   }) = _AppSettingsState;
 
