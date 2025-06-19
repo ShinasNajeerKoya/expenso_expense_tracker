@@ -8,11 +8,11 @@ import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/pro
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/profile/profile_repository_impl.dart';
 import 'package:expenso_expense_tracker/domain/repositories/home/home_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/home/home_repository_impl.dart';
-import 'package:expenso_expense_tracker/presentation/add_card/bloc/add_card_bloc.dart';
-import 'package:expenso_expense_tracker/presentation/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
-import 'package:expenso_expense_tracker/presentation/app_menu_section/profile/bloc/profile_bloc.dart';
-import 'package:expenso_expense_tracker/presentation/home/bloc/home_bloc.dart';
-import 'package:expenso_expense_tracker/presentation/onboarding/bloc/onboarding_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/add_card/bloc/add_card_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/profile/bloc/profile_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/home/bloc/home_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/onboarding/bloc/onboarding_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../data/dao_impl/add_card/add_card_dao_impl.dart';

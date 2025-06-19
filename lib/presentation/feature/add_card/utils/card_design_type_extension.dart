@@ -1,4 +1,5 @@
-import '../../../generated/app_icons.dart';
+
+import 'package:expenso_expense_tracker/generated/app_icons.dart';
 
 enum CardDesignType {
   card1,

@@ -4,8 +4,8 @@ import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
-import '../../presentation/add_card/utils/card_design_type_extension.dart';
-import '../../presentation/add_card/utils/card_type_extensions.dart';
+import '../../presentation/feature/add_card/utils/card_design_type_extension.dart';
+import '../../presentation/feature/add_card/utils/card_type_extensions.dart';
 import 'converters/add_card_model_converter_extensions.dart';
 import 'drift_tables/card_details_table.dart';
 

@@ -1,8 +1,8 @@
 import 'package:drift/drift.dart';
 import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
 
-import '../../../presentation/add_card/utils/card_design_type_extension.dart';
-import '../../../presentation/add_card/utils/card_type_extensions.dart';
+import '../../../presentation/feature/add_card/utils/card_design_type_extension.dart';
+import '../../../presentation/feature/add_card/utils/card_type_extensions.dart';
 import '../app_database.dart';
 import '../drift_tables/card_details_table.dart';
 

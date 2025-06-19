@@ -1,10 +1,10 @@
+import 'package:expenso_expense_tracker/config/themes/colors.dart';
+import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../config/themes/colors.dart';
-import '../../../config/themes/units.dart';
-import '../../../generated/app_icons.dart';
-import '../../../shared/helper_functions/custom_svg_icon.dart';
 import '../utils/extensions/menu_drawer_items_extension.dart';
 
 class MenuDrawerWidget extends StatelessWidget {
@@ -72,7 +72,7 @@ class MenuDrawerWidget extends StatelessWidget {
                               highlightColor: Colors.transparent,
                               onTap: () {
                                 Navigator.of(context).pop();
-                                // item.handleNavigation(context);
+                                item.handleNavigation(context);
                               },
                               borderRadius: BorderRadius.circular(14.r),
                               child: Container(

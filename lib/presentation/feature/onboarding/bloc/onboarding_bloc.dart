@@ -1,8 +1,8 @@
 import 'dart:developer';
 
+import 'package:expenso_expense_tracker/domain/repositories/onboarding/onboarding_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/repositories/onboarding/onboarding_repository.dart';
 import 'onboarding_state.dart';
 
 class OnboardingBloc extends Cubit<OnboardingState> {

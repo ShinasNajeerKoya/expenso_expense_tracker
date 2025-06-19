@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:expenso_expense_tracker/core/routes/route_config.dart';
+import 'package:expenso_expense_tracker/generated/app_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../generated/app_icons.dart';
 import '../../pages/home_page.dart';
 
 enum DrawerItem {
@@ -51,22 +53,22 @@ extension DrawerItemExtension on DrawerItem {
   void handleNavigation(BuildContext context) {
     switch (this) {
       case DrawerItem.profile:
-        Navigator.pushNamed(context, '/profile');
+        context.pushRoute(ProfileRoute());
         break;
       case DrawerItem.account:
-        Navigator.pushNamed(context, '/account');
+        context.pushRoute(AppAccountsRoute());
         break;
       case DrawerItem.language:
-        Navigator.pushNamed(context, '/language');
+        context.pushRoute(AppLanguageSelectionRoute());
         break;
       case DrawerItem.currency:
-        Navigator.pushNamed(context, '/currency');
+        context.pushRoute(AppCurrencySelectionRoute());
         break;
       case DrawerItem.settings:
-        Navigator.pushNamed(context, '/settings');
+        context.pushRoute(AppGeneralSettingsRoute());
         break;
       case DrawerItem.about:
-        Navigator.pushNamed(context, '/about');
+        context.pushRoute(AppAboutRoute());
         break;
     }
   }

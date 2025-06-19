@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expenso_expense_tracker/core/routes/route_config.dart';
-import 'package:expenso_expense_tracker/presentation/onboarding/pages/onboarding_page.dart';
+import 'package:expenso_expense_tracker/presentation/feature/onboarding/pages/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';

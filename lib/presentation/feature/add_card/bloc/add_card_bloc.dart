@@ -1,9 +1,9 @@
 import 'dart:developer';
 
+import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/models/add_card/add_card_model.dart';
-import '../../../domain/repositories/add_card/add_card_repository.dart';
+import '../../../../domain/repositories/add_card/add_card_repository.dart';
 import '../utils/card_design_type_extension.dart';
 import '../utils/card_type_extensions.dart';
 import 'add_card_state.dart';

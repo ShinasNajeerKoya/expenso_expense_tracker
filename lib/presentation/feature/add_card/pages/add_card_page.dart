@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
-import 'package:expenso_expense_tracker/presentation/add_card/widgets/card_selector.dart';
-import 'package:expenso_expense_tracker/presentation/add_card/widgets/text_field_label_and_body.dart';
+import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
+import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/presentation/feature/add_card/widgets/card_selector.dart';
+import 'package:expenso_expense_tracker/presentation/feature/add_card/widgets/text_field_label_and_body.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,8 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../domain/models/add_card/add_card_model.dart';
-import '../../../generated/app_icons.dart';
 import '../bloc/add_card_bloc.dart';
 import '../bloc/add_card_state.dart';
 import '../utils/card_design_type_extension.dart';

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../generated/app_icons.dart';
-import '../../../shared/helper_functions/custom_svg_icon.dart';
+import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 
 class BasicDetailsSection extends StatelessWidget {
   const BasicDetailsSection({

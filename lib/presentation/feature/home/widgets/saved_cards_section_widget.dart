@@ -1,14 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/core/routes/route_config.dart';
+import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../config/themes/units.dart';
-import '../../../core/routes/route_config.dart';
-import '../../../domain/models/add_card/add_card_model.dart';
-import '../../../generated/app_icons.dart';
-import '../../../shared/helper_functions/custom_svg_icon.dart';
 import '../../add_card/pages/add_card_page.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';

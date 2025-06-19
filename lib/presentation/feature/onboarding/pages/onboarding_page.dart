@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:expenso_expense_tracker/config/themes/colors.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/core/routes/route_config.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
+import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../core/routes/route_config.dart';
-import '../../../generated/locale_keys.g.dart';
-import '../../../shared/helper_functions/custom_svg_icon.dart';
 import '../../home/pages/home_page.dart';
 import '../bloc/onboarding_bloc.dart';
 import '../bloc/onboarding_state.dart';

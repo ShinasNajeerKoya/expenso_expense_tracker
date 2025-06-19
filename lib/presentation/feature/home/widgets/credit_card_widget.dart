@@ -1,11 +1,10 @@
+import 'package:expenso_expense_tracker/config/font_manager/font_styles.dart';
+import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../config/font_manager/font_styles.dart';
-import '../../../config/themes/units.dart';
-import '../../../generated/app_icons.dart';
-import '../../../shared/helper_functions/custom_svg_icon.dart';
+import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import '../../add_card/utils/card_design_type_extension.dart';
 import '../../add_card/utils/card_type_extensions.dart';
 

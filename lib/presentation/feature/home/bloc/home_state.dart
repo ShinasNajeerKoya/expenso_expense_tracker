@@ -1,7 +1,7 @@
 
+import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/models/add_card/add_card_model.dart';
 
 part 'home_state.freezed.dart';
 part 'home_state.g.dart';
