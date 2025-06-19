@@ -27,7 +27,7 @@ class GetItHelper {
   static void init() {
 
 
-    // AppRouter
+    /// AppRouter
     getIt.registerSingleton<AppRouter>(AppRouter());
 
 
