@@ -11,6 +11,7 @@ import '../../presentation/feature/app_menu_section/app_settings/pages/app_gener
 import '../../presentation/feature/home/pages/home_page.dart';
 import '../../presentation/feature/onboarding/pages/onboarding_page.dart';
 import '../../presentation/feature/app_menu_section/profile/pages/profile_page.dart';
+import '../../presentation/feature/splash/pages/splash_page.dart';
 
 part 'route_config.gr.dart';
 
@@ -19,7 +20,8 @@ class AppRouter extends RootStackRouter {
   AppRouter({super.navigatorKey});
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: OnboardingRoute.page, initial: true),
+        AutoRoute(page: SplashRoute.page, initial: true),
+        AutoRoute(page: OnboardingRoute.page),
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: AddCardRoute.page),
         ...settingsRoutes,

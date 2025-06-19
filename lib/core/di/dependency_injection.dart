@@ -8,11 +8,14 @@ import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/pro
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/profile/profile_repository_impl.dart';
 import 'package:expenso_expense_tracker/domain/repositories/home/home_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/home/home_repository_impl.dart';
+import 'package:expenso_expense_tracker/domain/repositories/splash/splash_repository.dart';
+import 'package:expenso_expense_tracker/domain/repositories/splash/splash_repository_impl.dart';
 import 'package:expenso_expense_tracker/presentation/feature/add_card/bloc/add_card_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/profile/bloc/profile_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/home/bloc/home_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/onboarding/bloc/onboarding_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/splash/bloc/splash_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../data/dao_impl/add_card/add_card_dao_impl.dart';
@@ -36,6 +39,7 @@ class GetItHelper {
     getIt.registerLazySingleton<CardDetailsDao>(() => CardDetailsDaoImpl(getIt<AppDatabase>()));
 
     /// Repositories
+    getIt.registerSingleton<SplashRepository>(SplashRepositoryImpl());
     getIt.registerSingleton<OnboardingRepository>(OnboardingRepositoryImpl());
     getIt.registerSingleton<HomeRepository>(HomeRepositoryImpl());
     getIt.registerSingleton<AddCardRepository>(AddCardRepositoryImpl(getIt<CardDetailsDao>()));
@@ -43,6 +47,7 @@ class GetItHelper {
     getIt.registerSingleton<ProfileRepository>(ProfileRepositoryImpl());
 
     /// BloCs
+    getIt.registerSingleton<SplashBloc>(SplashBloc(getIt<SplashRepository>()));
     getIt.registerSingleton<OnboardingBloc>(OnboardingBloc(getIt<OnboardingRepository>()));
     getIt.registerSingleton<HomeBloc>(HomeBloc(cardRepo: getIt<AddCardRepository>()));
     getIt.registerSingleton<AddCardBloc>(AddCardBloc(getIt<AddCardRepository>()));

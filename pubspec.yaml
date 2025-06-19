@@ -43,6 +43,8 @@ dependencies:
   carousel_slider: ^5.1.1
   flutter_card_swiper: ^7.0.2
   auto_route: ^10.1.0+1
+  shared_preferences: ^2.5.3
+
 
 
 
