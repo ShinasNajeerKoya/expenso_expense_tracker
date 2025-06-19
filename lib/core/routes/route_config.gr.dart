@@ -60,17 +60,81 @@ class AddCardRouteArgs {
 }
 
 /// generated route for
-/// [AppSettingsPage]
-class AppSettingsRoute extends PageRouteInfo<void> {
-  const AppSettingsRoute({List<PageRouteInfo>? children})
-      : super(AppSettingsRoute.name, initialChildren: children);
+/// [AppAboutPage]
+class AppAboutRoute extends PageRouteInfo<void> {
+  const AppAboutRoute({List<PageRouteInfo>? children})
+      : super(AppAboutRoute.name, initialChildren: children);
 
-  static const String name = 'AppSettingsRoute';
+  static const String name = 'AppAboutRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AppSettingsPage();
+      return const AppAboutPage();
+    },
+  );
+}
+
+/// generated route for
+/// [AppAccountsPage]
+class AppAccountsRoute extends PageRouteInfo<void> {
+  const AppAccountsRoute({List<PageRouteInfo>? children})
+      : super(AppAccountsRoute.name, initialChildren: children);
+
+  static const String name = 'AppAccountsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppAccountsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [AppCurrencySelectionPage]
+class AppCurrencySelectionRoute extends PageRouteInfo<void> {
+  const AppCurrencySelectionRoute({List<PageRouteInfo>? children})
+      : super(AppCurrencySelectionRoute.name, initialChildren: children);
+
+  static const String name = 'AppCurrencySelectionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppCurrencySelectionPage();
+    },
+  );
+}
+
+/// generated route for
+/// [AppGeneralSettingsPage]
+class AppGeneralSettingsRoute extends PageRouteInfo<void> {
+  const AppGeneralSettingsRoute({List<PageRouteInfo>? children})
+      : super(AppGeneralSettingsRoute.name, initialChildren: children);
+
+  static const String name = 'AppGeneralSettingsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppGeneralSettingsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [AppLanguageSelectionPage]
+class AppLanguageSelectionRoute extends PageRouteInfo<void> {
+  const AppLanguageSelectionRoute({List<PageRouteInfo>? children})
+      : super(AppLanguageSelectionRoute.name, initialChildren: children);
+
+  static const String name = 'AppLanguageSelectionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppLanguageSelectionPage();
     },
   );
 }

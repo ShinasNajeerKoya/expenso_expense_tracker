@@ -1,4 +1,4 @@
-import 'package:expenso_expense_tracker/domain/repositories/more_section/profile/profile_repository.dart';
+import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/profile/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   @override
