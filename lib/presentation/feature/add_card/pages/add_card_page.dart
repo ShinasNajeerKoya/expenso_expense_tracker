@@ -4,8 +4,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/presentation/feature/add_card/widgets/card_selector.dart';
 import 'package:expenso_expense_tracker/presentation/feature/add_card/widgets/text_field_label_and_body.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,7 +69,10 @@ class _AddCardPageState extends State<AddCardPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(addCardBloc.state.editingCardModel != null ? "Update Card" : "Add Card",
+        title: Text(
+            addCardBloc.state.editingCardModel != null
+                ? LocaleKeys.updateCard.toLocalizeString
+                : LocaleKeys.addCard.toLocalizeString,
             style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -132,7 +137,9 @@ class _AddCardPageState extends State<AddCardPage> {
               addCardBloc.validateAndSubmitCardDetails();
             },
             child: Text(
-              addCardBloc.state.editingCardModel != null ? "Update Card" : "Save Card",
+              addCardBloc.state.editingCardModel != null
+                  ? LocaleKeys.updateCard.toLocalizeString
+                  : LocaleKeys.saveCard.toLocalizeString,
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -159,7 +166,7 @@ class CardValidTillTextFieldWidget extends StatelessWidget {
       selector: (state) => state.expiryDateError,
       builder: (context, expiryDateError) {
         return TextFieldLabelAndBody(
-          label: 'Expiry Date',
+          label: LocaleKeys.expiryDate.toLocalizeString,
           child: CustomAddCardTextField(
             controller: expiryDateController,
             hintText: "MM/YY",
@@ -205,10 +212,10 @@ class CardHoldersNameTextFieldWidget extends StatelessWidget {
       selector: (state) => state.cardHolderError,
       builder: (context, cardHolderError) {
         return TextFieldLabelAndBody(
-          label: 'Cardholder Name',
+          label: LocaleKeys.cardholderName.toLocalizeString,
           child: CustomAddCardTextField(
             controller: cardHolderController,
-            hintText: "Name on the card",
+            hintText: LocaleKeys.nameOnTheCard.toLocalizeString,
             height: 55.h,
             keyboardType: TextInputType.text,
             errorMessage: cardHolderError,
@@ -238,7 +245,7 @@ class CardDesignDropDownWidget extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Select Card Design", style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(LocaleKeys.selectCardDesign.toLocalizeString, style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(height: 8.h),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
@@ -316,7 +323,7 @@ class CardNumberTextFieldWidget extends StatelessWidget {
       selector: (state) => state.cardNumberError,
       builder: (context, cardNumberError) {
         return TextFieldLabelAndBody(
-          label: 'Card Number',
+          label: LocaleKeys.cardNumber.toLocalizeString,
           child: CustomAddCardTextField(
             controller: cardNumberController,
             hintText: "0000",

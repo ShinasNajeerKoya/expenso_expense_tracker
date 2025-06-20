@@ -1,3 +1,11 @@
+br:
+	@echo "🧹 Cleaning Runner..."
+	dart run build_runner clean
+
+	@echo "📦 Getting Runner..."
+	dart run build_runner build --delete-conflicting-outputs
+
+
 app:
 	flutter clean; \
 	flutter pub get; \
@@ -10,9 +18,6 @@ app:
 feature:
 	fvm flutter pub run tool/feature_generator.dart
 
-br:
-	dart run build_runner clean
-	dart run build_runner build --delete-conflicting-outputs
 
 
 pipeline:
@@ -38,14 +43,7 @@ pipeline:
 			echo "✅ No changes to commit."; \
 		fi'
 
-
-
-
-
-generate-text-local:
-	dart run easy_localization:generate -S "assets/languages" -o "locale_keys.g.dart" -f keys;\
-
-manual-generate:
+text:
 	flutter pub get;\
 	dart run easy_localization:generate -S "assets/languages" -o "locale_keys.g.dart" -f keys;\
 	dart run build_runner build --delete-conflicting-outputs ;\

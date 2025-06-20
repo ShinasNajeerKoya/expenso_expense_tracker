@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/presentation/widgets/my_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,12 +9,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color? titleColor;
   final Color? borderColor;
+  final double? borderWidth;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.titleColor,
     this.borderColor,
+    this.borderWidth,
   });
 
   @override
@@ -29,13 +32,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         onPressed: () => context.router.pop(),
       ),
-      title: Text(
+      title: MyText(
         title,
-        style: TextStyle(
-          color: titleColor ?? Color(0xff885B2B),
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
+        fontColor: titleColor ?? Color(0xff885B2B),
+        fontWeight: FontWeight.w600,
+        fontSize: 18.sp,
       ),
       centerTitle: false,
       backgroundColor: Colors.transparent,
@@ -47,8 +48,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.transparent,
           border: Border(
             bottom: BorderSide(
-              color: borderColor ?? Color(0xffFFF7EE),
-              width: 2.h,
+              color: borderColor ?? Color(0xffFFF8EE),
+              width:borderWidth?? 2.h,
             ),
           ),
         ),

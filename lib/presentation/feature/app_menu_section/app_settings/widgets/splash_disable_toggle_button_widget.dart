@@ -1,9 +1,11 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:expenso_expense_tracker/config/themes/colors.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_state.dart';
 import 'package:expenso_expense_tracker/presentation/widgets/my_text.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +28,7 @@ class SplashDisableToggleButtonWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             MyText(
-              'Disable landing page',
+              LocaleKeys. disableLandingPage.toLocalizeString,
               fontSize: 12.sp,
             ),
             BlocSelector<AppSettingsBloc, AppSettingsState, bool>(

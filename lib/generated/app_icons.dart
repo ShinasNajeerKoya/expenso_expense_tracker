@@ -1,5 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 class AppIcons {
+  static const String kRoyalDivider = 'assets/icons/royal_divider.svg';
   static const String kSunrise = 'assets/icons/sunrise.svg';
   static const String kRupeeIcon = 'assets/icons/rupee_icon.svg';
   static const String kCard8 = 'assets/icons/card_8.svg';
@@ -7,9 +8,11 @@ class AppIcons {
   static const String kRfid = 'assets/icons/rfid.svg';
   static const String kMastercardBlack = 'assets/icons/mastercard_black.svg';
   static const String kCard9 = 'assets/icons/card_9.svg';
+  static const String kArrowCircleUp = 'assets/icons/Arrow-Circle-up.svg';
   static const String kRfidWhite = 'assets/icons/rfid_white.svg';
   static const String kChipWhite = 'assets/icons/chip_white.svg';
   static const String kCard10 = 'assets/icons/card_10.svg';
+  static const String kInstagram = 'assets/icons/instagram.svg';
   static const String kDollarIcon = 'assets/icons/dollar_icon.svg';
   static const String kSettings = 'assets/icons/settings.svg';
   static const String kEuroIcon = 'assets/icons/euro_icon.svg';
@@ -27,7 +30,9 @@ class AppIcons {
   static const String kAbout = 'assets/icons/about.svg';
   static const String kMastercardWhite = 'assets/icons/mastercard_white.svg';
   static const String kYenIcon = 'assets/icons/yen_icon.svg';
+  static const String kAboutHeader = 'assets/icons/about_header.svg';
   static const String kRfidBlack = 'assets/icons/rfid_black.svg';
+  static const String kYoutube = 'assets/icons/youtube.svg';
   static const String kChipBlack = 'assets/icons/chip_black.svg';
   static const String kLanguage = 'assets/icons/language.svg';
   static const String kCard7 = 'assets/icons/card_7.svg';
@@ -42,6 +47,7 @@ class AppIcons {
   static const String kRupayBlack = 'assets/icons/rupay_black.svg';
   static const String kCard1 = 'assets/icons/card_1.svg';
   static const String kAccounts = 'assets/icons/accounts.svg';
+  static const String kXTwitter = 'assets/icons/x_twitter.svg';
   static const String kCard10Prod = 'assets/icons/card_10_prod.svg';
   static const String kCard2 = 'assets/icons/card_2.svg';
   static const String kCard3 = 'assets/icons/card_3.svg';

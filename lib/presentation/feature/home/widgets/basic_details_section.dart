@@ -1,3 +1,5 @@
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
@@ -25,7 +27,7 @@ class BasicDetailsSection extends StatelessWidget {
               width: 8.w,
             ),
             Text(
-              'Good Morning',
+              LocaleKeys.goodMorning.toLocalizeString,
               style: TextStyle(color: Colors.white),
             ),
           ],
@@ -34,7 +36,7 @@ class BasicDetailsSection extends StatelessWidget {
           height: 8.h,
         ),
         Text(
-          'Welcome Shinas',
+          '${LocaleKeys.welcome.toLocalizeString} Shinas',
           style: TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ],

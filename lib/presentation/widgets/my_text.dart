@@ -8,6 +8,7 @@ class MyText extends StatelessWidget {
   final TextAlign? textAlign;
   final Color? fontColor;
   final double? letterSpacing;
+  final double? lineHeight;
   final int? maxLines;
 
   const MyText(
@@ -18,6 +19,7 @@ class MyText extends StatelessWidget {
     this.fontColor,
     this.maxLines,
     this.letterSpacing,
+    this.lineHeight,
     this.textAlign,
   });
 
@@ -30,6 +32,7 @@ class MyText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         letterSpacing: letterSpacing,
+        height: lineHeight,
         color: fontColor ?? Color(0xff885B2B),
         fontSize: fontSize ?? 14.sp,
         fontWeight: fontWeight ?? FontWeight.w600,

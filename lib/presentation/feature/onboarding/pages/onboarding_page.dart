@@ -24,19 +24,18 @@ class OnboardingPage extends StatelessWidget {
   final PageController _controller = PageController();
   final onboardingBloc = GetIt.I<OnboardingBloc>();
 
-  final List<OnboardingPageModel> pages = const [
+  final List<OnboardingPageModel> pages = [
     OnboardingPageModel(
-      title: 'Manage your Expenses',
-      subtitle:
-          'Get a full view so you know where to save.\nTrack spending, and keep tabs\non rising subscription costs.',
+      title: LocaleKeys.manageYourExpense.toLocalizeString,
+      subtitle: LocaleKeys.manageYourExpenseData.toLocalizeString,
     ),
     OnboardingPageModel(
-      title: 'Stay on Budget',
-      subtitle: 'Set monthly budgets and get alerts\nwhen you’re close to exceeding.',
+      title: LocaleKeys.stayOnBudget.toLocalizeString,
+      subtitle: LocaleKeys.stayOnBudgetData.toLocalizeString,
     ),
     OnboardingPageModel(
-      title: 'Insights & Reports',
-      subtitle: 'Visual charts and stats to\nunderstand your spending better.',
+      title: LocaleKeys.insightsReports.toLocalizeString,
+      subtitle: LocaleKeys.insightsReportsData.toLocalizeString,
     ),
   ];
 

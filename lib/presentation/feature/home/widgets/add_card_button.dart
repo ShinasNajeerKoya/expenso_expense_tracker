@@ -1,4 +1,6 @@
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +46,7 @@ class AddCardButton extends StatelessWidget {
                       color: Colors.white),
                   SizedBox(width: 8.w),
                   Text(
-                    "Add Card",
+                    LocaleKeys. addCard.toLocalizeString,
                     style: GoogleFonts.publicSans(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,

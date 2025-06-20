@@ -1,5 +1,7 @@
 import 'package:expenso_expense_tracker/config/font_manager/font_styles.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -69,7 +71,7 @@ class CreditCardWidget extends StatelessWidget {
                 ),
                 verticalMargin20,
                 Text(
-                  "\$12000",
+                  "\$12000 edit",
                   // titilliumWeb , exo2, saira
                   style: FontStyles.creditCard(
                     color: Colors.white,
@@ -96,7 +98,7 @@ class CreditCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Card Holder",
+                          LocaleKeys.cardholderName.toLocalizeString,
                           style: GoogleFonts.anta(color: Colors.white54, fontSize: 10.sp),
                         ),
                         SizedBox(
@@ -113,7 +115,7 @@ class CreditCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Valid Thru",
+                          LocaleKeys.cardholderName.toLocalizeString,
                           style: GoogleFonts.anta(color: Colors.white54, fontSize: 10.sp),
                         ),
                         Text(

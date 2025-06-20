@@ -1,3 +1,6 @@
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
+
 enum SplashDurationTypeEnum {
   verySlow,
   slow,
@@ -10,15 +13,15 @@ extension SplashDurationTypeEnumExtension on SplashDurationTypeEnum {
   String get displayName {
     switch (this) {
       case SplashDurationTypeEnum.verySlow:
-        return 'Snail';
+        return LocaleKeys.snail.toLocalizeString;
       case SplashDurationTypeEnum.slow:
-        return 'Slow';
+        return LocaleKeys.slow.toLocalizeString;
       case SplashDurationTypeEnum.medium:
-        return 'Medium';
+        return LocaleKeys.medium.toLocalizeString;
       case SplashDurationTypeEnum.fast:
-        return 'Fast';
+        return LocaleKeys.fast.toLocalizeString;
       case SplashDurationTypeEnum.veryFast:
-        return 'Fast as F';
+        return LocaleKeys.veryFast.toLocalizeString;
     }
   }
 

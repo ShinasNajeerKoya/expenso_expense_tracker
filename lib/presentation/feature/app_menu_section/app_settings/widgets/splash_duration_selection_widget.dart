@@ -1,9 +1,11 @@
 import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_state.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/pages/app_general_settings_page.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 import 'package:expenso_expense_tracker/presentation/widgets/my_text.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +42,7 @@ class SplashDurationSelectionWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MyText(
-                    'Splash Duration',
+                    LocaleKeys. splashDuration.toLocalizeString,
                     fontSize: 12.sp,
                   ),
                   Padding(

@@ -1,6 +1,7 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:expenso_expense_tracker/config/themes/colors.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_state.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
@@ -9,6 +10,7 @@ import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/ap
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/widgets/splash_duration_selector_widget.dart';
 import 'package:expenso_expense_tracker/presentation/widgets/custom_app_bar.dart';
 import 'package:expenso_expense_tracker/presentation/widgets/my_text.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/bottom_sheet_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -28,7 +30,7 @@ class AppGeneralSettingsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: "App Settings",
+        title: LocaleKeys.appSettings.toLocalizeString,
       ),
       body: Column(
         children: [
@@ -44,7 +46,7 @@ class AppGeneralSettingsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     MyText(
-                      'Statistics data sync',
+                      LocaleKeys.statisticsDataSync.toLocalizeString,
                       fontSize: 12.sp,
                     ),
                   ],
@@ -62,7 +64,7 @@ class AppGeneralSettingsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     MyText(
-                      'Download statistics',
+                      LocaleKeys.downloadStatistics.toLocalizeString,
                       fontSize: 12.sp,
                     ),
                   ],
