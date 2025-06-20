@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 
-enum AppLanguageEnum {
-  english,
-  kannada,
-  malayalam,
-  tamil,
-}
+enum AppLanguageEnum { english, kannada, malayalam, tamil, telugu, hindi, german, spanish }
 
 extension AppLanguageEnumExtension on AppLanguageEnum {
   Locale get locale {
@@ -20,6 +15,14 @@ extension AppLanguageEnumExtension on AppLanguageEnum {
         return const Locale('ml', 'IN');
       case AppLanguageEnum.tamil:
         return const Locale('ta', 'IN');
+      case AppLanguageEnum.telugu:
+        return const Locale('te', 'IN');
+      case AppLanguageEnum.hindi:
+        return const Locale('hi', 'IN');
+      case AppLanguageEnum.german:
+        return const Locale('de', 'DE');
+      case AppLanguageEnum.spanish:
+        return const Locale('es', 'ES');
     }
   }
 
@@ -33,6 +36,14 @@ extension AppLanguageEnumExtension on AppLanguageEnum {
         return 'മലയാളം';
       case AppLanguageEnum.tamil:
         return 'தமிழ்';
+      case AppLanguageEnum.telugu:
+        return 'తెలుగు';
+      case AppLanguageEnum.hindi:
+        return 'हिंदी';
+      case AppLanguageEnum.german:
+        return 'Deutsch';
+      case AppLanguageEnum.spanish:
+        return 'Español';
     }
   }
 
