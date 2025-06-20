@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/app_settings/app_settings_repository.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
@@ -47,5 +48,21 @@ class AppSettingsBloc extends Cubit<AppSettingsState> {
       splashDuration: splashDuration,
       isLoading: false,
     ));
+  }
+
+  void setAppLocale(Locale locale) async {
+    emit(state.copyWith(isLoading: true));
+    final isSaved = await _repo.setLocale(locale);
+    if (isSaved) {
+      emit(state.copyWith(selectedLocale: locale, isLoading: false));
+    } else {
+      emit(state.copyWith(error: true, isLoading: false));
+    }
+  }
+
+  Future<void> loadLocale() async {
+    emit(state.copyWith(isLoading: true));
+    final locale = await _repo.getLocale();
+    emit(state.copyWith(selectedLocale: locale, isLoading: false));
   }
 }

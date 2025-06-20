@@ -19,6 +19,8 @@ mixin _$AppSettingsState {
   bool get isLoading;
   bool get landingPageDisabled;
   SplashDurationTypeEnum get splashDuration;
+  @LocaleConverterHelper()
+  Locale get selectedLocale;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -42,17 +44,19 @@ mixin _$AppSettingsState {
             (identical(other.landingPageDisabled, landingPageDisabled) ||
                 other.landingPageDisabled == landingPageDisabled) &&
             (identical(other.splashDuration, splashDuration) ||
-                other.splashDuration == splashDuration));
+                other.splashDuration == splashDuration) &&
+            (identical(other.selectedLocale, selectedLocale) ||
+                other.selectedLocale == selectedLocale));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, error, isLoading, landingPageDisabled, splashDuration);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      landingPageDisabled, splashDuration, selectedLocale);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration, selectedLocale: $selectedLocale)';
   }
 }
 
@@ -66,7 +70,8 @@ abstract mixin class $AppSettingsStateCopyWith<$Res> {
       {bool error,
       bool isLoading,
       bool landingPageDisabled,
-      SplashDurationTypeEnum splashDuration});
+      SplashDurationTypeEnum splashDuration,
+      @LocaleConverterHelper() Locale selectedLocale});
 }
 
 /// @nodoc
@@ -86,6 +91,7 @@ class _$AppSettingsStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? landingPageDisabled = null,
     Object? splashDuration = null,
+    Object? selectedLocale = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -104,6 +110,10 @@ class _$AppSettingsStateCopyWithImpl<$Res>
           ? _self.splashDuration
           : splashDuration // ignore: cast_nullable_to_non_nullable
               as SplashDurationTypeEnum,
+      selectedLocale: null == selectedLocale
+          ? _self.selectedLocale
+          : selectedLocale // ignore: cast_nullable_to_non_nullable
+              as Locale,
     ));
   }
 }
@@ -115,7 +125,8 @@ class _AppSettingsState implements AppSettingsState {
       {this.error = false,
       this.isLoading = false,
       this.landingPageDisabled = false,
-      this.splashDuration = SplashDurationTypeEnum.medium});
+      this.splashDuration = SplashDurationTypeEnum.medium,
+      @LocaleConverterHelper() this.selectedLocale = const Locale('en', 'US')});
   factory _AppSettingsState.fromJson(Map<String, dynamic> json) =>
       _$AppSettingsStateFromJson(json);
 
@@ -131,6 +142,10 @@ class _AppSettingsState implements AppSettingsState {
   @override
   @JsonKey()
   final SplashDurationTypeEnum splashDuration;
+  @override
+  @JsonKey()
+  @LocaleConverterHelper()
+  final Locale selectedLocale;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -158,17 +173,19 @@ class _AppSettingsState implements AppSettingsState {
             (identical(other.landingPageDisabled, landingPageDisabled) ||
                 other.landingPageDisabled == landingPageDisabled) &&
             (identical(other.splashDuration, splashDuration) ||
-                other.splashDuration == splashDuration));
+                other.splashDuration == splashDuration) &&
+            (identical(other.selectedLocale, selectedLocale) ||
+                other.selectedLocale == selectedLocale));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, error, isLoading, landingPageDisabled, splashDuration);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      landingPageDisabled, splashDuration, selectedLocale);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration, selectedLocale: $selectedLocale)';
   }
 }
 
@@ -184,7 +201,8 @@ abstract mixin class _$AppSettingsStateCopyWith<$Res>
       {bool error,
       bool isLoading,
       bool landingPageDisabled,
-      SplashDurationTypeEnum splashDuration});
+      SplashDurationTypeEnum splashDuration,
+      @LocaleConverterHelper() Locale selectedLocale});
 }
 
 /// @nodoc
@@ -204,6 +222,7 @@ class __$AppSettingsStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? landingPageDisabled = null,
     Object? splashDuration = null,
+    Object? selectedLocale = null,
   }) {
     return _then(_AppSettingsState(
       error: null == error
@@ -222,6 +241,10 @@ class __$AppSettingsStateCopyWithImpl<$Res>
           ? _self.splashDuration
           : splashDuration // ignore: cast_nullable_to_non_nullable
               as SplashDurationTypeEnum,
+      selectedLocale: null == selectedLocale
+          ? _self.selectedLocale
+          : selectedLocale // ignore: cast_nullable_to_non_nullable
+              as Locale,
     ));
   }
 }

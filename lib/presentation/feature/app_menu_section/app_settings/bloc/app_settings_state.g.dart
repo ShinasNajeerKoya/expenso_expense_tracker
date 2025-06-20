@@ -14,6 +14,10 @@ _AppSettingsState _$AppSettingsStateFromJson(Map<String, dynamic> json) =>
       splashDuration: $enumDecodeNullable(
               _$SplashDurationTypeEnumEnumMap, json['splashDuration']) ??
           SplashDurationTypeEnum.medium,
+      selectedLocale: json['selectedLocale'] == null
+          ? const Locale('en', 'US')
+          : const LocaleConverterHelper()
+              .fromJson(json['selectedLocale'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AppSettingsStateToJson(_AppSettingsState instance) =>
@@ -23,6 +27,8 @@ Map<String, dynamic> _$AppSettingsStateToJson(_AppSettingsState instance) =>
       'landingPageDisabled': instance.landingPageDisabled,
       'splashDuration':
           _$SplashDurationTypeEnumEnumMap[instance.splashDuration]!,
+      'selectedLocale':
+          const LocaleConverterHelper().toJson(instance.selectedLocale),
     };
 
 const _$SplashDurationTypeEnumEnumMap = {

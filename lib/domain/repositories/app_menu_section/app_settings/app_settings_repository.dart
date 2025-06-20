@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 
 abstract class AppSettingsRepository {
@@ -8,4 +10,6 @@ abstract class AppSettingsRepository {
   Future<bool> isLandingPageDisabled();
   Future<bool> setSplashDuration(SplashDurationTypeEnum duration);
   Future<SplashDurationTypeEnum> getSplashDuration();
+  Future<bool> setLocale(Locale locale);
+  Future<Locale> getLocale();
 }

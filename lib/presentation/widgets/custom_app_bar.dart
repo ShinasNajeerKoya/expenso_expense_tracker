@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           CupertinoIcons.left_chevron,
           color: Color(0xff885B2B),
         ),
-        onPressed: () => context.router.pop(),
+        onPressed: () => context.router.pop(true),
       ),
       title: MyText(
         title,
@@ -49,7 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           border: Border(
             bottom: BorderSide(
               color: borderColor ?? Color(0xffFFF8EE),
-              width:borderWidth?? 2.h,
+              width: borderWidth ?? 2.h,
             ),
           ),
         ),

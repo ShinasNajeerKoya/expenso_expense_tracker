@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/core/routes/route_config.dart';
 import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
@@ -24,6 +25,8 @@ class SavedCardsSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentLocale = context.locale;
+
     return BlocSelector<HomeBloc, HomeState, List<AddCardModel>>(
       bloc: homeBloc,
       selector: (state) => state.cardList,
@@ -50,6 +53,7 @@ class SavedCardsSectionWidget extends StatelessWidget {
           return SizedBox(
             height: 220.h,
             child: CardSwiper(
+              key: ValueKey(currentLocale.languageCode),
               cardsCount: extendedList.length,
               numberOfCardsDisplayed: 2,
               isLoop: true,

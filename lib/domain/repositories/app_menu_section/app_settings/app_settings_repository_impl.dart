@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:expenso_expense_tracker/core/shared_preference/app_language_pref.dart';
 import 'package:expenso_expense_tracker/core/shared_preference/landing_page_pref.dart';
 import 'package:expenso_expense_tracker/core/shared_preference/splash_duration_pref.dart';
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/app_settings/app_settings_repository.dart';
@@ -27,5 +30,15 @@ class AppSettingsRepositoryImpl implements AppSettingsRepository {
   @override
   Future<SplashDurationTypeEnum> getSplashDuration() async {
     return await SplashDurationPref.getSplashDuration();
+  }
+
+  @override
+  Future<bool> setLocale(Locale locale) async {
+    return await LocalePref.saveLocale(locale);
+  }
+
+  @override
+  Future<Locale> getLocale() async {
+    return await LocalePref.getSavedLocale();
   }
 }

@@ -1,9 +1,6 @@
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import 'package:expenso_expense_tracker/config/themes/colors.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
-import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_state.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/widgets/splash_disable_toggle_button_widget.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/widgets/splash_duration_selection_widget.dart';
@@ -14,13 +11,13 @@ import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart
 import 'package:expenso_expense_tracker/shared/helper_functions/bottom_sheet_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
 @RoutePage()
 class AppGeneralSettingsPage extends StatelessWidget {
   static const id = '/appGeneralSettingsPage';
+
   AppGeneralSettingsPage({super.key});
 
   final appSettingsBloc = GetIt.I<AppSettingsBloc>();

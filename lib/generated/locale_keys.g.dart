@@ -44,5 +44,10 @@ abstract class  LocaleKeys {
   static const termsAndConditions = 'termsAndConditions';
   static const privacyPolicies = 'privacyPolicies';
   static const followUsOn = 'followUsOn';
+  static const selectLanguage = 'selectLanguage';
+  static const english = 'english';
+  static const kannada = 'kannada';
+  static const malayalam = 'malayalam';
+  static const tamil = 'tamil';
 
 }

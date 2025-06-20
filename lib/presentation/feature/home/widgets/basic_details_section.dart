@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ class BasicDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentLocale = context.locale;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,7 +30,8 @@ class BasicDetailsSection extends StatelessWidget {
               width: 8.w,
             ),
             Text(
-              LocaleKeys.goodMorning.toLocalizeString,
+              key: ValueKey(currentLocale.languageCode),
+              LocaleKeys.goodMorning.tr(),
               style: TextStyle(color: Colors.white),
             ),
           ],
@@ -36,6 +40,7 @@ class BasicDetailsSection extends StatelessWidget {
           height: 8.h,
         ),
         Text(
+          key: ValueKey(currentLocale.languageCode),
           '${LocaleKeys.welcome.toLocalizeString} Shinas',
           style: TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold),
         ),

@@ -39,6 +39,12 @@
   "visitWebsite": "Visit website",
   "termsAndConditions": "Terms and conditions",
   "privacyPolicies": "Privacy Policies",
-  "followUsOn": "Follow us on"
+  "followUsOn": "Follow us on",
+  "selectLanguage": "Select language",
+  "english": "English",
+  "kannada": "Kannada",
+  "malayalam": "Malayalam",
+  "tamil": "Tamil"
+
 
 }

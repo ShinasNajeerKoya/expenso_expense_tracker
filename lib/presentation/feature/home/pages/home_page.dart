@@ -8,6 +8,7 @@ import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/core/routes/route_config.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
 import 'package:expenso_expense_tracker/presentation/feature/add_card/utils/card_design_type_extension.dart';
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,8 +37,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final homeBloc = GetIt.I<HomeBloc>();
-
-  final CarouselSliderController controller = CarouselSliderController();
 
   @override
   void initState() {

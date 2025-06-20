@@ -154,18 +154,47 @@ class AppGeneralSettingsRouteArgs {
 
 /// generated route for
 /// [AppLanguageSelectionPage]
-class AppLanguageSelectionRoute extends PageRouteInfo<void> {
-  const AppLanguageSelectionRoute({List<PageRouteInfo>? children})
-      : super(AppLanguageSelectionRoute.name, initialChildren: children);
+class AppLanguageSelectionRoute
+    extends PageRouteInfo<AppLanguageSelectionRouteArgs> {
+  AppLanguageSelectionRoute({Key? key, List<PageRouteInfo>? children})
+      : super(
+          AppLanguageSelectionRoute.name,
+          args: AppLanguageSelectionRouteArgs(key: key),
+          initialChildren: children,
+        );
 
   static const String name = 'AppLanguageSelectionRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AppLanguageSelectionPage();
+      final args = data.argsAs<AppLanguageSelectionRouteArgs>(
+        orElse: () => const AppLanguageSelectionRouteArgs(),
+      );
+      return AppLanguageSelectionPage(key: args.key);
     },
   );
+}
+
+class AppLanguageSelectionRouteArgs {
+  const AppLanguageSelectionRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AppLanguageSelectionRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AppLanguageSelectionRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }
 
 /// generated route for
