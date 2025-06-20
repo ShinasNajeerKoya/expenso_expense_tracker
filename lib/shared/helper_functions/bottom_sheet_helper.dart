@@ -1,3 +1,4 @@
+import 'package:expenso_expense_tracker/config/themes/units.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,6 +42,72 @@ class ShowBottomSheet {
     final colorScheme = Theme.of(context).colorScheme;
     final draggableScrollController = DraggableScrollableController();
 
+    // return showModalBottomSheet<T>(
+    //   context: context,
+    //   isScrollControlled: true,
+    //   useSafeArea: true,
+    //   backgroundColor: Colors.transparent,
+    //   barrierColor: barrierColor ?? Colors.black26,
+    //   builder: (context) {
+    //     return Container(
+    //       margin: margin,
+    //       decoration: BoxDecoration(
+    //         color: backgroundColor ?? Colors.white,
+    //         borderRadius: borderRadius ?? BorderRadius.circular(20.0),
+    //       ),
+    //       child: DraggableScrollableSheet(
+    //         controller: draggableScrollController,
+    //         initialChildSize: initialSize,
+    //         expand: false,
+    //         builder: (context, scrollController) {
+    //           return Column(
+    //             mainAxisSize: MainAxisSize.min,
+    //             children: [
+    //               if (customHandle != null)
+    //                 customHandle
+    //               else if (showDragHandle)
+    //                 Container(
+    //                   height: 20.h,
+    //                   width: double.infinity,
+    //                   alignment: Alignment.center,
+    //                   decoration: BoxDecoration(
+    //                     color: Colors.black.withOpacity(0.3),
+    //                     borderRadius: const BorderRadius.only(
+    //                       topLeft: Radius.circular(20),
+    //                       topRight: Radius.circular(20),
+    //                     ),
+    //                   ),
+    //                   child: CustomSvgIcon(
+    //                     AppIcons.kBottomSheetHandle,
+    //                     width: 30.w,
+    //                     color: const Color(0xff885B2B),
+    //                   ),
+    //                 ),
+    //               Expanded(
+    //                 child: Container(
+    //                   padding: topPadding12,
+    //                   decoration: BoxDecoration(
+    //                     color: Colors.red.withOpacity(0.3),
+    //                     borderRadius: const BorderRadius.only(
+    //                       topLeft: Radius.circular(20),
+    //                       topRight: Radius.circular(20),
+    //                     ),
+    //                   ),
+    //                   child: builder(
+    //                     context,
+    //                     scrollController,
+    //                     draggableScrollController,
+    //                   ),
+    //                 ),
+    //               ),
+    //             ],
+    //           );
+    //         },
+    //       ),
+    //     );
+    //   },
+    // );
+
     return showModalBottomSheet<T>(
       context: context,
       isScrollControlled: true,
@@ -51,7 +118,7 @@ class ShowBottomSheet {
         return Container(
           margin: margin,
           decoration: BoxDecoration(
-            color: backgroundColor ?? Colors.white,
+            color: Colors.transparent,
             borderRadius: borderRadius ?? BorderRadius.circular(20.0),
           ),
           child: DraggableScrollableSheet(
@@ -59,27 +126,40 @@ class ShowBottomSheet {
             initialChildSize: initialSize,
             expand: false,
             builder: (context, scrollController) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
+              return Stack(
                 children: [
+                  // Handle stacked on top
                   if (customHandle != null)
                     customHandle
                   else if (showDragHandle)
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: 16.h,
-                        bottom: handleBottomPadding,
+                    Container(
+                      height: 50.h,
+                      width: double.infinity,
+                      padding: topPadding8,
+                      alignment: Alignment.topCenter,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.3),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
                       ),
-                      // child: Icon(
-                      //   CupertinoIcons.line_horizontal_3,
-                      //   color: Color(0xff885B2B),
-                      // ),
                       child: CustomSvgIcon(
                         AppIcons.kBottomSheetHandle,
-                        color: Color(0xff885B2B),
+                        width: 30.w,
+                        color: const Color(0xff885B2B),
                       ),
                     ),
-                  Expanded(
+                  Container(
+                    margin: topPadding24,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    padding: topPadding12,
                     child: builder(
                       context,
                       scrollController,

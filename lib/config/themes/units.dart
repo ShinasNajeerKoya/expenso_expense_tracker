@@ -150,6 +150,7 @@ final bottomPadding75 = EdgeInsets.only(bottom: 75.h);
 
 final topPadding2 = EdgeInsets.only(top: 2.h);
 final topPadding4 = EdgeInsets.only(top: 4.h);
+final topPadding6 = EdgeInsets.only(top: 6.h);
 final topPadding8 = EdgeInsets.only(top: 8.h);
 final topPadding10 = EdgeInsets.only(top: 10.h);
 final topPadding12 = EdgeInsets.only(top: 12.h);

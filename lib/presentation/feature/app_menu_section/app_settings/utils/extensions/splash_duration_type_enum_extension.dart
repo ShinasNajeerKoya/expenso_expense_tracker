@@ -10,7 +10,7 @@ extension SplashDurationTypeEnumExtension on SplashDurationTypeEnum {
   String get displayName {
     switch (this) {
       case SplashDurationTypeEnum.verySlow:
-        return 'Turtle';
+        return 'Snail';
       case SplashDurationTypeEnum.slow:
         return 'Slow';
       case SplashDurationTypeEnum.medium:
@@ -18,7 +18,7 @@ extension SplashDurationTypeEnumExtension on SplashDurationTypeEnum {
       case SplashDurationTypeEnum.fast:
         return 'Fast';
       case SplashDurationTypeEnum.veryFast:
-        return 'Cheetah';
+        return 'Fast as F';
     }
   }
 
