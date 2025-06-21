@@ -44,5 +44,18 @@
   "english": "ఇంగ్లీష్",
   "kannada": "కన్నడ",
   "malayalam": "మలయాళం",
-  "tamil": "తమిళం"
+  "tamil": "తమిళం",
+  "selectCurrency": "కరెన్సీని ఎంచుకోండి",
+  "rupee": "రూపాయి",
+  "currencySelected": "కరెన్సీ ఎంపిక చేయబడింది",
+  "dollar": "డాలర్",
+  "euro": "యూరో",
+  "pound": "పౌండ్",
+  "yen": "యెన్",
+  "won": "వొన్",
+  "naira": "నైరా",
+  "onlyDigitsAllowed": "అంకెలు మాత్రమే అనుమతించబడతాయి.",
+  "incompleteCardNumber": "అసంపూర్ణ కార్డు సంఖ్య.",
+  "onlyAlphabetsAllowed": "అక్షరాలు మాత్రమే అనుమతించబడతాయి.",
+  "validThruFormattingErrorMessage": "ఫార్మాట్ MM/YY అయి ఉండాలి"
 }

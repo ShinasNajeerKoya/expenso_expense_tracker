@@ -44,5 +44,18 @@
   "english": "ஆங்கிலம்",
   "kannada": "கன்னடம்",
   "malayalam": "மலையாளம்",
-  "tamil": "தமிழ்"
+  "tamil": "தமிழ்",
+  "selectCurrency": "நாணயத்தைத் தேர்ந்தெடுக்கவும்",
+  "rupee": "ரூபாய்",
+  "currencySelected": "நாணயம் தேர்ந்தெடுக்கப்பட்டது",
+  "dollar": "டாலர்",
+  "euro": "யூரோ",
+  "pound": "பவுண்டு",
+  "yen": "யென்",
+  "won": "வோன்",
+  "naira": "நைரா",
+  "onlyDigitsAllowed": "இலக்கங்கள் மட்டுமே அனுமதிக்கப்படும்.",
+  "incompleteCardNumber": "அட்டை எண் முழுமையடையவில்லை.",
+  "onlyAlphabetsAllowed": "அகரவரிசை மட்டுமே அனுமதிக்கப்படும்.",
+  "validThruFormattingErrorMessage": "வடிவம் MM/YY ஆக இருக்க வேண்டும்"
 }

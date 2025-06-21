@@ -49,5 +49,18 @@ abstract class  LocaleKeys {
   static const kannada = 'kannada';
   static const malayalam = 'malayalam';
   static const tamil = 'tamil';
+  static const selectCurrency = 'selectCurrency';
+  static const rupee = 'rupee';
+  static const currencySelected = 'currencySelected';
+  static const dollar = 'dollar';
+  static const euro = 'euro';
+  static const pound = 'pound';
+  static const yen = 'yen';
+  static const won = 'won';
+  static const naira = 'naira';
+  static const onlyDigitsAllowed = 'onlyDigitsAllowed';
+  static const incompleteCardNumber = 'incompleteCardNumber';
+  static const onlyAlphabetsAllowed = 'onlyAlphabetsAllowed';
+  static const validThruFormattingErrorMessage = 'validThruFormattingErrorMessage';
 
 }

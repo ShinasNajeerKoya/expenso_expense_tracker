@@ -93,18 +93,47 @@ class AppAccountsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AppCurrencySelectionPage]
-class AppCurrencySelectionRoute extends PageRouteInfo<void> {
-  const AppCurrencySelectionRoute({List<PageRouteInfo>? children})
-      : super(AppCurrencySelectionRoute.name, initialChildren: children);
+class AppCurrencySelectionRoute
+    extends PageRouteInfo<AppCurrencySelectionRouteArgs> {
+  AppCurrencySelectionRoute({Key? key, List<PageRouteInfo>? children})
+      : super(
+          AppCurrencySelectionRoute.name,
+          args: AppCurrencySelectionRouteArgs(key: key),
+          initialChildren: children,
+        );
 
   static const String name = 'AppCurrencySelectionRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AppCurrencySelectionPage();
+      final args = data.argsAs<AppCurrencySelectionRouteArgs>(
+        orElse: () => const AppCurrencySelectionRouteArgs(),
+      );
+      return AppCurrencySelectionPage(key: args.key);
     },
   );
+}
+
+class AppCurrencySelectionRouteArgs {
+  const AppCurrencySelectionRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AppCurrencySelectionRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AppCurrencySelectionRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }
 
 /// generated route for

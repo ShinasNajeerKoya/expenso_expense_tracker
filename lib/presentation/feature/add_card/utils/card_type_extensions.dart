@@ -4,11 +4,7 @@ import 'package:expenso_expense_tracker/generated/app_icons.dart';
 enum CardType { masterCard, visa, ruPay }
 
 extension CardTypeExtension on CardType {
-  String get label => switch (this) {
-        CardType.ruPay => 'RuPay',
-        CardType.masterCard => 'MasterCard',
-        CardType.visa => 'Visa',
-      };
+
 
   String get whiteIcon => switch (this) {
         CardType.ruPay => AppIcons.kRupayWhite,

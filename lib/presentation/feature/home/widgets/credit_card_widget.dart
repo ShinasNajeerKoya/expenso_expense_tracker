@@ -1,9 +1,14 @@
 import 'package:expenso_expense_tracker/config/font_manager/font_styles.dart';
 import 'package:expenso_expense_tracker/config/themes/units.dart';
+import 'package:expenso_expense_tracker/domain/models/app_menu_section/currency/currency_model.dart';
 import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_state.dart';
 import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:expenso_expense_tracker/generated/app_icons.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/custom_svg_icon.dart';
@@ -11,7 +16,7 @@ import '../../add_card/utils/card_design_type_extension.dart';
 import '../../add_card/utils/card_type_extensions.dart';
 
 class CreditCardWidget extends StatelessWidget {
-  const CreditCardWidget({
+  CreditCardWidget({
     super.key,
     required this.cardHoldersName,
     required this.cardNumber,
@@ -26,6 +31,8 @@ class CreditCardWidget extends StatelessWidget {
 
   final CardType cardType;
   final CardDesignType cardDesignType;
+
+  final appSettingsBloc = GetIt.I<AppSettingsBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -70,16 +77,21 @@ class CreditCardWidget extends StatelessWidget {
                   ],
                 ),
                 verticalMargin20,
-                Text(
-                  "\$12000 edit",
-                  // titilliumWeb , exo2, saira
-                  style: FontStyles.creditCard(
-                    color: Colors.white,
-                    size: 30.sp,
-                    letterSpacing: 2,
-
-                    // fontWeight: FontWeight.normal,
-                  ),
+                BlocSelector<AppSettingsBloc, AppSettingsState, CurrencyModel?>(
+                  bloc: appSettingsBloc,
+                  selector: (state) => state.selectedCurrency,
+                  builder: (context, selectedCurrency) {
+                    return Text(
+                      selectedCurrency != null ? '${selectedCurrency.symbol} 12000' : '₹ 12000',
+                      // titilliumWeb , exo2, saira
+                      style: FontStyles.creditCard(
+                        color: Colors.white,
+                        size: 28.sp,
+                        letterSpacing: 2,
+                        // fontWeight: FontWeight.normal,
+                      ),
+                    );
+                  },
                 ),
                 verticalMargin12,
                 Text(

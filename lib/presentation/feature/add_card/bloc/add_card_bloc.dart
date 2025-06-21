@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:expenso_expense_tracker/domain/models/add_card/add_card_model.dart';
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
+import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/repositories/add_card/add_card_repository.dart';
@@ -129,20 +131,20 @@ class AddCardBloc extends Cubit<AddCardState> {
     final sanitizedCardNumber = cardNumber.trim();
 
     if (!RegExp(r'^\d+$').hasMatch(sanitizedCardNumber)) {
-      cardNumberError = 'Only digits allowed.';
+      cardNumberError = LocaleKeys.onlyDigitsAllowed.toLocalizeString;
       hasError = true;
     } else if (sanitizedCardNumber.length != 4) {
-      cardNumberError = 'Incomplete card number.';
+      cardNumberError = LocaleKeys.incompleteCardNumber.toLocalizeString;
       hasError = true;
     }
 
     if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(cardHolderName)) {
-      nameError = 'Only alphabets allowed.';
+      nameError = LocaleKeys.onlyAlphabetsAllowed.toLocalizeString;
       hasError = true;
     }
 
     if (!RegExp(r'^\d{2}/\d{2}$').hasMatch(expiryDate)) {
-      expiryError = 'Format must be MM/YY';
+      expiryError = LocaleKeys.validThruFormattingErrorMessage.toLocalizeString;
       hasError = true;
     }
 

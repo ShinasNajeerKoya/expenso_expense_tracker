@@ -18,6 +18,10 @@ _AppSettingsState _$AppSettingsStateFromJson(Map<String, dynamic> json) =>
           ? const Locale('en', 'US')
           : const LocaleConverterHelper()
               .fromJson(json['selectedLocale'] as Map<String, dynamic>),
+      selectedCurrency: json['selectedCurrency'] == null
+          ? null
+          : CurrencyModel.fromJson(
+              json['selectedCurrency'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AppSettingsStateToJson(_AppSettingsState instance) =>
@@ -29,6 +33,7 @@ Map<String, dynamic> _$AppSettingsStateToJson(_AppSettingsState instance) =>
           _$SplashDurationTypeEnumEnumMap[instance.splashDuration]!,
       'selectedLocale':
           const LocaleConverterHelper().toJson(instance.selectedLocale),
+      'selectedCurrency': instance.selectedCurrency,
     };
 
 const _$SplashDurationTypeEnumEnumMap = {

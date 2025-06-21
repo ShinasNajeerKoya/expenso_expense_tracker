@@ -1,8 +1,10 @@
 import 'dart:ui';
 
-import 'package:expenso_expense_tracker/core/shared_preference/app_language_pref.dart';
-import 'package:expenso_expense_tracker/core/shared_preference/landing_page_pref.dart';
-import 'package:expenso_expense_tracker/core/shared_preference/splash_duration_pref.dart';
+import 'package:expenso_expense_tracker/core/shared_preference/app_language/app_language_pref.dart';
+import 'package:expenso_expense_tracker/core/shared_preference/currency/currency_pref.dart';
+import 'package:expenso_expense_tracker/core/shared_preference/landing_page/landing_page_pref.dart';
+import 'package:expenso_expense_tracker/core/shared_preference/splash/splash_duration_pref.dart';
+import 'package:expenso_expense_tracker/domain/models/app_menu_section/currency/currency_model.dart';
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/app_settings/app_settings_repository.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 
@@ -40,5 +42,15 @@ class AppSettingsRepositoryImpl implements AppSettingsRepository {
   @override
   Future<Locale> getLocale() async {
     return await LocalePref.getSavedLocale();
+  }
+
+  @override
+  Future<bool> setCurrency(CurrencyModel currency) {
+    return CurrencyPref.setCurrency(currency);
+  }
+
+  @override
+  Future<CurrencyModel?> getCurrency() {
+    return CurrencyPref.getCurrency();
   }
 }

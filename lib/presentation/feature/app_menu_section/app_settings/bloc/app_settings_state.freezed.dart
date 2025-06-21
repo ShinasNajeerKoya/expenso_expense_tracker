@@ -21,6 +21,7 @@ mixin _$AppSettingsState {
   SplashDurationTypeEnum get splashDuration;
   @LocaleConverterHelper()
   Locale get selectedLocale;
+  CurrencyModel? get selectedCurrency;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -46,17 +47,19 @@ mixin _$AppSettingsState {
             (identical(other.splashDuration, splashDuration) ||
                 other.splashDuration == splashDuration) &&
             (identical(other.selectedLocale, selectedLocale) ||
-                other.selectedLocale == selectedLocale));
+                other.selectedLocale == selectedLocale) &&
+            (identical(other.selectedCurrency, selectedCurrency) ||
+                other.selectedCurrency == selectedCurrency));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, error, isLoading,
-      landingPageDisabled, splashDuration, selectedLocale);
+      landingPageDisabled, splashDuration, selectedLocale, selectedCurrency);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration, selectedLocale: $selectedLocale)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration, selectedLocale: $selectedLocale, selectedCurrency: $selectedCurrency)';
   }
 }
 
@@ -71,7 +74,10 @@ abstract mixin class $AppSettingsStateCopyWith<$Res> {
       bool isLoading,
       bool landingPageDisabled,
       SplashDurationTypeEnum splashDuration,
-      @LocaleConverterHelper() Locale selectedLocale});
+      @LocaleConverterHelper() Locale selectedLocale,
+      CurrencyModel? selectedCurrency});
+
+  $CurrencyModelCopyWith<$Res>? get selectedCurrency;
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class _$AppSettingsStateCopyWithImpl<$Res>
     Object? landingPageDisabled = null,
     Object? splashDuration = null,
     Object? selectedLocale = null,
+    Object? selectedCurrency = freezed,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -114,7 +121,25 @@ class _$AppSettingsStateCopyWithImpl<$Res>
           ? _self.selectedLocale
           : selectedLocale // ignore: cast_nullable_to_non_nullable
               as Locale,
+      selectedCurrency: freezed == selectedCurrency
+          ? _self.selectedCurrency
+          : selectedCurrency // ignore: cast_nullable_to_non_nullable
+              as CurrencyModel?,
     ));
+  }
+
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CurrencyModelCopyWith<$Res>? get selectedCurrency {
+    if (_self.selectedCurrency == null) {
+      return null;
+    }
+
+    return $CurrencyModelCopyWith<$Res>(_self.selectedCurrency!, (value) {
+      return _then(_self.copyWith(selectedCurrency: value));
+    });
   }
 }
 
@@ -126,7 +151,8 @@ class _AppSettingsState implements AppSettingsState {
       this.isLoading = false,
       this.landingPageDisabled = false,
       this.splashDuration = SplashDurationTypeEnum.medium,
-      @LocaleConverterHelper() this.selectedLocale = const Locale('en', 'US')});
+      @LocaleConverterHelper() this.selectedLocale = const Locale('en', 'US'),
+      this.selectedCurrency});
   factory _AppSettingsState.fromJson(Map<String, dynamic> json) =>
       _$AppSettingsStateFromJson(json);
 
@@ -146,6 +172,8 @@ class _AppSettingsState implements AppSettingsState {
   @JsonKey()
   @LocaleConverterHelper()
   final Locale selectedLocale;
+  @override
+  final CurrencyModel? selectedCurrency;
 
   /// Create a copy of AppSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -175,17 +203,19 @@ class _AppSettingsState implements AppSettingsState {
             (identical(other.splashDuration, splashDuration) ||
                 other.splashDuration == splashDuration) &&
             (identical(other.selectedLocale, selectedLocale) ||
-                other.selectedLocale == selectedLocale));
+                other.selectedLocale == selectedLocale) &&
+            (identical(other.selectedCurrency, selectedCurrency) ||
+                other.selectedCurrency == selectedCurrency));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, error, isLoading,
-      landingPageDisabled, splashDuration, selectedLocale);
+      landingPageDisabled, splashDuration, selectedLocale, selectedCurrency);
 
   @override
   String toString() {
-    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration, selectedLocale: $selectedLocale)';
+    return 'AppSettingsState(error: $error, isLoading: $isLoading, landingPageDisabled: $landingPageDisabled, splashDuration: $splashDuration, selectedLocale: $selectedLocale, selectedCurrency: $selectedCurrency)';
   }
 }
 
@@ -202,7 +232,11 @@ abstract mixin class _$AppSettingsStateCopyWith<$Res>
       bool isLoading,
       bool landingPageDisabled,
       SplashDurationTypeEnum splashDuration,
-      @LocaleConverterHelper() Locale selectedLocale});
+      @LocaleConverterHelper() Locale selectedLocale,
+      CurrencyModel? selectedCurrency});
+
+  @override
+  $CurrencyModelCopyWith<$Res>? get selectedCurrency;
 }
 
 /// @nodoc
@@ -223,6 +257,7 @@ class __$AppSettingsStateCopyWithImpl<$Res>
     Object? landingPageDisabled = null,
     Object? splashDuration = null,
     Object? selectedLocale = null,
+    Object? selectedCurrency = freezed,
   }) {
     return _then(_AppSettingsState(
       error: null == error
@@ -245,7 +280,25 @@ class __$AppSettingsStateCopyWithImpl<$Res>
           ? _self.selectedLocale
           : selectedLocale // ignore: cast_nullable_to_non_nullable
               as Locale,
+      selectedCurrency: freezed == selectedCurrency
+          ? _self.selectedCurrency
+          : selectedCurrency // ignore: cast_nullable_to_non_nullable
+              as CurrencyModel?,
     ));
+  }
+
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CurrencyModelCopyWith<$Res>? get selectedCurrency {
+    if (_self.selectedCurrency == null) {
+      return null;
+    }
+
+    return $CurrencyModelCopyWith<$Res>(_self.selectedCurrency!, (value) {
+      return _then(_self.copyWith(selectedCurrency: value));
+    });
   }
 }
 

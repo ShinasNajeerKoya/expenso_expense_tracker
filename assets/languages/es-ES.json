@@ -44,5 +44,18 @@
   "english": "Inglés",
   "kannada": "Canarés",
   "malayalam": "Malabar",
-  "tamil": "Tamil"
+  "tamil": "Tamil",
+  "selectCurrency": "Seleccionar moneda",
+  "rupee": "Rupia",
+  "currencySelected": "Moneda seleccionada",
+  "dollar": "Dólar",
+  "euro": "Euro",
+  "pound": "Libra",
+  "yen": "Yen",
+  "won": "Won",
+  "naira": "Naira",
+  "onlyDigitsAllowed": "Solo se permiten dígitos.",
+  "incompleteCardNumber": "Número de tarjeta incompleto.",
+  "onlyAlphabetsAllowed": "Solo se permiten alfabetos.",
+  "validThruFormattingErrorMessage": "El formato debe ser MM/AA"
 }

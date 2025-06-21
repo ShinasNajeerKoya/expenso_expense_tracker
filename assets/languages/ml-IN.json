@@ -44,5 +44,18 @@
   "english": "ഇംഗ്ലീഷ്",
   "kannada": "കന്നഡ",
   "malayalam": "മലയാളം",
-  "tamil": "തമിഴ്"
+  "tamil": "തമിഴ്",
+  "selectCurrency": "കറൻസി തിരഞ്ഞെടുക്കുക",
+  "rupee": "രൂപ",
+  "currencySelected": "കറൻസി തിരഞ്ഞെടുത്തു",
+  "dollar": "ഡോളർ",
+  "euro": "യൂറോ",
+  "pound": "പൗണ്ട്",
+  "yen": "യെൻ",
+  "won": "വൺ",
+  "naira": "നൈറ",
+  "onlyDigitsAllowed": "അക്കങ്ങൾ മാത്രം അനുവദനീയം.",
+  "incompleteCardNumber": "കാർഡ് നമ്പർ അപൂർണ്ണം.",
+  "onlyAlphabetsAllowed": "അക്ഷരങ്ങൾ മാത്രം അനുവദനീയം.",
+  "validThruFormattingErrorMessage": "ഫോർമാറ്റ് MM/YY ആയിരിക്കണം"
 }

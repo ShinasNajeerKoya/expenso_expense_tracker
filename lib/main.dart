@@ -18,8 +18,6 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   GetItHelper.init();
 
-  final appSettingsBloc = getIt<AppSettingsBloc>();
-  await appSettingsBloc.loadLocale();
   runApp(
     EasyLocalization(
       path: 'assets/languages',

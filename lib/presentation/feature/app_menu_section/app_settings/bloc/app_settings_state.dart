@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:expenso_expense_tracker/domain/models/app_menu_section/currency/currency_model.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 import 'package:expenso_expense_tracker/shared/helper_functions/locale_converter_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,6 +16,8 @@ abstract class AppSettingsState with _$AppSettingsState {
     @Default(false) bool landingPageDisabled,
     @Default(SplashDurationTypeEnum.medium) SplashDurationTypeEnum splashDuration,
     @LocaleConverterHelper() @Default(Locale('en', 'US')) Locale selectedLocale,
+    CurrencyModel? selectedCurrency,
+
   }) = _AppSettingsState;
 
   factory AppSettingsState.fromJson(Map<String, dynamic> json) => _$AppSettingsStateFromJson(json);

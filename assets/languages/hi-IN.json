@@ -44,5 +44,18 @@
   "english": "अंग्रेज़ी",
   "kannada": "कन्नड़",
   "malayalam": "मलयालम",
-  "tamil": "तमिल"
+  "tamil": "तमिल",
+  "selectCurrency": "मुद्रा चुनें",
+  "rupee": "रुपया",
+  "currencySelected": "मुद्रा चुनी गई",
+  "dollar": "डॉलर",
+  "euro": "यूरो",
+  "pound": "पाउंड",
+  "yen": "येन",
+  "won": "वॉन",
+  "naira": "नायरा",
+  "onlyDigitsAllowed": "केवल अंक ही अनुमत हैं।",
+  "incompleteCardNumber": "अधूरा कार्ड नंबर।",
+  "onlyAlphabetsAllowed": "केवल अक्षर ही अनुमत हैं।",
+  "validThruFormattingErrorMessage": "प्रारूप MM/YY होना चाहिए"
 }

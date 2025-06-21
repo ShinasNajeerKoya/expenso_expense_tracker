@@ -44,7 +44,18 @@
   "english": "English",
   "kannada": "Kannada",
   "malayalam": "Malayalam",
-  "tamil": "Tamil"
-
-
+  "tamil": "Tamil",
+  "selectCurrency": "Select Currency",
+  "rupee": "Rupee",
+  "currencySelected": "Currency Selected",
+  "dollar": "Dollar",
+  "euro": "Euro",
+  "pound": "Pound",
+  "yen": "Yen",
+  "won": "Won",
+  "naira": "Naira",
+  "onlyDigitsAllowed": "Only digits allowed.",
+  "incompleteCardNumber": "Incomplete card number.",
+  "onlyAlphabetsAllowed": "Only alphabets allowed.",
+  "validThruFormattingErrorMessage": "Format must be MM/YY"
 }

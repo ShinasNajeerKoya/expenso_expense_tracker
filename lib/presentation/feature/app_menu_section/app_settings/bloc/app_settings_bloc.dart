@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:ui';
 
+import 'package:expenso_expense_tracker/domain/models/app_menu_section/currency/currency_model.dart';
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/app_settings/app_settings_repository.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/utils/extensions/splash_duration_type_enum_extension.dart';
 
@@ -15,6 +16,8 @@ class AppSettingsBloc extends Cubit<AppSettingsState> {
   void initFunction() {
     loadLandingPageState();
     loadSplashDuration();
+    loadLocale();
+    loadCurrency();
   }
 
   final AppSettingsRepository _repo;
@@ -64,5 +67,21 @@ class AppSettingsBloc extends Cubit<AppSettingsState> {
     emit(state.copyWith(isLoading: true));
     final locale = await _repo.getLocale();
     emit(state.copyWith(selectedLocale: locale, isLoading: false));
+  }
+
+  void setCurrency(CurrencyModel currency) async {
+    emit(state.copyWith(isLoading: true));
+    final isSaved = await _repo.setCurrency(currency);
+    if (isSaved) {
+      emit(state.copyWith(selectedCurrency: currency, isLoading: false));
+    } else {
+      emit(state.copyWith(error: true, isLoading: false));
+    }
+  }
+
+  void loadCurrency() async {
+    emit(state.copyWith(isLoading: true));
+    final currency = await _repo.getCurrency();
+    emit(state.copyWith(selectedCurrency: currency, isLoading: false));
   }
 }
