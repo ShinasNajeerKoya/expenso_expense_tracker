@@ -23,6 +23,7 @@ class SavedCardsSectionWidget extends StatelessWidget {
 
   final HomeBloc homeBloc;
 
+
   @override
   Widget build(BuildContext context) {
     final currentLocale = context.locale;

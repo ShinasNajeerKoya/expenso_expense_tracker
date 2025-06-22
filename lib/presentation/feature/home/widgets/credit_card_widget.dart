@@ -23,8 +23,12 @@ class CreditCardWidget extends StatelessWidget {
     required this.expiryDate,
     required this.cardType,
     required this.cardDesignType,
+    this.cardHeight,
+    this.boxFit,
   });
 
+  final double? cardHeight;
+  final BoxFit? boxFit;
   final String cardHoldersName;
   final String cardNumber;
   final String expiryDate;
@@ -37,7 +41,7 @@ class CreditCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.h,
+      height: cardHeight ?? 200.h,
       width: (286 + 76).w,
       child: Stack(
         children: [
@@ -66,7 +70,8 @@ class CreditCardWidget extends StatelessWidget {
                       width: 20.w,
                       child: CustomSvgIcon(
                         AppIcons.kRfidWhite,
-                        fit: BoxFit.fitHeight,
+                        // fit: boxFit ?? BoxFit.fitHeight,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                     SizedBox(
