@@ -88,7 +88,6 @@ class CreditCardWidget extends StatelessWidget {
                   builder: (context, selectedCurrency) {
                     return Text(
                       selectedCurrency != null ? '${selectedCurrency.symbol} 12000' : '₹ 12000',
-                      // titilliumWeb , exo2, saira
                       style: FontStyles.creditCard(
                         color: Colors.white,
                         size: 28.sp,
