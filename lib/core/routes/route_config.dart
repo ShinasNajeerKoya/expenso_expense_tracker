@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/models/add_card/add_card_model.dart';
 import '../../presentation/feature/add_card/pages/add_card_page.dart';
+import '../../presentation/feature/announcement/pages/announcement_page.dart';
 import '../../presentation/feature/app_menu_section/app_settings/pages/app_general_settings_page.dart';
 import '../../presentation/feature/home/pages/home_page.dart';
 import '../../presentation/feature/onboarding/pages/onboarding_page.dart';

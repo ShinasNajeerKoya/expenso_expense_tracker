@@ -60,6 +60,50 @@ class AddCardRouteArgs {
 }
 
 /// generated route for
+/// [AnnouncementPage]
+class AnnouncementRoute extends PageRouteInfo<AnnouncementRouteArgs> {
+  AnnouncementRoute({Key? key, List<PageRouteInfo>? children})
+      : super(
+          AnnouncementRoute.name,
+          args: AnnouncementRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'AnnouncementRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<AnnouncementRouteArgs>(
+        orElse: () => const AnnouncementRouteArgs(),
+      );
+      return AnnouncementPage(key: args.key);
+    },
+  );
+}
+
+class AnnouncementRouteArgs {
+  const AnnouncementRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AnnouncementRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AnnouncementRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
+}
+
+/// generated route for
 /// [AppAboutPage]
 class AppAboutRoute extends PageRouteInfo<void> {
   const AppAboutRoute({List<PageRouteInfo>? children})
@@ -77,18 +121,46 @@ class AppAboutRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AppAccountsPage]
-class AppAccountsRoute extends PageRouteInfo<void> {
-  const AppAccountsRoute({List<PageRouteInfo>? children})
-      : super(AppAccountsRoute.name, initialChildren: children);
+class AppAccountsRoute extends PageRouteInfo<AppAccountsRouteArgs> {
+  AppAccountsRoute({Key? key, List<PageRouteInfo>? children})
+      : super(
+          AppAccountsRoute.name,
+          args: AppAccountsRouteArgs(key: key),
+          initialChildren: children,
+        );
 
   static const String name = 'AppAccountsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return  AppAccountsPage();
+      final args = data.argsAs<AppAccountsRouteArgs>(
+        orElse: () => const AppAccountsRouteArgs(),
+      );
+      return AppAccountsPage(key: args.key);
     },
   );
+}
+
+class AppAccountsRouteArgs {
+  const AppAccountsRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AppAccountsRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AppAccountsRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }
 
 /// generated route for

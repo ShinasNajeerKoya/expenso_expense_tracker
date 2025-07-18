@@ -1,20 +1,19 @@
+import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:expenso_expense_tracker/generated/locale_keys.g.dart';
-
 
 import 'package:get_it/get_it.dart' show GetIt;
-import 'package:expenso_expense_tracker/presentation/feature/{{name.snakeCase()}}/bloc/{{name.snakeCase()}}_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/announcement/bloc/announcement_bloc.dart';
 import 'package:expenso_expense_tracker/shared/extensions/string_extensions.dart';
 import 'package:expenso_expense_tracker/presentation/widgets/custom_app_bar.dart';
 
 
 @RoutePage()
-class {{name.pascalCase()}}Page extends StatelessWidget {
-  static const id = '/{{name.camelCase()}}Page';
-  {{name.pascalCase()}}Page({super.key});
+class AnnouncementPage extends StatelessWidget {
+  static const id = '/announcementPage';
+  AnnouncementPage({super.key});
 
-  final {{name.camelCase()}}Bloc = GetIt.I<{{name.pascalCase()}}Bloc>();
+  final announcementBloc = GetIt.I<AnnouncementBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class {{name.pascalCase()}}Page extends StatelessWidget {
         title: LocaleKeys.blank.toLocalizeString,
       ),
       body: Center(
-        child: Text('{{name.pascalCase()}} Page'),
+        child: Text('Announcement Page'),
       ),
     );
   }
