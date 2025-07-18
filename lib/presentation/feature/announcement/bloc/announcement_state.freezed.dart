@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$AnnouncementState {
   bool get error;
   bool get isLoading;
+  List<AnnouncementModel> get announcements;
 
   /// Create a copy of AnnouncementState
   /// with the given fields replaced by the non-null parameter values.
@@ -36,16 +37,19 @@ mixin _$AnnouncementState {
             other is AnnouncementState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.announcements, announcements));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      const DeepCollectionEquality().hash(announcements));
 
   @override
   String toString() {
-    return 'AnnouncementState(error: $error, isLoading: $isLoading)';
+    return 'AnnouncementState(error: $error, isLoading: $isLoading, announcements: $announcements)';
   }
 }
 
@@ -55,7 +59,8 @@ abstract mixin class $AnnouncementStateCopyWith<$Res> {
           AnnouncementState value, $Res Function(AnnouncementState) _then) =
       _$AnnouncementStateCopyWithImpl;
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call(
+      {bool error, bool isLoading, List<AnnouncementModel> announcements});
 }
 
 /// @nodoc
@@ -73,6 +78,7 @@ class _$AnnouncementStateCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? announcements = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -83,6 +89,10 @@ class _$AnnouncementStateCopyWithImpl<$Res>
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      announcements: null == announcements
+          ? _self.announcements
+          : announcements // ignore: cast_nullable_to_non_nullable
+              as List<AnnouncementModel>,
     ));
   }
 }
@@ -90,7 +100,11 @@ class _$AnnouncementStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _AnnouncementState implements AnnouncementState {
-  const _AnnouncementState({this.error = false, this.isLoading = false});
+  const _AnnouncementState(
+      {this.error = false,
+      this.isLoading = false,
+      final List<AnnouncementModel> announcements = const []})
+      : _announcements = announcements;
   factory _AnnouncementState.fromJson(Map<String, dynamic> json) =>
       _$AnnouncementStateFromJson(json);
 
@@ -100,6 +114,14 @@ class _AnnouncementState implements AnnouncementState {
   @override
   @JsonKey()
   final bool isLoading;
+  final List<AnnouncementModel> _announcements;
+  @override
+  @JsonKey()
+  List<AnnouncementModel> get announcements {
+    if (_announcements is EqualUnmodifiableListView) return _announcements;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_announcements);
+  }
 
   /// Create a copy of AnnouncementState
   /// with the given fields replaced by the non-null parameter values.
@@ -123,16 +145,19 @@ class _AnnouncementState implements AnnouncementState {
             other is _AnnouncementState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._announcements, _announcements));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      const DeepCollectionEquality().hash(_announcements));
 
   @override
   String toString() {
-    return 'AnnouncementState(error: $error, isLoading: $isLoading)';
+    return 'AnnouncementState(error: $error, isLoading: $isLoading, announcements: $announcements)';
   }
 }
 
@@ -144,7 +169,8 @@ abstract mixin class _$AnnouncementStateCopyWith<$Res>
       __$AnnouncementStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call(
+      {bool error, bool isLoading, List<AnnouncementModel> announcements});
 }
 
 /// @nodoc
@@ -162,6 +188,7 @@ class __$AnnouncementStateCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? announcements = null,
   }) {
     return _then(_AnnouncementState(
       error: null == error
@@ -172,6 +199,10 @@ class __$AnnouncementStateCopyWithImpl<$Res>
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      announcements: null == announcements
+          ? _self._announcements
+          : announcements // ignore: cast_nullable_to_non_nullable
+              as List<AnnouncementModel>,
     ));
   }
 }

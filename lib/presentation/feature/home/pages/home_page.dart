@@ -85,6 +85,23 @@ class _HomePageState extends State<HomePage> {
                         child: CustomSvgIcon(AppIcons.kFileAdd),
                       ),
                     ),
+                    InkWell(
+                      onTap: () async {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (_) => AddCardPage()),
+                        // ).then((_) {
+                        //   homeBloc.loadAllCards();
+                        // });
+                        final result = await context.pushRoute(AnnouncementRoute());
+                      },
+                      child: SizedBox(
+                        height: 40.h,
+                        width: 40.h,
+                        // child: CustomSvgIcon(AppIconsOld.kDoubleArrow),
+                        child: CustomSvgIcon(AppIcons.kArrowCircleUp),
+                      ),
+                    ),
                     MenuDrawerWidget(),
                   ],
                 ),

@@ -2,6 +2,8 @@
 
 import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository_impl.dart';
+import 'package:expenso_expense_tracker/domain/repositories/announcement/announcement_repository.dart';
+import 'package:expenso_expense_tracker/domain/repositories/announcement/announcement_repository_impl.dart';
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/app_settings/app_settings_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/app_settings/app_settings_repository_impl.dart';
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/profile/profile_repository.dart';
@@ -11,6 +13,7 @@ import 'package:expenso_expense_tracker/domain/repositories/home/home_repository
 import 'package:expenso_expense_tracker/domain/repositories/splash/splash_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/splash/splash_repository_impl.dart';
 import 'package:expenso_expense_tracker/presentation/feature/add_card/bloc/add_card_bloc.dart';
+import 'package:expenso_expense_tracker/presentation/feature/announcement/bloc/announcement_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/app_settings/bloc/app_settings_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/app_menu_section/profile/bloc/profile_bloc.dart';
 import 'package:expenso_expense_tracker/presentation/feature/home/bloc/home_bloc.dart';
@@ -38,15 +41,16 @@ class GetItHelper {
     /// local db
     getIt.registerLazySingleton<CardDetailsDao>(() => CardDetailsDaoImpl(getIt<AppDatabase>()));
 
-    /// Repositories
+    /// Repositories -- add after each feature generation
     getIt.registerSingleton<SplashRepository>(SplashRepositoryImpl());
     getIt.registerSingleton<OnboardingRepository>(OnboardingRepositoryImpl());
     getIt.registerSingleton<HomeRepository>(HomeRepositoryImpl());
     getIt.registerSingleton<AddCardRepository>(AddCardRepositoryImpl(getIt<CardDetailsDao>()));
     getIt.registerSingleton<AppSettingsRepository>(AppSettingsRepositoryImpl());
     getIt.registerSingleton<ProfileRepository>(ProfileRepositoryImpl());
+    getIt.registerSingleton<AnnouncementRepository>(AnnouncementRepositoryImpl());
 
-    /// BloCs
+    /// BloCs -- add after each feature generation
     getIt.registerSingleton<SplashBloc>(
       SplashBloc(
         splashRepository: getIt<SplashRepository>(),
@@ -60,6 +64,7 @@ class GetItHelper {
     getIt.registerSingleton<AddCardBloc>(AddCardBloc(getIt<AddCardRepository>()));
     getIt.registerSingleton<AppSettingsBloc>(AppSettingsBloc(getIt<AppSettingsRepository>()));
     getIt.registerSingleton<ProfileBloc>(ProfileBloc(getIt<ProfileRepository>()));
+    getIt.registerSingleton<AnnouncementBloc>(AnnouncementBloc(getIt<AnnouncementRepository>()));
   }
 
   void dispose() {

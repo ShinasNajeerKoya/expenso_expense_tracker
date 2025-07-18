@@ -1,4 +1,7 @@
+import '../../models/announcement/announcement_model.dart';
+
 abstract class AnnouncementRepository {
 /// Add your repository logic here
-  Future<void> startAnnouncement();
+  Future<List<AnnouncementModel>> fetchAnnouncements();
+  Future<void> addAnnouncementViaFilePicker();
 }
