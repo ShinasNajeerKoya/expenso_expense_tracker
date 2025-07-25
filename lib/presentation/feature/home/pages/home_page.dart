@@ -18,6 +18,7 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
+import '../../../../shared/helper_functions/debouncer_helper/debouncer_helper.dart';
 import '../../add_card/pages/add_card_page.dart';
 import '../../add_card/utils/card_type_extensions.dart';
 import '../bloc/home_bloc.dart';
@@ -38,10 +39,25 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final homeBloc = GetIt.I<HomeBloc>();
 
+  late final DebouncerHelper _debouncer;
+
   @override
   void initState() {
     super.initState();
     homeBloc.loadAllCards();
+    _debouncer = DebouncerHelper(milliseconds: 500); // adjust debounce duration
+  }
+
+  @override
+  void dispose() {
+    _debouncer.dispose(); // important!
+    super.dispose();
+  }
+
+  void _onButtonPressed() {
+    _debouncer.run(() {
+      debugPrint('Button tapped');
+    });
   }
 
   @override
@@ -112,6 +128,11 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          ElevatedButton(
+              onPressed: () async {
+                await context.pushRoute(OstrumRoute(), );
+              },
+              child: Text('Debounce test')),
           verticalMargin16,
           Container(
             height: 285.h,

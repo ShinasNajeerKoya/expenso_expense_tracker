@@ -2,8 +2,8 @@ import 'package:expenso_expense_tracker/data/local_persistence/converters/add_ca
 import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../dao/add_card/add_card_dao.dart';
-import '../../models/add_card/add_card_model.dart';
+import '../../../domain/dao/add_card/add_card_dao.dart';
+import '../../../domain/models/add_card/add_card_model.dart';
 
 class AddCardRepositoryImpl implements AddCardRepository {
   final CardDetailsDao _dao;

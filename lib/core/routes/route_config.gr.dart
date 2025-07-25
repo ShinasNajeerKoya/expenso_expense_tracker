@@ -61,46 +61,18 @@ class AddCardRouteArgs {
 
 /// generated route for
 /// [AnnouncementPage]
-class AnnouncementRoute extends PageRouteInfo<AnnouncementRouteArgs> {
-  AnnouncementRoute({Key? key, List<PageRouteInfo>? children})
-      : super(
-          AnnouncementRoute.name,
-          args: AnnouncementRouteArgs(key: key),
-          initialChildren: children,
-        );
+class AnnouncementRoute extends PageRouteInfo<void> {
+  const AnnouncementRoute({List<PageRouteInfo>? children})
+      : super(AnnouncementRoute.name, initialChildren: children);
 
   static const String name = 'AnnouncementRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<AnnouncementRouteArgs>(
-        orElse: () => const AnnouncementRouteArgs(),
-      );
-      return AnnouncementPage(key: args.key);
+      return const AnnouncementPage();
     },
   );
-}
-
-class AnnouncementRouteArgs {
-  const AnnouncementRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'AnnouncementRouteArgs{key: $key}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! AnnouncementRouteArgs) return false;
-    return key == other.key;
-  }
-
-  @override
-  int get hashCode => key.hashCode;
 }
 
 /// generated route for
@@ -351,6 +323,50 @@ class OnboardingRouteArgs {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! OnboardingRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
+}
+
+/// generated route for
+/// [OstrumPage]
+class OstrumRoute extends PageRouteInfo<OstrumRouteArgs> {
+  OstrumRoute({Key? key, List<PageRouteInfo>? children})
+      : super(
+          OstrumRoute.name,
+          args: OstrumRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'OstrumRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<OstrumRouteArgs>(
+        orElse: () => const OstrumRouteArgs(),
+      );
+      return OstrumPage(key: args.key);
+    },
+  );
+}
+
+class OstrumRouteArgs {
+  const OstrumRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'OstrumRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! OstrumRouteArgs) return false;
     return key == other.key;
   }
 

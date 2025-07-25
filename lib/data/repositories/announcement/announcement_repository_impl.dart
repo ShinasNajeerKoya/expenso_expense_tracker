@@ -4,8 +4,8 @@ import 'package:expenso_expense_tracker/domain/repositories/announcement/announc
 import 'package:path/path.dart';
 
 import '../../../data/remote_persistance/supabase/supabase_announcement_helper.dart';
+import '../../../domain/models/announcement/announcement_model.dart';
 import '../../../shared/helper_functions/file_picker_helper/file_picker_helper.dart';
-import '../../models/announcement/announcement_model.dart';
 
 class AnnouncementRepositoryImpl implements AnnouncementRepository {
   @override
@@ -42,7 +42,7 @@ class AnnouncementRepositoryImpl implements AnnouncementRepository {
   Future<void> addAnnouncementViaFilePicker() async {
     try {
       final file = await LocalAssetHelper.getImageFileFromAssets(
-        'assets/test_images/test_2.png',
+        'assets/test_images/test_3.png',
       );
 
       final fileName = basename(file.path);

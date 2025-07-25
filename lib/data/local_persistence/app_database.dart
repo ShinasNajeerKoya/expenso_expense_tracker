@@ -4,14 +4,16 @@ import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
+import '../../domain/dao/announcements/announcement_dao.dart';
 import '../../presentation/feature/add_card/utils/card_design_type_extension.dart';
 import '../../presentation/feature/add_card/utils/card_type_extensions.dart';
 import 'converters/add_card_model_converter_extensions.dart';
+import 'drift_tables/announcement/announcement_table.dart';
 import 'drift_tables/card_details_table.dart';
 
 part 'app_database.g.dart';
 
-@DriftDatabase(tables: [CardsDetails])
+@DriftDatabase(tables: [CardsDetails, Announcements], daos: [AnnouncementDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase._internal() : super(_openConnection());
 
@@ -30,12 +32,18 @@ class AppDatabase extends _$AppDatabase {
           // handle migrations
         },
       );
+
+  late final AnnouncementDao announcementDao = AnnouncementDao(this);
 }
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dir = await getApplicationDocumentsDirectory();
     final file = File(p.join(dir.path, 'app.sqlite'));
+
+    // if (await file.exists()) {
+    //   await file.delete(); // 👈 Delete the old DB
+    // }
     return NativeDatabase(
       file,
       logStatements: true,
