@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$OstrumState {
   bool get error;
   bool get isLoading;
+  List<CommentModel> get comments;
 
   /// Create a copy of OstrumState
   /// with the given fields replaced by the non-null parameter values.
@@ -35,16 +36,18 @@ mixin _$OstrumState {
             other is OstrumState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other.comments, comments));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      const DeepCollectionEquality().hash(comments));
 
   @override
   String toString() {
-    return 'OstrumState(error: $error, isLoading: $isLoading)';
+    return 'OstrumState(error: $error, isLoading: $isLoading, comments: $comments)';
   }
 }
 
@@ -54,7 +57,7 @@ abstract mixin class $OstrumStateCopyWith<$Res> {
           OstrumState value, $Res Function(OstrumState) _then) =
       _$OstrumStateCopyWithImpl;
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call({bool error, bool isLoading, List<CommentModel> comments});
 }
 
 /// @nodoc
@@ -71,6 +74,7 @@ class _$OstrumStateCopyWithImpl<$Res> implements $OstrumStateCopyWith<$Res> {
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? comments = null,
   }) {
     return _then(_self.copyWith(
       error: null == error
@@ -81,6 +85,10 @@ class _$OstrumStateCopyWithImpl<$Res> implements $OstrumStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      comments: null == comments
+          ? _self.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>,
     ));
   }
 }
@@ -88,7 +96,11 @@ class _$OstrumStateCopyWithImpl<$Res> implements $OstrumStateCopyWith<$Res> {
 /// @nodoc
 @JsonSerializable()
 class _OstrumState implements OstrumState {
-  const _OstrumState({this.error = false, this.isLoading = false});
+  const _OstrumState(
+      {this.error = false,
+      this.isLoading = false,
+      final List<CommentModel> comments = const []})
+      : _comments = comments;
   factory _OstrumState.fromJson(Map<String, dynamic> json) =>
       _$OstrumStateFromJson(json);
 
@@ -98,6 +110,14 @@ class _OstrumState implements OstrumState {
   @override
   @JsonKey()
   final bool isLoading;
+  final List<CommentModel> _comments;
+  @override
+  @JsonKey()
+  List<CommentModel> get comments {
+    if (_comments is EqualUnmodifiableListView) return _comments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_comments);
+  }
 
   /// Create a copy of OstrumState
   /// with the given fields replaced by the non-null parameter values.
@@ -121,16 +141,18 @@ class _OstrumState implements OstrumState {
             other is _OstrumState &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, error, isLoading);
+  int get hashCode => Object.hash(runtimeType, error, isLoading,
+      const DeepCollectionEquality().hash(_comments));
 
   @override
   String toString() {
-    return 'OstrumState(error: $error, isLoading: $isLoading)';
+    return 'OstrumState(error: $error, isLoading: $isLoading, comments: $comments)';
   }
 }
 
@@ -142,7 +164,7 @@ abstract mixin class _$OstrumStateCopyWith<$Res>
       __$OstrumStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool error, bool isLoading});
+  $Res call({bool error, bool isLoading, List<CommentModel> comments});
 }
 
 /// @nodoc
@@ -159,6 +181,7 @@ class __$OstrumStateCopyWithImpl<$Res> implements _$OstrumStateCopyWith<$Res> {
   $Res call({
     Object? error = null,
     Object? isLoading = null,
+    Object? comments = null,
   }) {
     return _then(_OstrumState(
       error: null == error
@@ -169,6 +192,10 @@ class __$OstrumStateCopyWithImpl<$Res> implements _$OstrumStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      comments: null == comments
+          ? _self._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>,
     ));
   }
 }

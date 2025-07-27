@@ -1,5 +1,6 @@
 // core/di/injector.dart
 
+import 'package:dio/dio.dart';
 import 'package:expenso_expense_tracker/domain/repositories/add_card/add_card_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/announcement/announcement_repository.dart';
 import 'package:expenso_expense_tracker/domain/repositories/app_menu_section/app_settings/app_settings_repository.dart';
@@ -27,8 +28,10 @@ import '../../data/repositories/home/home_repository_impl.dart';
 import '../../data/repositories/onboarding/onboarding_repository_impl.dart';
 import '../../data/repositories/ostrum/ostrum_repository_impl.dart';
 import '../../data/repositories/splash/splash_repository_impl.dart';
+import '../../data/services/comment_service/comment_service.dart';
 import '../../domain/dao/add_card/add_card_dao.dart';
 import '../../domain/repositories/onboarding/onboarding_repository.dart';
+import '../network/api_client.dart';
 import '../routes/route_config.dart';
 
 final getIt = GetIt.instance;
@@ -44,6 +47,17 @@ class GetItHelper {
     /// local db
     getIt.registerLazySingleton<CardDetailsDao>(() => CardDetailsDaoImpl(getIt<AppDatabase>()));
 
+    /// Dio instance with headers
+    getIt.registerSingleton<Dio>(
+      Dio(BaseOptions(headers: {'User-Agent': 'Flutter-App'})),
+    );
+
+    /// ApiClient using the Dio instance
+    getIt.registerSingleton<ApiClient>(ApiClient(dio: getIt<Dio>()));
+
+    /// service
+    getIt.registerSingleton<OstrumService>(OstrumService(getIt<ApiClient>()));
+
     /// Repositories -- add after each feature generation
     getIt.registerSingleton<SplashRepository>(SplashRepositoryImpl());
     getIt.registerSingleton<OnboardingRepository>(OnboardingRepositoryImpl());
@@ -52,7 +66,7 @@ class GetItHelper {
     getIt.registerSingleton<AppSettingsRepository>(AppSettingsRepositoryImpl());
     getIt.registerSingleton<ProfileRepository>(ProfileRepositoryImpl());
     getIt.registerSingleton<AnnouncementRepository>(AnnouncementRepositoryImpl());
-    getIt.registerSingleton<OstrumRepository>(OstrumRepositoryImpl());
+    getIt.registerSingleton<OstrumRepository>(OstrumRepositoryImpl(getIt<OstrumService>()));
 
     /// BloCs -- add after each feature generation
     getIt.registerSingleton<SplashBloc>(

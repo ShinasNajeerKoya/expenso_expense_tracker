@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'exception_helper.dart';
+import '../../../core/network/api_client.dart';
+import '../exception_helper.dart';
 
 typedef FutureFunction = Future<void> Function();
 
@@ -28,7 +29,15 @@ Future<void> futureTryCatch(
     if (onBefore != null) await onBefore();
 
     await fun();
-  } on PostgrestException catch (error, stack) {
+  } on ApiException catch (error, stack) {
+    _handleError(
+      error: error,
+      message: error.errorMessage,
+      stack: stack,
+      logging: logging,
+      onError: onError,
+    );
+  }  on PostgrestException catch (error, stack) {
     _handleError(
       error: error,
       message: error.errorMessage ?? 'Supabase error',

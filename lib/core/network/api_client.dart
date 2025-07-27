@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
+import '../../shared/helper_functions/exception_helper.dart';
+
 /// A reusable API client using Dio that supports GET, POST, PUT, DELETE
 /// operations with error handling and typed responses.
 ///
@@ -12,16 +14,23 @@ class ApiClient {
 
   ApiClient({Dio? dio, String? authToken})
       : _dio = dio ??
-      Dio(BaseOptions(
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 15),
-        sendTimeout: const Duration(seconds: 10),
-        contentType: 'application/json',
-        responseType: ResponseType.json,
-      )) {
+            Dio(BaseOptions(
+              connectTimeout: const Duration(seconds: 10),
+              receiveTimeout: const Duration(seconds: 15),
+              sendTimeout: const Duration(seconds: 10),
+              contentType: 'application/json',
+              responseType: ResponseType.json,
+            )) {
     _dio.interceptors.add(LogInterceptor(
-      requestBody: true,
-      responseBody: true,
+      // requestBody: true,
+      // responseBody: true,
+      request: false,
+      requestHeader: false,
+      requestBody: false,
+      responseBody: false,
+      responseHeader: false,
+      error: true,
+      logPrint: (Object object) {},
     ));
 
     // Optional: Add Authorization header interceptor
@@ -39,10 +48,10 @@ class ApiClient {
 
   /// Generic GET method that returns parsed JSON as a Map.
   Future<Map<String, dynamic>> get(
-      String url, {
-        Map<String, dynamic>? queryParams,
-        Map<String, String>? headers,
-      }) async {
+    String url, {
+    Map<String, dynamic>? queryParams,
+    Map<String, String>? headers,
+  }) async {
     try {
       final response = await _dio.get(
         url,
@@ -58,10 +67,10 @@ class ApiClient {
 
   /// Generic POST method that sends JSON body and returns parsed response.
   Future<Map<String, dynamic>> post(
-      String url, {
-        dynamic data,
-        Map<String, String>? headers,
-      }) async {
+    String url, {
+    dynamic data,
+    Map<String, String>? headers,
+  }) async {
     try {
       final response = await _dio.post(
         url,
@@ -77,10 +86,10 @@ class ApiClient {
 
   /// Generic PUT method.
   Future<Map<String, dynamic>> put(
-      String url, {
-        dynamic data,
-        Map<String, String>? headers,
-      }) async {
+    String url, {
+    dynamic data,
+    Map<String, String>? headers,
+  }) async {
     try {
       final response = await _dio.put(
         url,
@@ -96,9 +105,9 @@ class ApiClient {
 
   /// Generic DELETE method.
   Future<Map<String, dynamic>> delete(
-      String url, {
-        Map<String, String>? headers,
-      }) async {
+    String url, {
+    Map<String, String>? headers,
+  }) async {
     try {
       final response = await _dio.delete(
         url,
@@ -114,11 +123,11 @@ class ApiClient {
   /// Typed GET method using a fromJson converter function.
   /// Useful for decoding directly to model objects from repo layer.
   Future<T> getTyped<T>(
-      String url, {
-        required T Function(dynamic) fromJson,
-        Map<String, dynamic>? queryParams,
-        Map<String, String>? headers,
-      }) async {
+    String url, {
+    required T Function(dynamic) fromJson,
+    Map<String, dynamic>? queryParams,
+    Map<String, String>? headers,
+  }) async {
     final json = await get(url, queryParams: queryParams, headers: headers);
     return fromJson(json);
   }
@@ -189,13 +198,3 @@ class ApiClient {
   }
 }
 
-/// Custom exception for all API errors
-class ApiException implements Exception {
-  final String message;
-  final int? statusCode;
-
-  ApiException(this.message, {this.statusCode});
-
-  @override
-  String toString() => 'ApiException($statusCode): $message';
-}

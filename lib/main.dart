@@ -9,7 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'config/themes/fonts.dart';
 import 'core/di/dependency_injection.dart';
@@ -17,9 +20,17 @@ import 'core/di/dependency_injection.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  final appDocDir = await getApplicationDocumentsDirectory();
+  final storage = await HydratedStorage.build(
+    storageDirectory: HydratedStorageDirectory(appDocDir.path),
+  );
+  HydratedBloc.storage = storage;
+
   await Supabase.initialize(
     url: 'https://mfeyedralyrngxjnhmct.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mZXllZHJhbHlybmd4am5obWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MTcyMDgsImV4cCI6MjA2ODM5MzIwOH0.zfyecPT1NTufonLw8gMbkuYkJcQ7cOCCXtHkB5-Nmyk',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mZXllZHJhbHlybmd4am5obWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MTcyMDgsImV4cCI6MjA2ODM5MzIwOH0.zfyecPT1NTufonLw8gMbkuYkJcQ7cOCCXtHkB5-Nmyk',
   );
   GetItHelper.init();
 
