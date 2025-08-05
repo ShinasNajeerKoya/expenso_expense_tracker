@@ -1,10 +1,9 @@
 // ** DO NOT EDIT WITHOUT PERMISSION **
 
-// feature generation file
+// feature generation file by Shinas Koya
 
 // this file is to generate feature using mason package. this will also include
 // running build runner to create freezed package as per the state we are defining.
-
 
 import 'dart:io';
 
